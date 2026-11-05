@@ -31,7 +31,7 @@ deterministic **B1** greedy baseline for comparison.
 
 ```bash
 # 1. From the workspace root, enter this project.
-cd Cloud_Migration_AI_Agent_Pipeline
+cd cloud-migration-ai-agent-pipeline
 
 # 2. Add your API key (never commit this file - it is already gitignored).
 cp .env.example .env
