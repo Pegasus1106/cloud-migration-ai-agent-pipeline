@@ -1,0 +1,50 @@
+# Environments
+.env
+venv/
+env/
+
+# Python Build Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Data Artifacts: keep input datasets, generator scripts, and the pricing
+# catalog under version control; ignore transient per-run outputs.
+data/cleaned_*.csv
+data/final_migration_plan.csv
+data/*_p1_plan.csv
+data/run_config.json
+data/run_log_*.json
+data/wave_summary.json
+data/*_wave_summary.json
+data/validation_report_*.json
+data/data_quality_report.json
+comparison_*.json
+baselines/*_plan.csv
+baselines/*_summary.json
+baselines/validation_report_*.json
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

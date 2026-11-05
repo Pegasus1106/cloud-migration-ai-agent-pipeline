@@ -1,0 +1,15 @@
+services:
+  neo4j:
+    image: neo4j:5@sha256:d9cfe82983d27f5a75b3aaae8f316d04f9a698a3b7f6103a508f7caf8362f255
+    container_name: p1-migration-neo4j
+    ports:
+      - "7475:7474"   # HTTP browser (offset from baseline's 7474 so both can run together)
+      - "7688:7687"   # Bolt protocol (offset from baseline's 7687)
+    environment:
+      NEO4J_AUTH: neo4j/password123
+      NEO4J_PLUGINS: '["apoc", "graph-data-science"]'
+    volumes:
+      - p1_neo4j_data:/data
+
+volumes:
+  p1_neo4j_data:

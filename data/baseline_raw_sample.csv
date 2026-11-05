@@ -1,0 +1,51 @@
+Server_ID,Hostname,OS_Version,Allocated_vCPU,Allocated_RAM_GB,Peak_CPU_Pct,Avg_CPU_Pct,Storage_GB,App_Name,Business_Tags,Outbound_Connections
+SRV-001,hr-web-01,Windows Server 2019,2,8,65,25,100,HR_Portal,Internal,SRV-002:8080:150|SRV-003:1433:20
+SRV-002,hr-app-01,Windows Server 2019,4,16,80,45,200,HR_Portal,Internal,SRV-003:1433:450
+SRV-003,hr-db-01,SQL Server 2019,8,32,90,60,500,HR_Portal,Internal,
+SRV-004,pay-app-01,Windows Server 2008,4,8,55,30,150,Payment_Gateway,PCI-DSS,SRV-005:1521:800
+SRV-005,pay-db-01,Oracle Linux 6.4,16,64,75,50,2000,Payment_Gateway,PCI-DSS,
+SRV-006,old-test-01,RHEL 5,1,2,5,1,40,Unknown,,
+SRV-007,mail-exch-01,Windows Server 2012,8,32,85,60,1000,Exchange,Corp_Comms,
+SRV-008,crm-web-01,Ubuntu 20.04,2,4,40,15,80,CRM,External_Facing,SRV-009:5432:300
+SRV-009,crm-db-01,Ubuntu 20.04,4,16,60,35,500,CRM,External_Facing,
+SRV-010,ad-dc-01,Windows Server 2019,2,8,30,10,100,Active_Directory,Core_Infra,SRV-011:445:10
+SRV-011,ad-dc-02,Windows Server 2019,2,8,35,12,100,Active_Directory,Core_Infra,SRV-010:445:10
+SRV-012,dns-01,CentOS 7,1,2,15,5,40,Core_DNS,Core_Infra,SRV-013:53:5
+SRV-013,dns-02,CentOS 7,1,2,20,6,40,Core_DNS,Core_Infra,SRV-012:53:5
+SRV-014,erp-web-01,Windows Server 2016,4,16,70,40,,ERP_System,SOX,SRV-016:8080:200|SRV-017:8080:200
+SRV-015,erp-web-02,Windows Server 2016,4,16,68,38,150,ERP_System,SOX,SRV-016:8080:190|SRV-017:8080:190
+SRV-016,erp-app-01,RHEL 7,8,32,85,55,300,ERP_System,SOX,SRV-018:1521:850
+SRV-017,erp-app-02,RHEL 7,8,32,80,50,300,ERP_System,SOX,SRV-018:1521:800
+SRV-018,erp-db-primary,Oracle Linux 7,16,128,95,70,5000,ERP_System,SOX,SRV-019:1521:1500
+SRV-019,erp-db-standby,Oracle Linux 7,16,128,40,15,5000,ERP_System,SOX,
+SRV-020,ecom-web-01,Ubuntu 22.04,2,8,75,45,80,E-Commerce,PCI-DSS,SRV-024:8443:500
+SRV-021,ecom-web-02,Ubuntu 22.04,2,8,78,48,80,E-Commerce,PCI-DSS,SRV-024:8443:520
+SRV-022,ecom-web-03,Ubuntu 22.04,2,8,72,42,80,E-Commerce,PCI-DSS,SRV-025:8443:490
+SRV-023,ecom-web-04,Ubuntu 22.04,2,8,80,50,80,E-Commerce,PCI-DSS,SRV-025:8443:510
+SRV-024,ecom-app-01,Ubuntu 22.04,4,16,85,60,150,E-Commerce,PCI-DSS,SRV-026:3306:1200
+SRV-025,ecom-app-02,Ubuntu 22.04,4,16,82,58,150,E-Commerce,PCI-DSS,SRV-026:3306:1150
+SRV-026,ecom-db-primary,RHEL 8,8,64,90,75,2000,E-Commerce,PCI-DSS,SRV-027:3306:2000
+SRV-027,ecom-db-replica,RHEL 8,8,64,50,25,2000,E-Commerce,PCI-DSS,
+SRV-028,dev-erp-01,Windows Server 2012,2,4,90,15,100,ERP_Dev,Non-Prod,SRV-029:1521:50
+SRV-029,dev-erp-db,Oracle Linux 6.4,4,16,45,10,500,ERP_Dev,Non-Prod,
+SRV-030,old-poc-01,RHEL 5,1,2,2,0,50,POC_Archived,,
+SRV-031,test-web-05,Ubuntu 18.04,,4,3,1,60,Web_Test,Non-Prod,
+SRV-032,qa-sim-01,Windows Server 2019,4,,15,5,200,QA_Tools,Non-Prod,
+SRV-033,med-ui-01,Windows Server 2008 R2,2,8,60,35,120,Med_Records,HIPAA,SRV-035:443:300
+SRV-034,med-ui-02,Windows Server 2008 R2,2,8,55,30,120,Med_Records,HIPAA,SRV-035:443:280
+SRV-035,med-app-01,Windows Server 2008 R2,4,16,75,45,250,Med_Records,HIPAA,SRV-037:1433:900
+SRV-036,med-app-02,Windows Server 2008 R2,4,16,70,42,250,Med_Records,HIPAA,SRV-037:1433:850
+SRV-037,med-db-01,SQL Server 2008,16,64,85,60,4000,Med_Records,HIPAA,
+SRV-038,bi-etl-01,RHEL 8,8,32,95,75,500,BI_Analytics,Data_Platform,SRV-040:5432:3000
+SRV-039,bi-etl-02,RHEL 8,8,32,98,80,500,BI_Analytics,Data_Platform,SRV-040:5432:3200
+SRV-040,dw-master-01,RHEL 8,32,256,90,85,15000,Data_Warehouse,Data_Platform,SRV-041:5432:5000|SRV-042:5432:5000
+SRV-041,dw-node-01,RHEL 8,32,256,85,80,15000,Data_Warehouse,Data_Platform,SRV-040:5432:2000
+SRV-042,dw-node-02,RHEL 8,32,256,88,82,15000,Data_Warehouse,Data_Platform,SRV-040:5432:2100
+SRV-043,jira-server-01,Ubuntu 20.04,4,16,60,25,200,Jira,Internal_Tools,SRV-044:5432:150
+SRV-044,jira-db-01,Ubuntu 20.04,4,16,50,20,300,Jira,Internal_Tools,
+SRV-045,sp-web-01,Windows Server 2016,4,16,40,15,150,SharePoint,Corp_Comms,SRV-047:1433:100
+SRV-046,sp-app-01,Windows Server 2016,4,16,45,18,200,SharePoint,Corp_Comms,SRV-047:1433:150
+SRV-047,sp-db-01,SQL Server 2016,8,32,55,25,1000,SharePoint,Corp_Comms,
+SRV-048,blog-wp-01,Ubuntu 22.04,1,2,25,5,40,Corp_Blog,Marketing,SRV-049:3306:10
+SRV-049,blog-db-01,Ubuntu 22.04,1,2,15,3,50,Corp_Blog,Marketing,
+SRV-050,util-filesrv-01,Windows Server 2019,2,8,20,8,2000,File_Server,Internal_Tools,

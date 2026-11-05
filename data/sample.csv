@@ -1,0 +1,51 @@
+Server_ID,Hostname,OS_Version,Allocated_vCPU,Allocated_RAM_GB,Peak_CPU_Pct,Avg_CPU_Pct,Storage_GB,App_Name,Business_Tags,Outbound_Connections,Transfer_GB,Current_Monthly_Cost,Early_Migration_Requested
+SRV-001,hr-web-01,Windows Server 2019,2.0,8.0,65,25,100.0,HR_Portal,Internal,SRV-002:8080:150|SRV-003:1433:20,100.0,215.0,False
+SRV-002,hr-app-01,Windows Server 2019,4.0,16.0,80,45,200.0,HR_Portal,Internal,SRV-003:1433:450,200.0,380.0,False
+SRV-003,hr-db-01,SQL Server 2019,8.0,32.0,90,60,500.0,HR_Portal,Internal,,500.0,715.0,False
+SRV-004,pay-app-01,Windows Server 2008,4.0,8.0,55,30,150.0,Payment_Gateway,PCI-DSS,SRV-005:1521:800,150.0,297.5,False
+SRV-005,pay-db-01,Oracle Linux 6.4,16.0,64.0,75,50,2000.0,Payment_Gateway,PCI-DSS,,2000.0,1430.0,False
+SRV-006,old-test-01,RHEL 5,1.0,2.0,5,1,40.0,Unknown,,,40.0,112.0,False
+SRV-007,mail-exch-01,Windows Server 2012,8.0,32.0,85,60,1000.0,Exchange,Corp_Comms,,1000.0,740.0,False
+SRV-008,crm-web-01,Ubuntu 20.04,2.0,4.0,40,15,80.0,CRM,External_Facing,SRV-009:5432:300,80.0,174.0,True
+SRV-009,crm-db-01,Ubuntu 20.04,4.0,16.0,60,35,500.0,CRM,External_Facing,,500.0,395.0,True
+SRV-010,ad-dc-01,Windows Server 2019,2.0,8.0,30,10,100.0,Active_Directory,Core_Infra,SRV-011:445:10,100.0,215.0,False
+SRV-011,ad-dc-02,Windows Server 2019,2.0,8.0,35,12,100.0,Active_Directory,Core_Infra,SRV-010:445:10,100.0,215.0,False
+SRV-012,dns-01,CentOS 7,1.0,2.0,15,5,40.0,Core_DNS,Core_Infra,SRV-013:53:5,40.0,112.0,False
+SRV-013,dns-02,CentOS 7,1.0,2.0,20,6,40.0,Core_DNS,Core_Infra,SRV-012:53:5,40.0,112.0,False
+SRV-014,erp-web-01,Windows Server 2016,4.0,16.0,70,40,,ERP_System,SOX,SRV-016:8080:200|SRV-017:8080:200,50.0,372.5,False
+SRV-015,erp-web-02,Windows Server 2016,4.0,16.0,68,38,150.0,ERP_System,SOX,SRV-016:8080:190|SRV-017:8080:190,150.0,377.5,False
+SRV-016,erp-app-01,RHEL 7,8.0,32.0,85,55,300.0,ERP_System,SOX,SRV-018:1521:850,300.0,705.0,False
+SRV-017,erp-app-02,RHEL 7,8.0,32.0,80,50,300.0,ERP_System,SOX,SRV-018:1521:800,300.0,705.0,False
+SRV-018,erp-db-primary,Oracle Linux 7,16.0,128.0,95,70,5000.0,ERP_System,SOX,SRV-019:1521:1500,5000.0,2220.0,False
+SRV-019,erp-db-standby,Oracle Linux 7,16.0,128.0,40,15,5000.0,ERP_System,SOX,,5000.0,2220.0,False
+SRV-020,ecom-web-01,Ubuntu 22.04,2.0,8.0,75,45,80.0,E-Commerce,PCI-DSS,SRV-024:8443:500,80.0,214.0,False
+SRV-021,ecom-web-02,Ubuntu 22.04,2.0,8.0,78,48,80.0,E-Commerce,PCI-DSS,SRV-024:8443:520,80.0,214.0,False
+SRV-022,ecom-web-03,Ubuntu 22.04,2.0,8.0,72,42,80.0,E-Commerce,PCI-DSS,SRV-025:8443:490,80.0,214.0,False
+SRV-023,ecom-web-04,Ubuntu 22.04,2.0,8.0,80,50,80.0,E-Commerce,PCI-DSS,SRV-025:8443:510,80.0,214.0,False
+SRV-024,ecom-app-01,Ubuntu 22.04,4.0,16.0,85,60,150.0,E-Commerce,PCI-DSS,SRV-026:3306:1200,150.0,377.5,False
+SRV-025,ecom-app-02,Ubuntu 22.04,4.0,16.0,82,58,150.0,E-Commerce,PCI-DSS,SRV-026:3306:1150,150.0,377.5,False
+SRV-026,ecom-db-primary,RHEL 8,8.0,64.0,90,75,2000.0,E-Commerce,PCI-DSS,SRV-027:3306:2000,2000.0,1110.0,False
+SRV-027,ecom-db-replica,RHEL 8,8.0,64.0,50,25,2000.0,E-Commerce,PCI-DSS,,2000.0,1110.0,False
+SRV-028,dev-erp-01,Windows Server 2012,2.0,4.0,90,15,100.0,ERP_Dev,Non-Prod,SRV-029:1521:50,100.0,175.0,False
+SRV-029,dev-erp-db,Oracle Linux 6.4,4.0,16.0,45,10,500.0,ERP_Dev,Non-Prod,,500.0,395.0,False
+SRV-030,old-poc-01,RHEL 5,1.0,2.0,2,0,50.0,POC_Archived,,,50.0,112.5,False
+SRV-031,test-web-05,Ubuntu 18.04,,4.0,3,1,60.0,Web_Test,Non-Prod,,60.0,173.0,False
+SRV-032,qa-sim-01,Windows Server 2019,4.0,,15,5,200.0,QA_Tools,Non-Prod,,200.0,260.0,False
+SRV-033,med-ui-01,Windows Server 2008 R2,2.0,8.0,60,35,120.0,Med_Records,HIPAA,SRV-035:443:300,120.0,216.0,False
+SRV-034,med-ui-02,Windows Server 2008 R2,2.0,8.0,55,30,120.0,Med_Records,HIPAA,SRV-035:443:280,120.0,216.0,False
+SRV-035,med-app-01,Windows Server 2008 R2,4.0,16.0,75,45,250.0,Med_Records,HIPAA,SRV-037:1433:900,250.0,382.5,False
+SRV-036,med-app-02,Windows Server 2008 R2,4.0,16.0,70,42,250.0,Med_Records,HIPAA,SRV-037:1433:850,250.0,382.5,False
+SRV-037,med-db-01,SQL Server 2008,16.0,64.0,85,60,4000.0,Med_Records,HIPAA,,4000.0,1530.0,False
+SRV-038,bi-etl-01,RHEL 8,8.0,32.0,95,75,500.0,BI_Analytics,Data_Platform,SRV-040:5432:3000,500.0,715.0,False
+SRV-039,bi-etl-02,RHEL 8,8.0,32.0,98,80,500.0,BI_Analytics,Data_Platform,SRV-040:5432:3200,500.0,715.0,False
+SRV-040,dw-master-01,RHEL 8,32.0,256.0,90,85,15000.0,Data_Warehouse,Data_Platform,SRV-041:5432:5000|SRV-042:5432:5000,15000.0,4640.0,False
+SRV-041,dw-node-01,RHEL 8,32.0,256.0,85,80,15000.0,Data_Warehouse,Data_Platform,SRV-040:5432:2000,15000.0,4640.0,False
+SRV-042,dw-node-02,RHEL 8,32.0,256.0,88,82,15000.0,Data_Warehouse,Data_Platform,SRV-040:5432:2100,15000.0,4640.0,False
+SRV-043,jira-server-01,Ubuntu 20.04,4.0,16.0,60,25,200.0,Jira,Internal_Tools,SRV-044:5432:150,200.0,380.0,False
+SRV-044,jira-db-01,Ubuntu 20.04,4.0,16.0,50,20,300.0,Jira,Internal_Tools,,300.0,385.0,False
+SRV-045,sp-web-01,Windows Server 2016,4.0,16.0,40,15,150.0,SharePoint,Corp_Comms,SRV-047:1433:100,150.0,377.5,False
+SRV-046,sp-app-01,Windows Server 2016,4.0,16.0,45,18,200.0,SharePoint,Corp_Comms,SRV-047:1433:150,200.0,380.0,False
+SRV-047,sp-db-01,SQL Server 2016,8.0,32.0,55,25,1000.0,SharePoint,Corp_Comms,,1000.0,740.0,False
+SRV-048,blog-wp-01,Ubuntu 22.04,1.0,2.0,25,5,40.0,Corp_Blog,Marketing,SRV-049:3306:10,40.0,112.0,True
+SRV-049,blog-db-01,Ubuntu 22.04,1.0,2.0,15,3,50.0,Corp_Blog,Marketing,,50.0,112.5,True
+SRV-050,util-filesrv-01,Windows Server 2019,2.0,8.0,20,8,2000.0,File_Server,Internal_Tools,,2000.0,310.0,False

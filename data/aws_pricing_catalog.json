@@ -1,0 +1,14 @@
+{
+  "catalog_version": "2026-10-04-v1",
+  "region": "us-east-1",
+  "os_assumption": "Linux On-Demand",
+  "hours_per_month": 730,
+  "source": "https://instances.vantage.sh (On-Demand hourly list price, captured 2026-10-04)",
+  "disclaimer": "Static snapshot for reproducible estimation only. Not a live AWS billing quote. Excludes storage, data-transfer-out, and support charges.",
+  "instances": {
+    "t3.large":    { "vcpu": 2,  "ram_gb": 8,   "hourly_usd": 0.0832 },
+    "t3.xlarge":   { "vcpu": 4,  "ram_gb": 16,  "hourly_usd": 0.1664 },
+    "m5.2xlarge":  { "vcpu": 8,  "ram_gb": 32,  "hourly_usd": 0.3840 },
+    "m5.4xlarge":  { "vcpu": 16, "ram_gb": 64,  "hourly_usd": 0.7680 }
+  }
+}
