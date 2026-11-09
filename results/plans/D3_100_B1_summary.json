@@ -1,0 +1,81 @@
+{
+  "system": "B1 (greedy first-fit-decreasing, SCC granularity, no community/early/risk priority)",
+  "packing": "same-wave",
+  "max_transfer_gb": 3000.0,
+  "wave_count": 21,
+  "wave_totals_gb": {
+    "0": 2993.0,
+    "1": 4566.0,
+    "2": 4691.0,
+    "3": 8192.0,
+    "4": 8175.0,
+    "5": 7938.0,
+    "6": 2986.0,
+    "7": 2996.0,
+    "8": 2968.0,
+    "9": 2999.0,
+    "10": 2986.0,
+    "11": 2997.0,
+    "12": 2977.0,
+    "13": 3000.0,
+    "14": 2988.0,
+    "15": 2995.0,
+    "16": 2833.0,
+    "17": 4074.0,
+    "18": 2974.0,
+    "19": 2083.0,
+    "20": 1781.0
+  },
+  "infeasible_groups": [
+    {
+      "group_id": "SCC:BEN-0074",
+      "members": [
+        "BEN-0074"
+      ],
+      "total_gb": 4566.0,
+      "wave": 1
+    },
+    {
+      "group_id": "SCC:BEN-0075",
+      "members": [
+        "BEN-0075"
+      ],
+      "total_gb": 4691.0,
+      "wave": 2
+    },
+    {
+      "group_id": "SCC:BEN-0076",
+      "members": [
+        "BEN-0076"
+      ],
+      "total_gb": 8192.0,
+      "wave": 3
+    },
+    {
+      "group_id": "SCC:BEN-0077",
+      "members": [
+        "BEN-0077"
+      ],
+      "total_gb": 8175.0,
+      "wave": 4
+    },
+    {
+      "group_id": "SCC:BEN-0078",
+      "members": [
+        "BEN-0078"
+      ],
+      "total_gb": 7938.0,
+      "wave": 5
+    },
+    {
+      "group_id": "SCC:BEN-0028",
+      "members": [
+        "BEN-0028",
+        "BEN-0029"
+      ],
+      "total_gb": 4074.0,
+      "wave": 17
+    }
+  ],
+  "group_count": 91
+}

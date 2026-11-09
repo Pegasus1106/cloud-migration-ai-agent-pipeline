@@ -1,0 +1,51 @@
+Server_ID,Hostname,OS,Normalized_CPU,Target_Size,Risk_Score,Wave_ID
+SRV-001,hr-web-01,Windows Server 2019,53.0,t3.large,Low,0
+SRV-002,hr-app-01,Windows Server 2019,69.5,t3.xlarge,Low,0
+SRV-003,hr-db-01,SQL Server 2019,81.0,m5.2xlarge,Low,0
+SRV-004,pay-app-01,Windows Server 2008,47.5,t3.xlarge,High,3
+SRV-005,pay-db-01,Oracle Linux 6.4,67.5,m5.4xlarge,High,3
+SRV-006,old-test-01,RHEL 5,3.8,t3.large,High,5
+SRV-007,mail-exch-01,Windows Server 2012,77.5,m5.2xlarge,Low,6
+SRV-008,crm-web-01,Ubuntu 20.04,32.5,t3.large,Low,7
+SRV-009,crm-db-01,Ubuntu 20.04,52.5,t3.xlarge,Low,7
+SRV-010,ad-dc-01,Windows Server 2019,24.0,t3.large,Low,9
+SRV-011,ad-dc-02,Windows Server 2019,28.1,t3.large,Low,9
+SRV-012,dns-01,CentOS 7,12.0,t3.large,Low,11
+SRV-013,dns-02,CentOS 7,15.8,t3.large,Low,11
+SRV-014,erp-web-01,Windows Server 2016,61.0,t3.xlarge,High,13
+SRV-015,erp-web-02,Windows Server 2016,59.0,t3.xlarge,High,13
+SRV-016,erp-app-01,RHEL 7,76.0,m5.2xlarge,High,13
+SRV-017,erp-app-02,RHEL 7,71.0,m5.2xlarge,High,13
+SRV-018,erp-db-primary,Oracle Linux 7,87.5,m5.4xlarge,High,13
+SRV-019,erp-db-standby,Oracle Linux 7,32.5,m5.4xlarge,High,13
+SRV-020,ecom-web-01,Ubuntu 22.04,66.0,t3.large,High,19
+SRV-021,ecom-web-02,Ubuntu 22.04,69.0,t3.large,High,19
+SRV-022,ecom-web-03,Ubuntu 22.04,63.0,t3.large,High,19
+SRV-023,ecom-web-04,Ubuntu 22.04,71.0,t3.large,High,19
+SRV-024,ecom-app-01,Ubuntu 22.04,77.5,t3.xlarge,High,19
+SRV-025,ecom-app-02,Ubuntu 22.04,74.8,t3.xlarge,High,19
+SRV-026,ecom-db-primary,RHEL 8,85.5,m5.4xlarge,High,19
+SRV-027,ecom-db-replica,RHEL 8,42.5,m5.4xlarge,High,19
+SRV-028,dev-erp-01,Windows Server 2012,67.5,t3.large,Low,27
+SRV-029,dev-erp-db,Oracle Linux 6.4,34.5,t3.xlarge,High,27
+SRV-030,old-poc-01,RHEL 5,1.4,t3.large,High,29
+SRV-031,test-web-05,Ubuntu 18.04,2.4,t3.large,Low,30
+SRV-032,qa-sim-01,Windows Server 2019,12.0,t3.xlarge,Low,31
+SRV-033,med-ui-01,Windows Server 2008 R2,52.5,t3.large,High,32
+SRV-034,med-ui-02,Windows Server 2008 R2,47.5,t3.large,High,32
+SRV-035,med-app-01,Windows Server 2008 R2,66.0,t3.xlarge,High,32
+SRV-036,med-app-02,Windows Server 2008 R2,61.6,t3.xlarge,High,32
+SRV-037,med-db-01,SQL Server 2008,77.5,m5.4xlarge,High,32
+SRV-038,bi-etl-01,RHEL 8,89.0,m5.2xlarge,Low,37
+SRV-039,bi-etl-02,RHEL 8,92.6,m5.2xlarge,Low,37
+SRV-040,dw-master-01,RHEL 8,88.5,m5.4xlarge,Low,37
+SRV-041,dw-node-01,RHEL 8,83.5,m5.4xlarge,Low,37
+SRV-042,dw-node-02,RHEL 8,86.2,m5.4xlarge,Low,37
+SRV-043,jira-server-01,Ubuntu 20.04,49.5,t3.xlarge,Low,42
+SRV-044,jira-db-01,Ubuntu 20.04,41.0,t3.xlarge,Low,42
+SRV-045,sp-web-01,Windows Server 2016,32.5,t3.xlarge,Low,44
+SRV-046,sp-app-01,Windows Server 2016,36.9,t3.xlarge,Low,44
+SRV-047,sp-db-01,SQL Server 2016,46.0,m5.2xlarge,Low,44
+SRV-048,blog-wp-01,Ubuntu 22.04,19.0,t3.large,Low,47
+SRV-049,blog-db-01,Ubuntu 22.04,11.4,t3.large,Low,47
+SRV-050,util-filesrv-01,Windows Server 2019,16.4,t3.large,Low,49

@@ -1,0 +1,1149 @@
+{
+  "summary": {
+    "model": "qwen3-coder-30b-a3b-instruct",
+    "cases": 31,
+    "clear": 24,
+    "ambiguous": 7,
+    "overall_accuracy_pct": 96.8,
+    "clear_exact_match_pct": 100.0,
+    "field_accuracy_pct": {
+      "max_transfer_gb": 100.0,
+      "target_cloud": 100.0,
+      "early": 100.0,
+      "pilot_wave": 100.0
+    },
+    "ambiguous_clarified_pct": 85.7,
+    "false_clarification_pct": 0.0,
+    "latency_sec_mean": 11.1,
+    "llm_calls_mean": 4.2,
+    "self_corrections_total": 26,
+    "errors": 0,
+    "milestone1_target_pct": 85.0
+  },
+  "cases": [
+    {
+      "case_id": "D1-clear-00",
+      "kind": "clear",
+      "request": "Create a migration plan limited to 5,000 GB.",
+      "gold": {
+        "max_transfer_gb": 5000.0,
+        "target_cloud": "AWS",
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 5000.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "SRV-008",
+          "SRV-009",
+          "SRV-048",
+          "SRV-049"
+        ],
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan has been created with a limit of 5,000 GB. It includes four servers already flagged for early migration: SRV-008, SRV-009, SRV-048, and SRV-049, which together account for 670 GB of the transfer volume. The plan is set for AWS as the target cloud. Please confirm if this configuration meets your requirements.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 16.5,
+      "llm_calls": 5,
+      "tool_calls": 7,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D1-clear-01",
+      "kind": "clear",
+      "request": "I need a migration plan that caps each wave at 3 TB, moves the HR Portal early, and kicks off with a pilot wave.",
+      "gold": {
+        "max_transfer_gb": 3000.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "HR_Portal"
+        ],
+        "pilot_wave": true
+      },
+      "proposed": {
+        "max_transfer_gb": 3000.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "SRV-001",
+          "SRV-002",
+          "SRV-003"
+        ],
+        "early_app_names": [
+          "HR_Portal"
+        ],
+        "pilot_wave": true
+      },
+      "reply": "Your migration plan is set as follows:\n\n- Each wave is capped at 3,000 GB (3 TB).\n- The HR Portal application and its associated servers are marked for early migration.\n- A pilot wave is included to start the process with a small, low-risk test.\n- The target cloud is AWS.\n\nPlease confirm if this setup works for you.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 16.4,
+      "llm_calls": 7,
+      "tool_calls": 6,
+      "tool_errors": 3
+    },
+    {
+      "case_id": "D1-clear-02",
+      "kind": "clear",
+      "request": "Prepare a migration plan for Azure with a wave limit of 2,500 GB, ensuring the Corp Blog and QA Tools are moved early.",
+      "gold": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AZURE",
+        "early_app_names": [
+          "Corp_Blog",
+          "QA_Tools"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AZURE",
+        "early_server_ids": [
+          "SRV-048",
+          "SRV-049",
+          "SRV-032"
+        ],
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan targets Azure with a wave limit of 2,500 GB. The Corp Blog and QA Tools applications will be migrated early, including their associated servers. No pilot wave is included. Please confirm if this setup is correct.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 14.9,
+      "llm_calls": 5,
+      "tool_calls": 5,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D1-clear-03",
+      "kind": "clear",
+      "request": "- Migration plan request\n- Wave limit: 3,000 GB\n- Early move: Payment Gateway",
+      "gold": {
+        "max_transfer_gb": 3000.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "Payment_Gateway"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 3000.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "SRV-004",
+          "SRV-005"
+        ],
+        "early_app_names": [
+          "Payment_Gateway"
+        ],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan proposes moving the \"Payment Gateway\" application (and its two servers, SRV-004 and SRV-005) in an early wave, with a maximum wave size of 3,000 GB. No pilot wave is included. Please confirm if this setup is correct.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 5.4,
+      "llm_calls": 4,
+      "tool_calls": 4,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D1-clear-04",
+      "kind": "clear",
+      "request": "Please draft a migration plan with a wave limit of 2,000 gigabytes, moving CRM and Core DNS early.",
+      "gold": {
+        "max_transfer_gb": 2000.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "CRM",
+          "Core_DNS"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 2000.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "SRV-008",
+          "SRV-009",
+          "SRV-012",
+          "SRV-013"
+        ],
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan proposes moving CRM and Core DNS early, with a wave limit of 2,000 GB on AWS. This includes 6 servers with a total data volume of 750 GB. Shall I proceed?",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 10.3,
+      "llm_calls": 5,
+      "tool_calls": 5,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D1-clear-05",
+      "kind": "clear",
+      "request": "Provide a migration plan with a 2,500 GB wave limit.",
+      "gold": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [],
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "reply": "I've created a migration plan with a 2,500 GB wave limit for AWS. The configuration includes the 4 servers already flagged for early migration (with a total of 670 GB). No additional applications or servers were specified for early migration, so the plan will proceed with the default approach.\n\nThe plan reserves wave 0 for a potential pilot if needed, but won't use it unless requested. All other a",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 10.2,
+      "llm_calls": 3,
+      "tool_calls": 2,
+      "tool_errors": 0
+    },
+    {
+      "case_id": "D1-clear-06",
+      "kind": "clear",
+      "request": "Generate a migration plan limited to 1,500 GB per wave.",
+      "gold": {
+        "max_transfer_gb": 1500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 1500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [],
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "reply": "I've created a migration plan with a 1,500 GB wave limit to AWS. The plan includes 4 servers already flagged for early migration (totaling 670 GB), but no additional applications or servers were specified for early migration. \n\nThe configuration will process applications in waves of up to 1,500 GB each, with a pilot wave disabled. All applications will be migrated using standard wave processing.\n\n",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 6.9,
+      "llm_calls": 3,
+      "tool_calls": 2,
+      "tool_errors": 0
+    },
+    {
+      "case_id": "D1-clear-07",
+      "kind": "clear",
+      "request": "- Migration plan request\n- Wave limit: 2500GB\n- Early move: CRM, Data Warehouse\n- Start with a pilot wave",
+      "gold": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "CRM",
+          "Data_Warehouse"
+        ],
+        "pilot_wave": true
+      },
+      "proposed": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "SRV-008",
+          "SRV-009",
+          "SRV-040",
+          "SRV-041",
+          "SRV-042"
+        ],
+        "early_app_names": [],
+        "pilot_wave": true
+      },
+      "reply": "The migration plan proposes a pilot wave (Wave 0) for a small, low-risk test, followed by waves of up to 2500 GB each. The CRM and Data Warehouse applications are included in the early migration, totaling 45,670 GB. This will span multiple waves due to the size. Please confirm if this setup is acceptable.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 11.9,
+      "llm_calls": 5,
+      "tool_calls": 5,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D1-clear-08",
+      "kind": "clear",
+      "request": "Provide a migration plan limited to 1.5\u202fTB, moving Core DNS early.",
+      "gold": {
+        "max_transfer_gb": 1500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "Core_DNS"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 1500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "SRV-012",
+          "SRV-013"
+        ],
+        "early_app_names": [
+          "Core_DNS"
+        ],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan proposes moving 1.5 TB, prioritizing the Core DNS application and its two servers (SRV-012, SRV-013). The plan targets AWS and does not include a pilot wave. All early migration flags from the CSV are honored. \n\nPlease confirm if this configuration meets your requirements.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 9.1,
+      "llm_calls": 4,
+      "tool_calls": 4,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D1-clear-09",
+      "kind": "clear",
+      "request": "Draft a migration plan with a wave limit of 1500GB.",
+      "gold": {
+        "max_transfer_gb": 1500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 1500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [],
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan is configured with a wave limit of 1500 GB to AWS. It will honor the existing early migration flags, which include 4 servers with a total of 670 GB. No additional applications or servers are marked for early migration. The plan does not include a pilot wave.\n\nPlease confirm if this setup meets your requirements.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 9.6,
+      "llm_calls": 3,
+      "tool_calls": 2,
+      "tool_errors": 0
+    },
+    {
+      "case_id": "D1-clear-10",
+      "kind": "clear",
+      "request": "Create a migration plan capped at 5,000 gigabytes, moving Corp Blog and QA Tools early.",
+      "gold": {
+        "max_transfer_gb": 5000.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "Corp_Blog",
+          "QA_Tools"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 5000.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "SRV-048",
+          "SRV-049",
+          "SRV-032"
+        ],
+        "early_app_names": [
+          "Corp_Blog",
+          "QA_Tools"
+        ],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan proposes moving Corp Blog and QA Tools early, with a cap of 5,000 GB per wave to AWS. This includes 5 servers with a total data volume of 870 GB. No pilot wave is included. Please confirm if this meets your requirements.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 11.5,
+      "llm_calls": 5,
+      "tool_calls": 5,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D1-clear-11",
+      "kind": "clear",
+      "request": "Prepare a migration plan for AZURE with a wave limit of 4,000 gigabytes, moving Med Records early.",
+      "gold": {
+        "max_transfer_gb": 4000.0,
+        "target_cloud": "AZURE",
+        "early_app_names": [
+          "Med_Records"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 4000.0,
+        "target_cloud": "AZURE",
+        "early_server_ids": [
+          "SRV-033",
+          "SRV-034",
+          "SRV-035",
+          "SRV-036",
+          "SRV-037"
+        ],
+        "early_app_names": [
+          "Med_Records"
+        ],
+        "pilot_wave": false
+      },
+      "reply": "We\u2019re setting up a cloud migration plan to AZURE with a 4,000 GB wave limit. The Med Records application and its 5 servers will be migrated early. \n\nThis plan will span multiple waves due to the size of the early migration. Let me know if this looks good to proceed!",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 17.8,
+      "llm_calls": 5,
+      "tool_calls": 5,
+      "tool_errors": 2
+    },
+    {
+      "case_id": "D3_100-clear-00",
+      "kind": "clear",
+      "request": "Generate a migration plan for AZURE, wave limit 2\u202fTB, with Executive Scorecard Reporting Suite moved early.",
+      "gold": {
+        "max_transfer_gb": 2000.0,
+        "target_cloud": "AZURE",
+        "early_app_names": [
+          "Executive_Scorecard_Reporting_Suite"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 2000.0,
+        "target_cloud": "AZURE",
+        "early_server_ids": [
+          "BEN-0034"
+        ],
+        "early_app_names": [
+          "Executive_Scorecard_Reporting_Suite"
+        ],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan proposes moving the \"Executive Scorecard Reporting Suite\" application and its server (BEN-0034) to Azure first, with a wave limit of 2,000 GB. No pilot wave is included. The plan honors existing early migration flags and includes a note that Azure cost estimation is unavailable. Please confirm this configuration.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 14.2,
+      "llm_calls": 4,
+      "tool_calls": 4,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D3_100-clear-01",
+      "kind": "clear",
+      "request": "Develop a migration plan for AWS, wave limit 2,500 gigabytes, moving Active Directory, Payment Gateway Proxy, and ProductUsage Behavioural Analytics early.",
+      "gold": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "Active_Directory",
+          "Payment_Gateway_Proxy",
+          "ProductUsage_Behavioural_Analytics"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "BEN-0001",
+          "BEN-0002",
+          "BEN-0015",
+          "BEN-0016",
+          "BEN-0017",
+          "BEN-0018",
+          "BEN-0055",
+          "BEN-0056",
+          "BEN-0057",
+          "BEN-0058",
+          "BEN-0059",
+          "BEN-0060",
+          "BEN-0061"
+        ],
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan proposes moving 19 servers (totaling 10,774 GB) early to AWS, including all instances of Active Directory, Payment Gateway Proxy, and ProductUsage Behavioural Analytics. The wave limit is set to 2,500 GB. \n\nPlease confirm if this configuration is acceptable.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 18.0,
+      "llm_calls": 6,
+      "tool_calls": 7,
+      "tool_errors": 2
+    },
+    {
+      "case_id": "D3_100-clear-02",
+      "kind": "clear",
+      "request": "Start with a pilot wave, then produce a migration plan limited to 3,500\u202fGB, moving GlobalInsights Geo Analytics Engine, ProductUsage Behavioural Analytics, and RetailPulse Sales Analytics early.",
+      "gold": {
+        "max_transfer_gb": 3500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "GlobalInsights_Geo_Analytics_Engine",
+          "ProductUsage_Behavioural_Analytics",
+          "RetailPulse_Sales_Analytics"
+        ],
+        "pilot_wave": true
+      },
+      "proposed": {
+        "max_transfer_gb": 3500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [],
+        "early_app_names": [
+          "GlobalInsights_Geo_Analytics_Engine",
+          "ProductUsage_Behavioural_Analytics",
+          "RetailPulse_Sales_Analytics"
+        ],
+        "pilot_wave": true
+      },
+      "reply": "The migration plan includes a pilot wave and moves the following applications early: GlobalInsights Geo Analytics Engine, ProductUsage Behavioural Analytics, and RetailPulse Sales Analytics. The maximum transfer volume per wave is set to 3,500 GB. \n\nPlease confirm if this configuration meets your requirements.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 11.2,
+      "llm_calls": 4,
+      "tool_calls": 6,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D3_100-clear-03",
+      "kind": "clear",
+      "request": "Construct a migration plan for AWS, wave limit 5\u202fTB, moving Wellness Program Portal early.",
+      "gold": {
+        "max_transfer_gb": 5000.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "Wellness_Program_Portal"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 5000.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "BEN-0062"
+        ],
+        "early_app_names": [
+          "Wellness_Program_Portal"
+        ],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan proposes moving the Wellness Program Portal application and its server BEN-0062 to AWS, with a wave limit of 5,000 GB. This plan also includes honoring existing early migration flags and does not include a pilot wave. Please confirm if this setup is correct.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 16.8,
+      "llm_calls": 4,
+      "tool_calls": 4,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D3_100-clear-04",
+      "kind": "clear",
+      "request": "Generate a migration plan limited to 2500GB and move the Fraud Detection Risk Scoring Service early.",
+      "gold": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "Fraud_Detection_Risk_Scoring_Service"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "BEN-0012"
+        ],
+        "early_app_names": [
+          "Fraud_Detection_Risk_Scoring_Service"
+        ],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan is set with a 2500 GB wave limit. The Fraud Detection Risk Scoring Service will be migrated early, including its server BEN-0012. No pilot wave is included. Please confirm if this setup meets your requirements.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 13.5,
+      "llm_calls": 4,
+      "tool_calls": 4,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D3_100-clear-05",
+      "kind": "clear",
+      "request": "Prepare a migration plan with a wave limit of 1,500 gigabytes and start with a pilot wave.",
+      "gold": {
+        "max_transfer_gb": 1500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [],
+        "pilot_wave": true
+      },
+      "proposed": {
+        "max_transfer_gb": 1500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [],
+        "early_app_names": [],
+        "pilot_wave": true
+      },
+      "reply": "Your migration plan is set with the following configuration:\n\n- Wave limit: 1,500 GB\n- Pilot wave enabled (wave 0 for a small test)\n- Target cloud: AWS\n- The system will honor existing early migration flags from the CSV\n- No additional applications or servers selected for early migration beyond the 6 already flagged\n\nThis plan reserves a small pilot wave for testing while maintaining your specifie",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 14.8,
+      "llm_calls": 3,
+      "tool_calls": 2,
+      "tool_errors": 0
+    },
+    {
+      "case_id": "D3_100-clear-06",
+      "kind": "clear",
+      "request": "- wave limit: 2.5 TB\n- move early: Core DNS, Tele Visit Platform\n- begin with a pilot wave",
+      "gold": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "Core_DNS",
+          "Tele_Visit_Platform"
+        ],
+        "pilot_wave": true
+      },
+      "proposed": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "BEN-0003",
+          "BEN-0004",
+          "BEN-0065",
+          "BEN-0066",
+          "BEN-0067",
+          "BEN-0068"
+        ],
+        "early_app_names": [],
+        "pilot_wave": true
+      },
+      "reply": "The proposal includes a pilot wave followed by two additional waves, with a total wave limit of 2.5 TB. The early migration includes all servers from \"Core DNS\" and \"Tele Visit Platform\". \n\nPlease confirm if this setup aligns with your expectations.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 7.8,
+      "llm_calls": 5,
+      "tool_calls": 5,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D3_100-clear-07",
+      "kind": "clear",
+      "request": "Create a migration plan for Azure with a wave limit of 3,000 GB, initiating a pilot wave.",
+      "gold": {
+        "max_transfer_gb": 3000.0,
+        "target_cloud": "AZURE",
+        "early_app_names": [],
+        "pilot_wave": true
+      },
+      "proposed": {
+        "max_transfer_gb": 3000.0,
+        "target_cloud": "AZURE",
+        "early_server_ids": [],
+        "early_app_names": [],
+        "pilot_wave": true
+      },
+      "reply": "I've created a migration plan for Azure with a 3,000 GB wave limit and a pilot wave enabled. The plan includes 6 servers already flagged for early migration (totaling 901 GB), which will be migrated in the initial wave. The pilot wave will contain up to 5 servers with a maximum of 1,500 GB of data.\n\nNo additional applications or servers were specified for early migration beyond the pre-flagged one",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 8.4,
+      "llm_calls": 3,
+      "tool_calls": 2,
+      "tool_errors": 0
+    },
+    {
+      "case_id": "D3_100-clear-08",
+      "kind": "clear",
+      "request": "Hey, can you put together a migration plan capped at 3,500 gigabytes and make sure the Patch Automation Engine is moved early?",
+      "gold": {
+        "max_transfer_gb": 3500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "Patch_Automation_Engine"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 3500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "BEN-0005",
+          "BEN-0006",
+          "BEN-0007",
+          "BEN-0008"
+        ],
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan has been configured with the following settings:\n\n- Wave size capped at 3,500 GB.\n- The Patch Automation Engine (4 servers) is included for early migration.\n- Target cloud is AWS.\n- No pilot wave is included.\n\nPlease confirm if this setup meets your requirements.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 10.8,
+      "llm_calls": 5,
+      "tool_calls": 4,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D3_100-clear-09",
+      "kind": "clear",
+      "request": "Develop a migration plan for AWS with a wave limit of 2,500 gigabytes, move RetailPulse Sales Analytics early, and commence with a pilot wave.",
+      "gold": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "RetailPulse_Sales_Analytics"
+        ],
+        "pilot_wave": true
+      },
+      "proposed": {
+        "max_transfer_gb": 2500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "BEN-0083",
+          "BEN-0084",
+          "BEN-0085",
+          "BEN-0086",
+          "BEN-0087",
+          "BEN-0088",
+          "BEN-0089",
+          "BEN-0090"
+        ],
+        "early_app_names": [
+          "RetailPulse_Sales_Analytics"
+        ],
+        "pilot_wave": true
+      },
+      "reply": "The migration plan is set for AWS with a wave limit of 2,500 GB and includes a pilot wave. The RetailPulse Sales Analytics application and its 8 associated servers will be migrated early. \n\nNote: The early migration servers total 4,237 GB, which exceeds one wave's limit, so they will span multiple waves. \n\nPlease confirm this configuration.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 13.6,
+      "llm_calls": 5,
+      "tool_calls": 4,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D3_100-clear-10",
+      "kind": "clear",
+      "request": "Provide a migration plan limited to 4 TB and move Core DNS early.",
+      "gold": {
+        "max_transfer_gb": 4000.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "Core_DNS"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 4000.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "BEN-0003",
+          "BEN-0004"
+        ],
+        "early_app_names": [],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan includes moving the Core DNS servers (BEN-0003 and BEN-0004) early, with a total transfer volume of 351 GB, well within the 4 TB limit. No pilot wave is requested. Please confirm if this meets your requirements.",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 6.7,
+      "llm_calls": 4,
+      "tool_calls": 4,
+      "tool_errors": 1
+    },
+    {
+      "case_id": "D3_100-clear-11",
+      "kind": "clear",
+      "request": "Migration plan request:\n- wave limit: 1.5 TB\n- early migration: Core DNS, Employee Survey Tool, Marketing Attribution Modeler",
+      "gold": {
+        "max_transfer_gb": 1500.0,
+        "target_cloud": "AWS",
+        "early_app_names": [
+          "Core_DNS",
+          "Employee_Survey_Tool",
+          "Marketing_Attribution_Modeler"
+        ],
+        "pilot_wave": false
+      },
+      "proposed": {
+        "max_transfer_gb": 1500.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [
+          "BEN-0003",
+          "BEN-0004",
+          "BEN-0064",
+          "BEN-0097",
+          "BEN-0098",
+          "BEN-0099",
+          "BEN-0100"
+        ],
+        "early_app_names": [
+          "Core_DNS",
+          "Employee_Survey_Tool",
+          "Marketing_Attribution_Modeler"
+        ],
+        "pilot_wave": false
+      },
+      "reply": "Your cloud migration plan has been configured as follows:\n\n- Wave limit: 1,500 GB (1.5 TB)\n- Target cloud: AWS\n- Early migration applications: Core DNS, Employee Survey Tool, Marketing Attribution Modeler\n- Early migration servers: 8 servers in total\n- Pilot wave: No\n- Honor existing early migration flags: Yes\n\nThis plan will migrate the specified applications and their associated servers in the f",
+      "correct": true,
+      "false_clarification": false,
+      "fields": {
+        "max_transfer_gb": true,
+        "target_cloud": true,
+        "early": true,
+        "pilot_wave": true
+      },
+      "early_extra": [],
+      "early_missing": [],
+      "error": null,
+      "latency_sec": 18.8,
+      "llm_calls": 6,
+      "tool_calls": 7,
+      "tool_errors": 2
+    },
+    {
+      "case_id": "D1-ambiguous-00",
+      "kind": "ambiguous",
+      "request": "- Provide a migration plan\n- Wave limit: 3000\u202fGB\n- Move the billing system early",
+      "gold": {
+        "needs_clarification": true
+      },
+      "proposed": null,
+      "reply": "The term \"billing system\" does not match any known application in the dataset. Could you clarify which application you'd like to move early? It might be under a different name.",
+      "correct": true,
+      "fields": {
+        "asked_clarification": true
+      },
+      "error": null,
+      "latency_sec": 3.9,
+      "llm_calls": 3,
+      "tool_calls": 2,
+      "tool_errors": 0
+    },
+    {
+      "case_id": "D1-ambiguous-01",
+      "kind": "ambiguous",
+      "request": "Create a migration plan with a wave limit of 3000\u202fGB, moving ERP early.",
+      "gold": {
+        "needs_clarification": true
+      },
+      "proposed": {
+        "max_transfer_gb": 3000.0,
+        "target_cloud": "AWS",
+        "early_server_ids": [],
+        "early_app_names": [
+          "ERP_Dev",
+          "ERP_System"
+        ],
+        "pilot_wave": false
+      },
+      "reply": "The migration plan proposes moving ERP_Dev and ERP_System applications first, with a wave limit of 3000 GB to AWS. The early migration includes 12 servers totaling 12,070 GB, which will span multiple waves. No pilot wave is included. Please confirm if this meets your requirements.",
+      "correct": false,
+      "fields": {
+        "asked_clarification": false
+      },
+      "error": null,
+      "latency_sec": 17.1,
+      "llm_calls": 6,
+      "tool_calls": 5,
+      "tool_errors": 2
+    },
+    {
+      "case_id": "D1-ambiguous-02",
+      "kind": "ambiguous",
+      "request": "Please prepare a migration plan that respects a wave limit of 3000\u202fGB and includes the mainframe connector in the early\u2011move set.",
+      "gold": {
+        "needs_clarification": true
+      },
+      "proposed": null,
+      "reply": "The query \"mainframe connector\" did not match any servers or applications. Could you clarify if you meant a specific application or server related to a mainframe connector, or if it's a typo?",
+      "correct": true,
+      "fields": {
+        "asked_clarification": true
+      },
+      "error": null,
+      "latency_sec": 7.9,
+      "llm_calls": 2,
+      "tool_calls": 2,
+      "tool_errors": 0
+    },
+    {
+      "case_id": "D3_100-ambiguous-00",
+      "kind": "ambiguous",
+      "request": "Hey team, I need a migration plan that caps each wave at 3000\u202fGB and makes sure the payment app is shifted early in the process.",
+      "gold": {
+        "needs_clarification": true
+      },
+      "proposed": null,
+      "reply": "The term \"payment app\" doesn't directly match any known applications. Could you clarify which specific application you'd like to move early? For example, are you referring to \"Payment_Gateway_Proxy\", \"Payment_Reconciliation_Engine\", or another related application?",
+      "correct": true,
+      "fields": {
+        "asked_clarification": true
+      },
+      "error": null,
+      "latency_sec": 7.7,
+      "llm_calls": 3,
+      "tool_calls": 2,
+      "tool_errors": 0
+    },
+    {
+      "case_id": "D3_100-ambiguous-01",
+      "kind": "ambiguous",
+      "request": "Provide a migration plan:\n- Wave limit: 3000\u202fGB\n- Early\u2011move item: the clinical system",
+      "gold": {
+        "needs_clarification": true
+      },
+      "proposed": null,
+      "reply": "The term \"clinical system\" did not match any known applications. Could you clarify which specific application you'd like to move early? For example, \"MediStat_Clinical_Reporting_Suite\" or \"Clinical_Guidelines_Repository\"?",
+      "correct": true,
+      "fields": {
+        "asked_clarification": true
+      },
+      "error": null,
+      "latency_sec": 2.5,
+      "llm_calls": 3,
+      "tool_calls": 2,
+      "tool_errors": 0
+    },
+    {
+      "case_id": "D3_100-ambiguous-02",
+      "kind": "ambiguous",
+      "request": "Generate a migration plan with a 3000\u202fGB wave limit, moving the mainframe connector early.",
+      "gold": {
+        "needs_clarification": true
+      },
+      "proposed": null,
+      "reply": "The query \"mainframe connector\" did not match any servers or applications. Could you clarify which application or server you'd like to move early?",
+      "correct": true,
+      "fields": {
+        "asked_clarification": true
+      },
+      "error": null,
+      "latency_sec": 8.0,
+      "llm_calls": 2,
+      "tool_calls": 2,
+      "tool_errors": 0
+    },
+    {
+      "case_id": "D3_100-ambiguous-03",
+      "kind": "ambiguous",
+      "request": "Draft a migration plan that caps waves at 3000\u202fGB and pulls the warehouse management system forward in the schedule.",
+      "gold": {
+        "needs_clarification": true
+      },
+      "proposed": null,
+      "reply": "The \"warehouse management system\" doesn't directly match any known applications. Could you clarify which application you'd like to prioritize for early migration? It might be under a slightly different name.",
+      "correct": true,
+      "fields": {
+        "asked_clarification": true
+      },
+      "error": null,
+      "latency_sec": 2.8,
+      "llm_calls": 3,
+      "tool_calls": 2,
+      "tool_errors": 0
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "system": "B1 (greedy first-fit-decreasing, SCC granularity, no community/early/risk priority)",
+  "packing": "same-wave",
+  "max_transfer_gb": 3000.0,
+  "wave_count": 8,
+  "wave_totals_gb": {
+    "0": 2984.0,
+    "1": 2987.0,
+    "2": 2831.0,
+    "3": 2978.0,
+    "4": 2088.0,
+    "5": 1851.0,
+    "6": 2015.0,
+    "7": 1522.0
+  },
+  "infeasible_groups": [],
+  "group_count": 24
+}

@@ -1,0 +1,101 @@
+Server_ID,Hostname,App_Name,OS_Version,Target_Size,Risk_Score,Transfer_GB,Current_Monthly_Cost,SCC_Id,Wave_ID,Early_Migration_Requested
+BEN-0043,risk-scor-srv-01,Risk_Scoring_Service,Windows Server 2019,t3.xlarge,High,154.0,537.7,SCC:BEN-0043,0,False
+BEN-0064,empl-surv-srv-01,Employee_Survey_Tool,RHEL 8,m5.2xlarge,Low,230.0,541.5,SCC:BEN-0064,0,True
+BEN-0073,glob-geo-node-01,GlobalInsights_Geo_Analytics_Engine,RHEL 8,m5.4xlarge,Low,2609.0,2740.45,SCC:BEN-0073,0,False
+BEN-0074,glob-geo-node-02,GlobalInsights_Geo_Analytics_Engine,Ubuntu 24.04,m5.4xlarge,Low,4566.0,2838.3,SCC:BEN-0074,1,False
+BEN-0075,glob-geo-node-03,GlobalInsights_Geo_Analytics_Engine,Ubuntu 24.04,m5.4xlarge,Low,4691.0,4124.55,SCC:BEN-0075,2,False
+BEN-0076,glob-geo-node-04,GlobalInsights_Geo_Analytics_Engine,RHEL 9,m5.4xlarge,Low,8192.0,1739.6,SCC:BEN-0076,3,False
+BEN-0077,glob-geo-node-05,GlobalInsights_Geo_Analytics_Engine,RHEL 8,m5.4xlarge,Low,8175.0,3018.75,SCC:BEN-0077,4,False
+BEN-0078,glob-geo-node-06,GlobalInsights_Geo_Analytics_Engine,RHEL 8,m5.4xlarge,Low,7938.0,1726.9,SCC:BEN-0078,5,False
+BEN-0036,recr-work-web-01,Recruitment_Workflow_Engine,Windows Server 2016,t3.xlarge,High,201.0,380.05,SCC:BEN-0036,6,False
+BEN-0044,medi-clin-node-01,MediStat_Clinical_Reporting_Suite,RHEL 9,m5.4xlarge,High,1979.0,3988.95,SCC:BEN-0044,6,False
+BEN-0055,prod-beha-node-01,ProductUsage_Behavioural_Analytics,Ubuntu 22.04,m5.4xlarge,Low,806.0,2650.3,SCC:BEN-0055,6,False
+BEN-0021,clin-guid-app-02,Clinical_Guidelines_Repository,Ubuntu 20.04,m5.2xlarge,High,229.0,541.45,SCC:BEN-0021,7,False
+BEN-0045,medi-clin-node-02,MediStat_Clinical_Reporting_Suite,RHEL 9,m5.4xlarge,High,1633.0,2691.65,SCC:BEN-0045,7,False
+BEN-0046,medi-clin-node-03,MediStat_Clinical_Reporting_Suite,Ubuntu 20.04,m5.4xlarge,High,941.0,1377.05,SCC:BEN-0046,7,False
+BEN-0096,cred-card-srv-01,Credit_Card_Token_Vault,Windows Server 2019,t3.xlarge,High,193.0,379.65,SCC:BEN-0096,7,False
+BEN-0047,medi-clin-node-04,MediStat_Clinical_Reporting_Suite,RHEL 8,m5.4xlarge,High,649.0,3922.45,SCC:BEN-0047,8,False
+BEN-0056,prod-beha-node-02,ProductUsage_Behavioural_Analytics,Ubuntu 22.04,m5.4xlarge,Low,851.0,1372.55,SCC:BEN-0056,8,False
+BEN-0057,prod-beha-node-03,ProductUsage_Behavioural_Analytics,Ubuntu 20.04,m5.4xlarge,Low,1468.0,3963.4,SCC:BEN-0057,8,False
+BEN-0005,patc-auto-web-01,Patch_Automation_Engine,Windows Server 2016,t3.xlarge,High,198.0,299.9,SCC:BEN-0005,9,False
+BEN-0007,patc-auto-app-01,Patch_Automation_Engine,Windows Server 2019,t3.xlarge,High,73.0,373.65,SCC:BEN-0007,9,False
+BEN-0048,medi-clin-node-05,MediStat_Clinical_Reporting_Suite,RHEL 8,m5.4xlarge,High,2070.0,2073.5,SCC:BEN-0048,9,False
+BEN-0069,invo-web-01,InvoiceHub,Windows Server 2019,t3.xlarge,High,221.0,301.05,SCC:BEN-0069,9,False
+BEN-0083,reta-sale-node-01,RetailPulse_Sales_Analytics,Ubuntu 20.04,m5.4xlarge,Low,437.0,1991.85,SCC:BEN-0083,9,False
+BEN-0031,conf-mana-web-02,Configuration_Management_Database,RHEL 8,t3.xlarge,High,50.0,372.5,SCC:BEN-0031,10,False
+BEN-0049,medi-clin-node-06,MediStat_Clinical_Reporting_Suite,RHEL 8,m5.4xlarge,High,1922.0,1426.1,SCC:BEN-0049,10,False
+BEN-0050,medi-clin-node-07,MediStat_Clinical_Reporting_Suite,Ubuntu 20.04,m5.4xlarge,High,1014.0,2020.7,SCC:BEN-0050,10,False
+BEN-0034,exec-scor-srv-01,Executive_Scorecard_Reporting_Suite,Windows Server 2022,t3.xlarge,Low,33.0,371.65,SCC:BEN-0034,11,False
+BEN-0058,prod-beha-node-04,ProductUsage_Behavioural_Analytics,Ubuntu 22.04,m5.4xlarge,Low,1011.0,1380.55,SCC:BEN-0058,11,False
+BEN-0059,prod-beha-node-05,ProductUsage_Behavioural_Analytics,Ubuntu 24.04,m5.4xlarge,Low,1590.0,1409.5,SCC:BEN-0059,11,False
+BEN-0066,tele-visi-web-02,Tele_Visit_Platform,Ubuntu 22.04,t3.xlarge,High,184.0,379.2,SCC:BEN-0066,11,False
+BEN-0079,pric-prom-srv-01,Pricing_Promotion_Engine,RHEL 9,t3.xlarge,High,179.0,378.95,SCC:BEN-0079,11,False
+BEN-0016,paym-gate-web-02,Payment_Gateway_Proxy,Ubuntu 22.04,t3.large,High,167.0,178.35,SCC:BEN-0016,12,False
+BEN-0060,prod-beha-node-06,ProductUsage_Behavioural_Analytics,RHEL 8,m5.4xlarge,Low,1076.0,2663.8,SCC:BEN-0060,12,False
+BEN-0061,prod-beha-node-07,ProductUsage_Behavioural_Analytics,Ubuntu 24.04,m5.4xlarge,Low,1349.0,2677.45,SCC:BEN-0061,12,False
+BEN-0071,invo-web-03,InvoiceHub,Windows Server 2016,t3.large,High,170.0,178.5,SCC:BEN-0071,12,False
+BEN-0080,remo-pati-web-01,Remote_Patient_Monitoring_Gateway,Windows Server 2019,t3.xlarge,High,49.0,292.45,SCC:BEN-0080,12,False
+BEN-0091,char-mana-srv-01,Chargeback_Manager,Windows Server 2019,m5.2xlarge,High,166.0,538.3,SCC:BEN-0091,12,False
+BEN-0081,remo-pati-app-01,Remote_Patient_Monitoring_Gateway,Windows Server 2019,m5.2xlarge,High,190.0,539.5,SCC:BEN-0081,13,False
+BEN-0082,remo-pati-app-02,Remote_Patient_Monitoring_Gateway,Windows Server 2019,m5.2xlarge,High,93.0,534.65,SCC:BEN-0082,13,False
+BEN-0084,reta-sale-node-02,RetailPulse_Sales_Analytics,RHEL 8,m5.4xlarge,Low,605.0,3920.25,SCC:BEN-0084,13,False
+BEN-0085,reta-sale-node-03,RetailPulse_Sales_Analytics,RHEL 8,m5.4xlarge,Low,339.0,1986.95,SCC:BEN-0085,13,False
+BEN-0086,reta-sale-node-04,RetailPulse_Sales_Analytics,Ubuntu 20.04,m5.4xlarge,Low,693.0,2644.65,SCC:BEN-0086,13,False
+BEN-0087,reta-sale-node-05,RetailPulse_Sales_Analytics,RHEL 9,m5.4xlarge,Low,273.0,2623.65,SCC:BEN-0087,13,False
+BEN-0088,reta-sale-node-06,RetailPulse_Sales_Analytics,RHEL 9,m5.4xlarge,Low,639.0,3921.95,SCC:BEN-0088,13,False
+BEN-0089,reta-sale-node-07,RetailPulse_Sales_Analytics,RHEL 8,m5.4xlarge,Low,168.0,1338.4,SCC:BEN-0089,13,False
+BEN-0006,patc-auto-web-02,Patch_Automation_Engine,Windows Server 2019,t3.large,High,114.0,215.7,SCC:BEN-0006,14,False
+BEN-0008,patc-auto-app-02,Patch_Automation_Engine,Windows Server 2016,m5.2xlarge,High,236.0,541.8,SCC:BEN-0008,14,False
+BEN-0011,netw-heal-srv-01,Network_Health_Dashboard,Ubuntu 24.04,m5.2xlarge,Low,108.0,535.4,SCC:BEN-0011,14,True
+BEN-0012,frau-dete-srv-01,Fraud_Detection_Risk_Scoring_Service,RHEL 9,m5.2xlarge,High,139.0,696.95,SCC:BEN-0012,14,False
+BEN-0019,clin-guid-web-01,Clinical_Guidelines_Repository,Ubuntu 20.04,t3.large,High,130.0,216.5,SCC:BEN-0019,14,False
+BEN-0020,clin-guid-app-01,Clinical_Guidelines_Repository,Ubuntu 20.04,m5.2xlarge,High,202.0,540.1,SCC:BEN-0020,14,False
+BEN-0030,conf-mana-web-01,Configuration_Management_Database,RHEL 9,t3.xlarge,High,140.0,297.0,SCC:BEN-0030,14,False
+BEN-0037,recr-work-web-02,Recruitment_Workflow_Engine,Windows Server 2022,t3.xlarge,High,118.0,295.9,SCC:BEN-0037,14,False
+BEN-0038,recr-work-app-01,Recruitment_Workflow_Engine,Windows Server 2019,t3.xlarge,High,155.0,377.75,SCC:BEN-0038,14,False
+BEN-0042,exte-part-srv-01,External_Partner_Portal,RHEL 8,t3.xlarge,Low,150.0,377.5,SCC:BEN-0042,14,False
+BEN-0051,cust-text-ingest-01,CustomerSentiment_Text_Mining_Service,RHEL 8,t3.xlarge,Low,110.0,375.5,SCC:BEN-0051,14,False
+BEN-0052,cust-text-xform-01,CustomerSentiment_Text_Mining_Service,Ubuntu 24.04,m5.2xlarge,Low,233.0,701.65,SCC:BEN-0052,14,False
+BEN-0054,cust-text-queue-01,CustomerSentiment_Text_Mining_Service,Ubuntu 24.04,m5.2xlarge,Low,106.0,695.3,SCC:BEN-0052,14,False
+BEN-0062,well-prog-srv-01,Wellness_Program_Portal,Ubuntu 20.04,m5.2xlarge,High,129.0,536.45,SCC:BEN-0062,14,False
+BEN-0065,tele-visi-web-01,Tele_Visit_Platform,Ubuntu 22.04,t3.large,High,120.0,216.0,SCC:BEN-0065,14,False
+BEN-0070,invo-web-02,InvoiceHub,Windows Server 2019,t3.large,High,138.0,176.9,SCC:BEN-0070,14,False
+BEN-0090,reta-sale-node-08,RetailPulse_Sales_Analytics,Ubuntu 22.04,m5.4xlarge,Low,182.0,1339.1,SCC:BEN-0090,14,False
+BEN-0092,paym-reco-ingest-01,Payment_Reconciliation_Engine,Windows Server 2019,t3.xlarge,High,152.0,377.6,SCC:BEN-0092,14,False
+BEN-0093,paym-reco-xform-01,Payment_Reconciliation_Engine,Windows Server 2022,m5.2xlarge,High,47.0,692.35,SCC:BEN-0093,14,False
+BEN-0094,paym-reco-load-01,Payment_Reconciliation_Engine,Windows Server 2022,t3.xlarge,High,209.0,380.45,SCC:BEN-0094,14,False
+BEN-0095,paym-reco-queue-01,Payment_Reconciliation_Engine,Windows Server 2016,t3.xlarge,High,70.0,373.5,SCC:BEN-0093,14,False
+BEN-0015,paym-gate-web-01,Payment_Gateway_Proxy,Ubuntu 22.04,t3.xlarge,High,94.0,294.7,SCC:BEN-0015,15,False
+BEN-0017,paym-gate-app-01,Payment_Gateway_Proxy,Ubuntu 22.04,m5.2xlarge,High,180.0,539.0,SCC:BEN-0017,15,False
+BEN-0024,recu-bill-web-01,Recurring_Billing_Service,RHEL 9,t3.large,High,92.0,214.6,SCC:BEN-0024,15,False
+BEN-0025,recu-bill-web-02,Recurring_Billing_Service,RHEL 8,t3.large,High,43.0,172.15,SCC:BEN-0025,15,False
+BEN-0039,hr-sqlclu-01,Shared_DB_Hr,SQL Server 2019,m5.2xlarge,High,1249.0,752.45,SCC:BEN-0039,15,False
+BEN-0040,hr-sqlclu-02,Shared_DB_Hr,SQL Server 2019,m5.4xlarge,High,1167.0,2028.35,SCC:BEN-0039,15,False
+BEN-0063,tax-fili-srv-01,Tax_Filing_Service,Ubuntu 22.04,m5.2xlarge,High,85.0,694.25,SCC:BEN-0063,15,False
+BEN-0068,tele-visi-app-02,Tele_Visit_Platform,RHEL 8,t3.xlarge,High,85.0,374.25,SCC:BEN-0068,15,False
+BEN-0001,ad-dc-01,Active_Directory,Windows Server 2019,t3.xlarge,Low,153.0,377.65,SCC:BEN-0001,16,False
+BEN-0002,ad-dc-02,Active_Directory,Windows Server 2022,t3.xlarge,Low,63.0,373.15,SCC:BEN-0001,16,False
+BEN-0003,dns-01,Core_DNS,CentOS 7,t3.xlarge,Low,234.0,381.7,SCC:BEN-0003,16,False
+BEN-0004,dns-02,Core_DNS,Ubuntu 22.04,t3.xlarge,Low,117.0,375.85,SCC:BEN-0004,16,False
+BEN-0018,paym-gate-db-01,Payment_Gateway_Proxy,Oracle Linux 8,m5.4xlarge,High,1065.0,1383.25,SCC:BEN-0018,16,False
+BEN-0026,recu-bill-app-01,Recurring_Billing_Service,RHEL 9,m5.2xlarge,High,56.0,532.8,SCC:BEN-0026,16,False
+BEN-0027,recu-bill-app-02,Recurring_Billing_Service,RHEL 9,m5.2xlarge,High,240.0,542.0,SCC:BEN-0027,16,False
+BEN-0032,conf-mana-app-01,Configuration_Management_Database,Ubuntu 22.04,m5.2xlarge,High,57.0,692.85,SCC:BEN-0032,16,False
+BEN-0033,conf-mana-app-02,Configuration_Management_Database,Ubuntu 20.04,t3.xlarge,High,37.0,371.85,SCC:BEN-0033,16,False
+BEN-0035,pays-gate-srv-01,PayStream_Gateway,Ubuntu 22.04,m5.2xlarge,High,42.0,532.1,SCC:BEN-0035,16,False
+BEN-0041,cust-serv-srv-01,Customer_Service_Ticketing_CSM,Windows Server 2022,m5.2xlarge,High,41.0,532.05,SCC:BEN-0041,16,False
+BEN-0053,cust-text-load-01,CustomerSentiment_Text_Mining_Service,Ubuntu 22.04,m5.2xlarge,Low,67.0,693.35,SCC:BEN-0053,16,False
+BEN-0067,tele-visi-app-01,Tele_Visit_Platform,Ubuntu 20.04,t3.xlarge,High,67.0,373.35,SCC:BEN-0067,16,False
+BEN-0072,invo-app-01,InvoiceHub,Windows Server 2019,m5.2xlarge,High,31.0,531.55,SCC:BEN-0072,16,False
+BEN-0097,mark-attr-ingest-01,Marketing_Attribution_Modeler,Ubuntu 20.04,m5.2xlarge,Low,77.0,693.85,SCC:BEN-0097,16,True
+BEN-0098,mark-attr-xform-01,Marketing_Attribution_Modeler,RHEL 9,t3.xlarge,Low,238.0,381.9,SCC:BEN-0098,16,True
+BEN-0099,mark-attr-load-01,Marketing_Attribution_Modeler,Ubuntu 20.04,t3.xlarge,Low,176.0,378.8,SCC:BEN-0099,16,True
+BEN-0100,mark-attr-queue-01,Marketing_Attribution_Modeler,Ubuntu 24.04,t3.xlarge,Low,72.0,373.6,SCC:BEN-0098,16,True
+BEN-0028,financep-sqlclu-01,Shared_DB_Financep,SQL Server 2019,m5.4xlarge,High,2011.0,1110.55,SCC:BEN-0028,17,False
+BEN-0029,financep-sqlclu-02,Shared_DB_Financep,SQL Server 2022,m5.4xlarge,High,2063.0,1433.15,SCC:BEN-0028,17,False
+BEN-0013,retailec-sqlclu-01,Shared_DB_Retailec,SQL Server 2016,m5.4xlarge,High,816.0,1050.8,SCC:BEN-0013,18,False
+BEN-0014,retailec-sqlclu-02,Shared_DB_Retailec,SQL Server 2019,m5.4xlarge,High,2158.0,1117.9,SCC:BEN-0013,18,False
+BEN-0009,corporat-sqlclu-01,Shared_DB_Corporat,SQL Server 2022,m5.4xlarge,High,1123.0,1066.15,SCC:BEN-0009,19,False
+BEN-0010,corporat-sqlclu-02,Shared_DB_Corporat,SQL Server 2022,m5.4xlarge,High,960.0,2018.0,SCC:BEN-0009,19,False
+BEN-0022,healthca-sqlclu-01,Shared_DB_Healthca,SQL Server 2019,m5.4xlarge,High,1050.0,1382.5,SCC:BEN-0022,20,False
+BEN-0023,healthca-sqlclu-02,Shared_DB_Healthca,SQL Server 2019,m5.4xlarge,High,731.0,1046.55,SCC:BEN-0022,20,False

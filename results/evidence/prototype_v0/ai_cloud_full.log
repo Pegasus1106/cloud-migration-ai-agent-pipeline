@@ -1,0 +1,47 @@
+/Users/vrajchaudhari/Desktop/Cloud/cloud-migration-ai-agent-pipeline/cloud_selection_agent.py:10: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.chains.graph_qa.cypher import GraphCypherQAChain
+
+
+> Entering new GraphCypherQAChain chain...
+Generated Cypher:
+MATCH (s:Server)
+RETURN s.os AS operating_system, count(s) AS server_count
+ORDER BY server_count DESC
+Full Context:
+[{'operating_system': 'Ubuntu 22.04', 'server_count': 8}, {'operating_system': 'RHEL 8', 'server_count': 7}, {'operating_system': 'Windows Server 2019', 'server_count': 6}, {'operating_system': 'Ubuntu 20.04', 'server_count': 4}, {'operating_system': 'Windows Server 2016', 'server_count': 4}, {'operating_system': 'Windows Server 2008 R2', 'server_count': 4}, {'operating_system': 'Oracle Linux 6.4', 'server_count': 2}, {'operating_system': 'RHEL 5', 'server_count': 2}, {'operating_system': 'Windows Server 2012', 'server_count': 2}, {'operating_system': 'CentOS 7', 'server_count': 2}]
+
+> Finished chain.
+
+─── Agent Response ───
+
+[human] Evaluate our server ecosystem and select the best target cloud platform.
+
+[tool_call] query_neo4j({'question': 'What is the distribution of operating systems across all servers?'})
+
+[tool] Generated Cypher: MATCH (s:Server)
+RETURN s.os AS operating_system, count(s) AS server_count
+ORDER BY server_count DESC
+Answer: The distribution of operating systems across all servers is as follows:
+
+- Ubuntu 22.04: 8 servers
+- RHEL 8: 7 servers
+- Windows Server 2019: 6 servers
+- Ubuntu 20.04: 4 servers
+- Windows Server 2016: 4 servers
+- Windows Server 2008 R2: 4 servers
+- Oracle Linux 6.4: 2 servers
+- RHEL 5: 2 servers
+- Windows Server 2012: 2 servers
+- CentOS 7: 2 servers
+
+In total, there are 39 servers distributed across these 10 different operating systems.
+
+[ai] Based on the OS distribution, the environment has a significant presence of both Linux/Open Source (Ubuntu, RHEL, CentOS) and Microsoft technologies (Windows Server). However, the Linux distributions are more prevalent with 21 servers (Ubuntu 22.04, RHEL 8, Ubuntu 20.04, Oracle Linux 6.4, CentOS 7) compared to Windows servers (16 servers). Given this balance, AWS would be the optimal choice for its strong support for Linux workloads and cost-effective pricing for open-source technologies.
+
+[tool_call] set_target_cloud({'cloud_name': 'AWS', 'rationale': 'The server ecosystem has a higher concentration of Linux/Open Source operating systems (Ubuntu, RHEL, CentOS) compared to Microsoft technologies, making AWS the optimal choice for cost-effective support of open-source workloads.'})
+
+[tool] ✅ Target cloud saved to Neo4j.
+   Platform  : AWS
+   Rationale : The server ecosystem has a higher concentration of Linux/Open Source operating systems (Ubuntu, RHEL, CentOS) compared to Microsoft technologies, making AWS the optimal choice for cost-effective support of open-source workloads.
+
+[ai] Based on my analysis of the server ecosystem, I have selected AWS as the target cloud platform. The OS distribution shows a higher concentration of Linux/Open Source operating systems (Ubuntu, RHEL, CentOS) compared to Microsoft technologies, making AWS the optimal choice for cost-effective support of open-source workloads. This decision is supported by the data showing 21 Linux servers versus 16 Windows servers in the environment.

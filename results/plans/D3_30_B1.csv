@@ -1,0 +1,31 @@
+Server_ID,Hostname,App_Name,OS_Version,Target_Size,Risk_Score,Transfer_GB,Current_Monthly_Cost,SCC_Id,Wave_ID,Early_Migration_Requested
+BEN-0009,pati-port-web-01,Patient_Portal_Mobile_API,Ubuntu 22.04,t3.large,High,197.0,219.85,SCC:BEN-0009,0,False
+BEN-0010,pati-port-app-01,Patient_Portal_Mobile_API,RHEL 9,m5.2xlarge,High,217.0,700.85,SCC:BEN-0010,0,False
+BEN-0013,fina-mont-ingest-01,FinanceClose_Month_End_Reconciliation,Windows Server 2022,t3.xlarge,Low,191.0,379.55,SCC:BEN-0013,0,False
+BEN-0014,fina-mont-xform-01,FinanceClose_Month_End_Reconciliation,Windows Server 2019,t3.xlarge,Low,184.0,379.2,SCC:BEN-0014,0,False
+BEN-0015,fina-mont-load-01,FinanceClose_Month_End_Reconciliation,Windows Server 2019,t3.xlarge,Low,119.0,375.95,SCC:BEN-0015,0,False
+BEN-0016,fina-mont-queue-01,FinanceClose_Month_End_Reconciliation,Windows Server 2022,m5.2xlarge,Low,171.0,698.55,SCC:BEN-0014,0,False
+BEN-0019,prod-beha-node-01,ProductUsage_Behavioural_Analytics,Ubuntu 20.04,m5.4xlarge,Low,1716.0,2055.8,SCC:BEN-0019,0,False
+BEN-0028,cont-mana-srv-01,Content_Management_System_CMS,Windows Server 2016,m5.2xlarge,High,189.0,539.45,SCC:BEN-0028,0,False
+BEN-0017,dataanal-sqlclu-01,Shared_DB_Dataanal,SQL Server 2019,m5.2xlarge,High,1554.0,767.7,SCC:BEN-0017,1,False
+BEN-0018,dataanal-sqlclu-02,Shared_DB_Dataanal,SQL Server 2022,m5.4xlarge,High,1433.0,2041.65,SCC:BEN-0017,1,False
+BEN-0005,data-rule-ingest-01,DataQuality_Rules_Engine,Ubuntu 22.04,m5.2xlarge,Low,176.0,698.8,SCC:BEN-0005,2,True
+BEN-0006,data-rule-xform-01,DataQuality_Rules_Engine,Ubuntu 22.04,t3.xlarge,Low,103.0,375.15,SCC:BEN-0006,2,True
+BEN-0007,data-rule-load-01,DataQuality_Rules_Engine,RHEL 8,m5.2xlarge,Low,226.0,701.3,SCC:BEN-0007,2,True
+BEN-0008,data-rule-queue-01,DataQuality_Rules_Engine,RHEL 8,m5.2xlarge,Low,122.0,696.1,SCC:BEN-0006,2,True
+BEN-0020,prod-beha-node-02,ProductUsage_Behavioural_Analytics,RHEL 8,m5.4xlarge,Low,1927.0,2706.35,SCC:BEN-0020,2,False
+BEN-0025,orde-mana-srv-01,Order_Management_System_OMS,Windows Server 2022,m5.2xlarge,High,173.0,538.65,SCC:BEN-0025,2,False
+BEN-0029,phar-mana-web-01,Pharmacy_Management,Windows Server 2022,t3.xlarge,High,104.0,375.2,SCC:BEN-0029,2,False
+BEN-0001,ad-dc-01,Active_Directory,Windows Server 2022,t3.xlarge,Low,53.0,372.65,SCC:BEN-0001,3,False
+BEN-0002,ad-dc-02,Active_Directory,Windows Server 2016,t3.large,Low,149.0,217.45,SCC:BEN-0001,3,False
+BEN-0003,dns-01,Core_DNS,Ubuntu 22.04,t3.xlarge,Low,151.0,377.55,SCC:BEN-0003,3,False
+BEN-0004,dns-02,Core_DNS,Ubuntu 24.04,t3.xlarge,Low,97.0,374.85,SCC:BEN-0004,3,False
+BEN-0026,retailec-sqlclu-01,Shared_DB_Retailec,SQL Server 2016,m5.4xlarge,High,1151.0,1387.55,SCC:BEN-0026,3,False
+BEN-0027,retailec-sqlclu-02,Shared_DB_Retailec,SQL Server 2022,m5.4xlarge,High,1135.0,1386.75,SCC:BEN-0026,3,False
+BEN-0030,phar-mana-app-01,Pharmacy_Management,Windows Server 2019,t3.xlarge,High,242.0,382.1,SCC:BEN-0030,3,False
+BEN-0021,prod-beha-node-03,ProductUsage_Behavioural_Analytics,Ubuntu 20.04,m5.4xlarge,Low,2088.0,2074.4,SCC:BEN-0021,4,False
+BEN-0011,healthca-sqlclu-01,Shared_DB_Healthca,SQL Server 2016,m5.4xlarge,High,812.0,2010.6,SCC:BEN-0011,5,False
+BEN-0012,healthca-sqlclu-02,Shared_DB_Healthca,SQL Server 2022,m5.4xlarge,High,1039.0,1061.95,SCC:BEN-0011,5,False
+BEN-0022,prod-beha-node-04,ProductUsage_Behavioural_Analytics,RHEL 9,m5.4xlarge,Low,1215.0,1390.75,SCC:BEN-0022,6,False
+BEN-0023,prod-beha-node-05,ProductUsage_Behavioural_Analytics,Ubuntu 24.04,m5.4xlarge,Low,800.0,2650.0,SCC:BEN-0023,6,False
+BEN-0024,prod-beha-node-06,ProductUsage_Behavioural_Analytics,Ubuntu 22.04,m5.4xlarge,Low,1522.0,3966.1,SCC:BEN-0024,7,False

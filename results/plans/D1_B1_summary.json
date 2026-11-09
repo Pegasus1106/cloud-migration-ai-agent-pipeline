@@ -1,0 +1,55 @@
+{
+  "system": "B1 (greedy first-fit-decreasing, SCC granularity, no community/early/risk priority)",
+  "packing": "same-wave",
+  "max_transfer_gb": 3000.0,
+  "wave_count": 10,
+  "wave_totals_gb": {
+    "0": 3000.0,
+    "1": 3000.0,
+    "2": 45000.0,
+    "3": 3000.0,
+    "4": 2970.0,
+    "5": 4000.0,
+    "6": 2890.0,
+    "7": 5000.0,
+    "8": 5000.0,
+    "9": 2000.0
+  },
+  "infeasible_groups": [
+    {
+      "group_id": "SCC:SRV-040",
+      "members": [
+        "SRV-040",
+        "SRV-041",
+        "SRV-042"
+      ],
+      "total_gb": 45000.0,
+      "wave": 2
+    },
+    {
+      "group_id": "SCC:SRV-037",
+      "members": [
+        "SRV-037"
+      ],
+      "total_gb": 4000.0,
+      "wave": 5
+    },
+    {
+      "group_id": "SCC:SRV-018",
+      "members": [
+        "SRV-018"
+      ],
+      "total_gb": 5000.0,
+      "wave": 7
+    },
+    {
+      "group_id": "SCC:SRV-019",
+      "members": [
+        "SRV-019"
+      ],
+      "total_gb": 5000.0,
+      "wave": 8
+    }
+  ],
+  "group_count": 46
+}

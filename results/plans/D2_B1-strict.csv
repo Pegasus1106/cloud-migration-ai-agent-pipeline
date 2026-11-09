@@ -1,0 +1,84 @@
+Server_ID,Hostname,App_Name,OS_Version,Target_Size,Risk_Score,Transfer_GB,Current_Monthly_Cost,SCC_Id,Wave_ID,Early_Migration_Requested
+SYN-050,ad-01,Active_Directory,Windows Server 2019,t3.large,Low,115.0,215.75,SCC:SYN-050,0,False
+SYN-079,util-02,File_Server,Windows Server 2019,t3.large,Low,1760.0,298.0,SCC:SYN-079,0,False
+SYN-081,util-04,File_Server,Windows Server 2019,t3.large,Low,1122.0,266.1,SCC:SYN-081,0,False
+SYN-061,jira-01,Jira,Ubuntu 20.04,t3.xlarge,Low,158.0,377.9,SCC:SYN-061,1,True
+SYN-082,util-05,File_Server,Windows Server 2019,t3.large,Low,1380.0,279.0,SCC:SYN-082,1,False
+SYN-083,util-06,File_Server,Windows Server 2019,t3.large,Low,1452.0,282.6,SCC:SYN-083,1,False
+SYN-054,mail-01,Exchange,Windows Server 2016,t3.xlarge,Low,293.0,384.65,SCC:SYN-054,2,False
+SYN-078,util-01,File_Server,Windows Server 2019,t3.large,Low,1361.0,278.05,SCC:SYN-078,2,False
+SYN-080,util-03,File_Server,Windows Server 2019,t3.large,Low,1331.0,276.55,SCC:SYN-080,2,False
+SYN-001,fin-erp-01,Finance_ERP,RHEL 8,m5.2xlarge,High,178.0,698.9,SCC:SYN-001,3,False
+SYN-007,pay-01,Payment_Gateway,Oracle Linux 7,m5.2xlarge,High,203.0,700.15,SCC:SYN-007,3,False
+SYN-010,crm2-01,CRM,Ubuntu 22.04,t3.xlarge,Low,191.0,379.55,SCC:SYN-010,3,True
+SYN-012,ecom-01,E-Commerce,Ubuntu 22.04,t3.xlarge,High,90.0,374.5,SCC:SYN-012,3,False
+SYN-020,dp-001,Data_Platform,CentOS 7,m5.4xlarge,Low,773.0,1368.65,SCC:SYN-020,3,False
+SYN-051,ad-02,Active_Directory,Windows Server 2019,t3.large,Low,88.0,214.4,SCC:SYN-051,3,False
+SYN-052,dns-01,Core_DNS,CentOS 7,t3.large,Low,31.0,111.55,SCC:SYN-052,3,False
+SYN-055,mail-02,Exchange,Windows Server 2016,t3.xlarge,Low,341.0,387.05,SCC:SYN-055,3,False
+SYN-058,sp-01,SharePoint,Windows Server 2016,t3.xlarge,Low,213.0,380.65,SCC:SYN-058,3,False
+SYN-062,jira-02,Jira,Ubuntu 20.04,t3.xlarge,Low,149.0,377.45,SCC:SYN-062,3,True
+SYN-064,legacy-01,POC_Archived,RHEL 5,t3.large,High,54.0,112.7,SCC:SYN-064,3,False
+SYN-065,legacy-02,POC_Archived,RHEL 5,t3.large,High,27.0,111.35,SCC:SYN-065,3,False
+SYN-066,legacy-03,POC_Archived,RHEL 5,t3.large,High,57.0,112.85,SCC:SYN-066,3,False
+SYN-067,legacy-04,POC_Archived,RHEL 5,t3.large,High,26.0,111.3,SCC:SYN-067,3,False
+SYN-068,legacy-05,POC_Archived,RHEL 5,t3.large,High,42.0,112.1,SCC:SYN-068,3,False
+SYN-069,legacy-06,POC_Archived,RHEL 5,t3.large,High,58.0,112.9,SCC:SYN-069,3,False
+SYN-070,med-01,Med_Records,Windows Server 2008 R2,t3.xlarge,High,248.0,382.4,SCC:SYN-070,3,False
+SYN-075,blog2-01,Corp_Blog,Ubuntu 22.04,t3.large,Low,57.0,112.85,SCC:SYN-075,3,True
+SYN-002,fin-erp-02,Finance_ERP,RHEL 8,m5.2xlarge,High,212.0,700.6,SCC:SYN-002,4,False
+SYN-008,pay-02,Payment_Gateway,Oracle Linux 7,m5.2xlarge,High,416.0,710.8,SCC:SYN-008,4,False
+SYN-011,crm2-02,CRM,Ubuntu 22.04,t3.xlarge,Low,167.0,378.35,SCC:SYN-011,4,True
+SYN-013,ecom-02,E-Commerce,Ubuntu 22.04,t3.xlarge,High,186.0,379.3,SCC:SYN-013,4,False
+SYN-021,dp-002,Data_Platform,RHEL 8,m5.4xlarge,Low,632.0,1361.6,SCC:SYN-021,4,False
+SYN-053,dns-02,Core_DNS,CentOS 7,t3.large,Low,37.0,111.85,SCC:SYN-053,4,False
+SYN-056,mail-03,Exchange,Windows Server 2016,t3.xlarge,Low,371.0,388.55,SCC:SYN-056,4,False
+SYN-059,sp-02,SharePoint,Windows Server 2016,t3.xlarge,Low,177.0,378.85,SCC:SYN-059,4,False
+SYN-063,jira-03,Jira,Ubuntu 20.04,t3.xlarge,Low,171.0,378.55,SCC:SYN-063,4,True
+SYN-071,med-02,Med_Records,Windows Server 2008 R2,t3.xlarge,High,215.0,380.75,SCC:SYN-071,4,False
+SYN-076,blog2-02,Corp_Blog,Ubuntu 22.04,t3.large,Low,46.0,112.3,SCC:SYN-076,4,True
+SYN-003,fin-erp-03,Finance_ERP,RHEL 8,m5.2xlarge,High,176.0,698.8,SCC:SYN-003,5,False
+SYN-009,pay-03,Payment_Gateway,Oracle Linux 7,m5.2xlarge,High,279.0,703.95,SCC:SYN-009,5,False
+SYN-014,ecom-03,E-Commerce,Ubuntu 22.04,t3.xlarge,High,193.0,379.65,SCC:SYN-014,5,False
+SYN-022,dp-003,Data_Platform,CentOS 7,m5.4xlarge,Low,623.0,1361.15,SCC:SYN-022,5,False
+SYN-057,mail-04,Exchange,Windows Server 2016,t3.xlarge,Low,375.0,388.75,SCC:SYN-057,5,False
+SYN-060,sp-03,SharePoint,Windows Server 2016,t3.xlarge,Low,270.0,383.5,SCC:SYN-060,5,False
+SYN-072,med-03,Med_Records,Windows Server 2008 R2,t3.xlarge,High,261.0,383.05,SCC:SYN-072,5,False
+SYN-077,blog2-03,Corp_Blog,Ubuntu 22.04,t3.large,Low,43.0,112.15,SCC:SYN-077,5,True
+SYN-004,fin-erp-04,Finance_ERP,RHEL 8,m5.2xlarge,High,172.0,698.6,SCC:SYN-004,6,False
+SYN-015,ecom-04,E-Commerce,Ubuntu 22.04,t3.xlarge,High,104.0,375.2,SCC:SYN-015,6,False
+SYN-023,dp-004,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,516.0,1355.8,SCC:SYN-023,6,False
+SYN-073,med-04,Med_Records,Windows Server 2008 R2,t3.xlarge,High,386.0,389.3,SCC:SYN-073,6,False
+SYN-005,fin-erp-05,Finance_ERP,RHEL 8,m5.2xlarge,High,158.0,697.9,SCC:SYN-005,7,False
+SYN-016,ecom-05,E-Commerce,Ubuntu 22.04,t3.xlarge,High,85.0,374.25,SCC:SYN-016,7,False
+SYN-024,dp-005,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,517.0,1355.85,SCC:SYN-024,7,False
+SYN-074,med-05,Med_Records,Windows Server 2008 R2,t3.xlarge,High,334.0,386.7,SCC:SYN-074,7,False
+SYN-006,fin-erp-06,Finance_ERP,RHEL 8,m5.2xlarge,High,205.0,700.25,SCC:SYN-006,8,False
+SYN-017,ecom-06,E-Commerce,Ubuntu 22.04,t3.xlarge,High,178.0,378.9,SCC:SYN-017,8,False
+SYN-025,dp-006,Data_Platform,RHEL 8,m5.4xlarge,Low,769.0,1368.45,SCC:SYN-025,8,False
+SYN-018,ecom-07,E-Commerce,Ubuntu 22.04,t3.xlarge,High,189.0,379.45,SCC:SYN-018,9,False
+SYN-026,dp-007,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,552.0,1357.6,SCC:SYN-026,9,False
+SYN-019,ecom-08,E-Commerce,Ubuntu 22.04,t3.xlarge,High,128.0,376.4,SCC:SYN-019,10,False
+SYN-027,dp-008,Data_Platform,CentOS 7,m5.4xlarge,Low,898.0,1374.9,SCC:SYN-027,10,False
+SYN-028,dp-009,Data_Platform,RHEL 8,m5.4xlarge,Low,670.0,1363.5,SCC:SYN-028,11,False
+SYN-029,dp-010,Data_Platform,RHEL 8,m5.4xlarge,Low,805.0,1370.25,SCC:SYN-029,12,False
+SYN-030,dp-011,Data_Platform,RHEL 8,m5.4xlarge,Low,412.0,1350.6,SCC:SYN-030,13,False
+SYN-031,dp-012,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,732.0,1366.6,SCC:SYN-031,14,False
+SYN-032,dp-013,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,690.0,1364.5,SCC:SYN-032,15,False
+SYN-033,dp-014,Data_Platform,RHEL 8,m5.4xlarge,Low,866.0,1373.3,SCC:SYN-033,16,False
+SYN-034,dp-015,Data_Platform,CentOS 7,m5.4xlarge,Low,849.0,1372.45,SCC:SYN-034,17,False
+SYN-035,dp-016,Data_Platform,CentOS 7,m5.4xlarge,Low,414.0,1350.7,SCC:SYN-035,18,False
+SYN-036,dp-017,Data_Platform,RHEL 8,m5.4xlarge,Low,764.0,1368.2,SCC:SYN-036,19,False
+SYN-037,dp-018,Data_Platform,RHEL 8,m5.4xlarge,Low,812.0,1370.6,SCC:SYN-037,20,False
+SYN-038,dp-019,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,605.0,1360.25,SCC:SYN-038,21,False
+SYN-039,dp-020,Data_Platform,CentOS 7,m5.4xlarge,Low,456.0,1352.8,SCC:SYN-039,22,False
+SYN-040,dp-021,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,852.0,1372.6,SCC:SYN-040,23,False
+SYN-041,dp-022,Data_Platform,RHEL 8,m5.4xlarge,Low,800.0,1370.0,SCC:SYN-041,24,False
+SYN-042,dp-023,Data_Platform,RHEL 8,m5.4xlarge,Low,614.0,1360.7,SCC:SYN-042,25,False
+SYN-043,dp-024,Data_Platform,RHEL 8,m5.4xlarge,Low,880.0,1374.0,SCC:SYN-043,26,False
+SYN-044,dp-025,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,370.0,1348.5,SCC:SYN-044,27,False
+SYN-045,dp-026,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,786.0,1369.3,SCC:SYN-045,28,False
+SYN-046,dp-027,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,840.0,1372.0,SCC:SYN-046,29,False
+SYN-047,dp-028,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,852.0,1372.6,SCC:SYN-047,30,False
+SYN-048,dp-029,Data_Platform,CentOS 7,m5.4xlarge,Low,619.0,1360.95,SCC:SYN-048,31,False
+SYN-049,dp-030,Data_Platform,Ubuntu 20.04,m5.4xlarge,Low,748.0,1367.4,SCC:SYN-049,32,False

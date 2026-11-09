@@ -1,0 +1,31 @@
+Server_ID,Hostname,OS,Normalized_CPU,Target_Size,Risk_Score,Wave_ID
+BEN-0001,ad-dc-01,Windows Server 2022,85.1,Standard_D4s_v3,,0
+BEN-0002,ad-dc-02,Windows Server 2016,31.3,Standard_D2s_v3,,0
+BEN-0003,dns-01,Ubuntu 22.04,69.5,Standard_D4s_v3,,0
+BEN-0004,dns-02,Ubuntu 24.04,34.7,Standard_D4s_v3,,0
+BEN-0009,pati-port-web-01,Ubuntu 22.04,37.1,Standard_D2s_v3,,0
+BEN-0010,pati-port-app-01,RHEL 9,71.5,Standard_D8s_v3,,0
+BEN-0011,healthca-sqlclu-01,SQL Server 2016,26.2,Standard_D16s_v3,,0
+BEN-0012,healthca-sqlclu-02,SQL Server 2022,36.8,Standard_D16s_v3,,0
+BEN-0013,fina-mont-ingest-01,Windows Server 2022,74.1,Standard_D4s_v3,,0
+BEN-0014,fina-mont-xform-01,Windows Server 2019,25.2,Standard_D4s_v3,,0
+BEN-0015,fina-mont-load-01,Windows Server 2019,50.9,Standard_D4s_v3,,0
+BEN-0016,fina-mont-queue-01,Windows Server 2022,43.6,Standard_D8s_v3,,0
+BEN-0017,dataanal-sqlclu-01,SQL Server 2019,81.6,Standard_D8s_v3,,0
+BEN-0018,dataanal-sqlclu-02,SQL Server 2022,40.7,Standard_D16s_v3,,0
+BEN-0019,prod-beha-node-01,Ubuntu 20.04,46.5,Standard_D16s_v3,,0
+BEN-0020,prod-beha-node-02,RHEL 8,89.9,Standard_D16s_v3,,0
+BEN-0021,prod-beha-node-03,Ubuntu 20.04,71.6,Standard_D16s_v3,,0
+BEN-0022,prod-beha-node-04,RHEL 9,33.0,Standard_D16s_v3,,0
+BEN-0023,prod-beha-node-05,Ubuntu 24.04,35.2,Standard_D16s_v3,,0
+BEN-0024,prod-beha-node-06,Ubuntu 22.04,73.7,Standard_D16s_v3,,0
+BEN-0025,orde-mana-srv-01,Windows Server 2022,90.8,Standard_D8s_v3,,0
+BEN-0026,retailec-sqlclu-01,SQL Server 2016,58.6,Standard_D16s_v3,,0
+BEN-0027,retailec-sqlclu-02,SQL Server 2022,67.2,Standard_D16s_v3,,0
+BEN-0028,cont-mana-srv-01,Windows Server 2016,77.0,Standard_D8s_v3,,0
+BEN-0029,phar-mana-web-01,Windows Server 2022,67.9,Standard_D4s_v3,,0
+BEN-0030,phar-mana-app-01,Windows Server 2019,65.3,Standard_D4s_v3,,0
+BEN-0005,data-rule-ingest-01,Ubuntu 22.04,24.0,Standard_D8s_v3,,4
+BEN-0006,data-rule-xform-01,Ubuntu 22.04,11.5,Standard_D4s_v3,,4
+BEN-0007,data-rule-load-01,RHEL 8,7.3,Standard_D8s_v3,,4
+BEN-0008,data-rule-queue-01,RHEL 8,20.6,Standard_D8s_v3,,4

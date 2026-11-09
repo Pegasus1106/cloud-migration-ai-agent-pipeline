@@ -1,0 +1,31 @@
+Server_ID,Hostname,OS_Version,Allocated_vCPU,Allocated_RAM_GB,Peak_CPU_Pct,Avg_CPU_Pct,Storage_GB,App_Name,Business_Tags,Outbound_Connections,Transfer_GB,Current_Monthly_Cost,Early_Migration_Requested
+BEN-0001,ad-dc-01,Windows Server 2022,4.0,16,95,62,53,Active_Directory,Internal,BEN-0002:5432:352,53,372.65,False
+BEN-0002,ad-dc-02,Windows Server 2016,2.0,8,43,4,149,Active_Directory,Internal,BEN-0001:8080:70,149,217.45,False
+BEN-0003,dns-01,Ubuntu 22.04,4.0,16,74,59,151,Core_DNS,Internal,BEN-0004:53:397,151,377.55,False
+BEN-0004,dns-02,Ubuntu 24.04,4.0,16,41,20,97,Core_DNS,Internal,,97,374.85,False
+BEN-0005,data-rule-ingest-01,Ubuntu 22.04,8.0,32,33,3,176,DataQuality_Rules_Engine,Internal,BEN-0006:443:323,176,698.8,True
+BEN-0006,data-rule-xform-01,Ubuntu 22.04,4.0,16,16,1,103,DataQuality_Rules_Engine,Internal,BEN-0007:389:255|BEN-0008:1433:139,103,375.15,True
+BEN-0007,data-rule-load-01,RHEL 8,8.0,32,10,1,226,DataQuality_Rules_Engine,Internal,,226,701.3,True
+BEN-0008,data-rule-queue-01,RHEL 8,8.0,32,29,1,122,DataQuality_Rules_Engine,Internal,BEN-0006:3306:399,122,696.1,True
+BEN-0009,pati-port-web-01,Ubuntu 22.04,2.0,8,41,28,197,Patient_Portal_Mobile_API,HIPAA,BEN-0010:1433:687|BEN-0001:1433:890|BEN-0003:5432:699,197,219.85,False
+BEN-0010,pati-port-app-01,RHEL 9,8.0,32,79,54,217,Patient_Portal_Mobile_API,HIPAA,BEN-0011:1433:396|BEN-0001:3306:571|BEN-0003:5432:791,217,700.85,False
+BEN-0011,healthca-sqlclu-01,SQL Server 2016,16.0,128,31,15,812,Shared_DB_Healthca,SOX,BEN-0012:5432:727,812,2010.6,False
+BEN-0012,healthca-sqlclu-02,SQL Server 2022,,64,44,20,1039,Shared_DB_Healthca,SOX,BEN-0011:5432:535,1039,1061.95,False
+BEN-0013,fina-mont-ingest-01,Windows Server 2022,4.0,16,84,51,191,FinanceClose_Month_End_Reconciliation,Internal,BEN-0014:8080:56|BEN-0001:1433:647|BEN-0003:389:635,191,379.55,False
+BEN-0014,fina-mont-xform-01,Windows Server 2019,4.0,16,30,14,184,FinanceClose_Month_End_Reconciliation,Internal,BEN-0015:1433:413|BEN-0016:3306:342,184,379.2,False
+BEN-0015,fina-mont-load-01,Windows Server 2019,4.0,16,56,39,119,FinanceClose_Month_End_Reconciliation,Internal,BEN-0017:389:395,119,375.95,False
+BEN-0016,fina-mont-queue-01,Windows Server 2022,8.0,32,49,31,171,FinanceClose_Month_End_Reconciliation,Internal,BEN-0014:389:123,171,698.55,False
+BEN-0017,dataanal-sqlclu-01,SQL Server 2019,8.0,32,93,55,1554,Shared_DB_Dataanal,SOX,BEN-0018:1433:497,1554,767.7,False
+BEN-0018,dataanal-sqlclu-02,SQL Server 2022,16.0,128,50,19,1433,Shared_DB_Dataanal,SOX,BEN-0017:8080:486,1433,2041.65,False
+BEN-0019,prod-beha-node-01,Ubuntu 20.04,16.0,128,51,36,1716,ProductUsage_Behavioural_Analytics,Internal,BEN-0020:389:37|BEN-0022:443:401|BEN-0001:3306:524|BEN-0003:389:370,1716,2055.8,False
+BEN-0020,prod-beha-node-02,RHEL 8,32.0,128,95,78,1927,ProductUsage_Behavioural_Analytics,Internal,BEN-0021:443:148|BEN-0022:3306:873|BEN-0024:8080:147|BEN-0001:3306:241|BEN-0003:3306:682,1927,2706.35,False
+BEN-0021,prod-beha-node-03,Ubuntu 20.04,16.0,128,80,52,2088,ProductUsage_Behavioural_Analytics,Internal,BEN-0022:1433:379|BEN-0024:3306:59,2088,2074.4,False
+BEN-0022,prod-beha-node-04,RHEL 9,16.0,64,42,12,1215,ProductUsage_Behavioural_Analytics,Internal,BEN-0023:443:846|BEN-0024:8080:441,1215,1390.75,False
+BEN-0023,prod-beha-node-05,Ubuntu 24.04,32.0,128,40,24,800,ProductUsage_Behavioural_Analytics,Internal,BEN-0024:3306:289,800,2650.0,False
+BEN-0024,prod-beha-node-06,Ubuntu 22.04,32.0,256,80,59,1522,ProductUsage_Behavioural_Analytics,Internal,,1522,3966.1,False
+BEN-0025,orde-mana-srv-01,Windows Server 2022,8.0,16,95,81,173,Order_Management_System_OMS,PCI-DSS,BEN-0026:8080:548|BEN-0001:53:843|BEN-0003:1433:141,173,538.65,False
+BEN-0026,retailec-sqlclu-01,SQL Server 2016,16.0,64,67,39,1151,Shared_DB_Retailec,SOX,BEN-0027:3306:482,1151,1387.55,False
+BEN-0027,retailec-sqlclu-02,SQL Server 2022,16.0,64,78,42,1135,Shared_DB_Retailec,SOX,BEN-0026:53:370,1135,1386.75,False
+BEN-0028,cont-mana-srv-01,Windows Server 2016,8.0,16,83,63,189,Content_Management_System_CMS,PCI-DSS,BEN-0026:1433:696|BEN-0001:53:223|BEN-0003:1433:430,189,539.45,False
+BEN-0029,phar-mana-web-01,Windows Server 2022,4.0,16,73,56,104,Pharmacy_Management,HIPAA,BEN-0030:443:640|BEN-0001:8080:896|BEN-0003:5432:429,104,375.2,False
+BEN-0030,phar-mana-app-01,Windows Server 2019,4.0,16,77,38,242,Pharmacy_Management,HIPAA,BEN-0011:53:431|BEN-0001:3306:329|BEN-0003:3306:665,242,382.1,False

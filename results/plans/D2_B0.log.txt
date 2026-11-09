@@ -1,0 +1,389 @@
+[0;34m======================================================[0m
+[0;34m    Cloud Migration AI Agent Pipeline                 [0m
+[0;34m======================================================[0m
+
+[1;33m🧹 Cleaning up previous state...[0m
+[0;32m✓ Cleanup complete.[0m
+
+[1;33m[1/7] Setting up Python virtual environment...[0m
+[0;32m✓ Dependencies installed.[0m
+
+[1;33m[2/7] Starting Neo4j Database (with APOC & GDS)...[0m
+Waiting for Neo4j to be ready (this can take 30-40 seconds for plugins to load)...
+.........[0;32m✓ Neo4j is ready![0m
+
+[1;33m[3/7] Running Module 1: Data Normalization Agent...[0m
+
+─── Agent Response ───
+The server discovery data in `data/sample.csv` has been successfully cleaned and normalized. Here's a summary of the process:
+
+- **Total Rows Processed**: 83
+- **Rows Flagged for Missing Critical Metrics**: 0
+- **Imputed Fields**: No fields required imputation.
+- **Normalized_CPU_Pct**: Computed for all entries.
+- **Output File**: The cleaned data is saved to `data/cleaned_samples.csv`.
+
+Let me know if further processing or analysis is needed!
+[0;32m✓ Cleaned CSV generated.[0m
+
+[1;33m[4/7] Running Module 2: Graph Ingestion Agent...[0m
+
+─── Agent Response ───
+The cleaned server discovery data has been successfully loaded into the Neo4j database. Here's a summary of the ingestion:
+
+- **Server nodes created**: 83
+- **COMMUNICATES_WITH edges created**: 117
+- **Neo4j URL**: bolt://localhost:7687
+- **Browser UI**: http://localhost:7474
+
+You can now query the graph to analyze server dependencies and communications.
+[0;32m✓ Graph populated.[0m
+
+[1;33m[5/7] Running Module 3 & 4: Cloud Selection & Server Sizing...[0m
+
+
+[1m> Entering new GraphCypherQAChain chain...[0m
+Generated Cypher:
+[32;1m[1;3mMATCH (s:Server)
+RETURN s.os AS operating_system, count(s) AS count
+ORDER BY count DESC[0m
+Full Context:
+[32;1m[1;3m[{'operating_system': 'RHEL 8', 'count': 17}, {'operating_system': 'Ubuntu 20.04', 'count': 15}, {'operating_system': 'Ubuntu 22.04', 'count': 13}, {'operating_system': 'CentOS 7', 'count': 9}, {'operating_system': 'Windows Server 2019', 'count': 8}, {'operating_system': 'Windows Server 2016', 'count': 7}, {'operating_system': 'RHEL 5', 'count': 6}, {'operating_system': 'Windows Server 2008 R2', 'count': 5}, {'operating_system': 'Oracle Linux 7', 'count': 3}][0m
+
+[1m> Finished chain.[0m
+
+─── Agent Response ───
+
+[human] Evaluate our server ecosystem and select the best target cloud platform.
+
+[tool_call] query_neo4j({'question': 'What is the distribution of operating systems across all servers?'})
+
+[tool] Generated Cypher: MATCH (s:Server)
+RETURN s.os AS operating_system, count(s) AS count
+ORDER BY count DESC
+Answer: Based on the provided data, here is the distribution of operating systems across all servers:
+
+- RHEL 8: 17 servers
+- Ubuntu 20.04: 15 servers
+- Ubuntu 22.04: 13 servers
+- CentOS 7: 9 servers
+- Windows Server 2019: 8 servers
+- Windows Server 2016: 7 servers
+- RHEL 5: 6 servers
+- Windows Server 2008 R2: 5 servers
+- Oracle Linux 7: 3 servers
+
+This shows that RHEL 8 has the highest concentration with 17 servers, followed by Ubuntu 20.04 with 15 servers, and Ubuntu 22.04 with 13 servers. The distribution indicates a mix of Linux distributions and Windows Server versions across the server infrastructure.
+
+[ai] Based on the OS distribution data, the environment has a significant presence of both Linux distributions (RHEL, Ubuntu, CentOS) and Windows Server versions. However, since the question specifically asks to choose between AWS and Azure, and the presence of Windows Server versions suggests a potential benefit from Azure's hybrid licensing advantages, I will choose Azure.
+
+[tool_call] set_target_cloud({'cloud_name': 'AZURE', 'rationale': "The environment has a significant presence of Windows Server versions, which would benefit from Azure's hybrid licensing advantages."})
+
+[tool] ✅ Target cloud saved to Neo4j.
+   Platform  : AZURE
+   Rationale : The environment has a significant presence of Windows Server versions, which would benefit from Azure's hybrid licensing advantages.
+
+[ai] Based on the analysis of the server ecosystem, I have selected AZURE as the target cloud platform. The decision is driven by the significant presence of Windows Server versions (Windows Server 2019, 2016, 2008 R2) in the environment, which would benefit from Azure's hybrid licensing advantages. While there is also a substantial presence of Linux distributions (RHEL, Ubuntu, CentOS), the Windows Server components make Azure the more strategic choice for this migration.
+
+─── Agent Response ───
+
+[human] Check our target cloud and right-size all servers in the database.
+
+[tool_call] get_target_cloud({})
+
+[tool] Target cloud platform: AZURE
+
+[tool_call] right_size_servers({'cloud_provider': 'AZURE'})
+
+[tool] ✅ Right-sizing complete for AZURE.
+   Total servers sized: 83
+   Breakdown:
+  • Standard_D16s_v3: 30 servers
+  • Standard_D4s_v3: 25 servers
+  • Standard_D2s_v3: 19 servers
+  • Standard_D8s_v3: 9 servers
+
+[ai] The server right-sizing process has been completed for the AZURE cloud platform. Here's a summary of the recommendations:
+
+- **Total servers sized:** 83
+- **Breakdown:**
+  - Standard_D16s_v3: 30 servers
+  - Standard_D4s_v3: 25 servers
+  - Standard_D2s_v3: 19 servers
+  - Standard_D8s_v3: 9 servers
+
+These instance types have been selected based on the sizing matrix to optimize performance and cost efficiency for your environment.
+[0;32m✓ Architecture decisions saved.[0m
+
+[1;33m[6/7] Running Module 5 & 6: Risk Analysis & Wave Planning...[0m
+
+
+[1m> Entering new GraphCypherQAChain chain...[0m
+Generated Cypher:
+[32;1m[1;3mMATCH (s:Server)
+RETURN s.id, s.os, s.business_tags[0m
+Full Context:
+[32;1m[1;3m[{'s.id': 'SYN-001', 's.os': 'RHEL 8', 's.business_tags': 'SOX'}, {'s.id': 'SYN-002', 's.os': 'RHEL 8', 's.business_tags': 'SOX'}, {'s.id': 'SYN-003', 's.os': 'RHEL 8', 's.business_tags': 'SOX'}, {'s.id': 'SYN-004', 's.os': 'RHEL 8', 's.business_tags': 'SOX'}, {'s.id': 'SYN-005', 's.os': 'RHEL 8', 's.business_tags': 'SOX'}, {'s.id': 'SYN-006', 's.os': 'RHEL 8', 's.business_tags': 'SOX'}, {'s.id': 'SYN-007', 's.os': 'Oracle Linux 7', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SYN-008', 's.os': 'Oracle Linux 7', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SYN-009', 's.os': 'Oracle Linux 7', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SYN-010', 's.os': 'Ubuntu 22.04', 's.business_tags': 'External_Facing'}, {'s.id': 'SYN-011', 's.os': 'Ubuntu 22.04', 's.business_tags': 'External_Facing'}, {'s.id': 'SYN-012', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SYN-013', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SYN-014', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SYN-015', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SYN-016', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SYN-017', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SYN-018', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SYN-019', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SYN-020', 's.os': 'CentOS 7', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-021', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-022', 's.os': 'CentOS 7', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-023', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-024', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-025', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-026', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-027', 's.os': 'CentOS 7', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-028', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-029', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-030', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-031', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-032', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-033', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-034', 's.os': 'CentOS 7', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-035', 's.os': 'CentOS 7', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-036', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-037', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-038', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-039', 's.os': 'CentOS 7', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-040', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-041', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-042', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-043', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-044', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-045', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-046', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-047', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-048', 's.os': 'CentOS 7', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-049', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Data_Platform'}, {'s.id': 'SYN-050', 's.os': 'Windows Server 2019', 's.business_tags': 'Core_Infra'}, {'s.id': 'SYN-051', 's.os': 'Windows Server 2019', 's.business_tags': 'Core_Infra'}, {'s.id': 'SYN-052', 's.os': 'CentOS 7', 's.business_tags': 'Core_Infra'}, {'s.id': 'SYN-053', 's.os': 'CentOS 7', 's.business_tags': 'Core_Infra'}, {'s.id': 'SYN-054', 's.os': 'Windows Server 2016', 's.business_tags': 'Corp_Comms'}, {'s.id': 'SYN-055', 's.os': 'Windows Server 2016', 's.business_tags': 'Corp_Comms'}, {'s.id': 'SYN-056', 's.os': 'Windows Server 2016', 's.business_tags': 'Corp_Comms'}, {'s.id': 'SYN-057', 's.os': 'Windows Server 2016', 's.business_tags': 'Corp_Comms'}, {'s.id': 'SYN-058', 's.os': 'Windows Server 2016', 's.business_tags': 'Corp_Comms'}, {'s.id': 'SYN-059', 's.os': 'Windows Server 2016', 's.business_tags': 'Corp_Comms'}, {'s.id': 'SYN-060', 's.os': 'Windows Server 2016', 's.business_tags': 'Corp_Comms'}, {'s.id': 'SYN-061', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Internal_Tools'}, {'s.id': 'SYN-062', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Internal_Tools'}, {'s.id': 'SYN-063', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Internal_Tools'}, {'s.id': 'SYN-064', 's.os': 'RHEL 5', 's.business_tags': 'nan'}, {'s.id': 'SYN-065', 's.os': 'RHEL 5', 's.business_tags': 'nan'}, {'s.id': 'SYN-066', 's.os': 'RHEL 5', 's.business_tags': 'nan'}, {'s.id': 'SYN-067', 's.os': 'RHEL 5', 's.business_tags': 'nan'}, {'s.id': 'SYN-068', 's.os': 'RHEL 5', 's.business_tags': 'nan'}, {'s.id': 'SYN-069', 's.os': 'RHEL 5', 's.business_tags': 'nan'}, {'s.id': 'SYN-070', 's.os': 'Windows Server 2008 R2', 's.business_tags': 'HIPAA'}, {'s.id': 'SYN-071', 's.os': 'Windows Server 2008 R2', 's.business_tags': 'HIPAA'}, {'s.id': 'SYN-072', 's.os': 'Windows Server 2008 R2', 's.business_tags': 'HIPAA'}, {'s.id': 'SYN-073', 's.os': 'Windows Server 2008 R2', 's.business_tags': 'HIPAA'}, {'s.id': 'SYN-074', 's.os': 'Windows Server 2008 R2', 's.business_tags': 'HIPAA'}, {'s.id': 'SYN-075', 's.os': 'Ubuntu 22.04', 's.business_tags': 'Marketing'}, {'s.id': 'SYN-076', 's.os': 'Ubuntu 22.04', 's.business_tags': 'Marketing'}, {'s.id': 'SYN-077', 's.os': 'Ubuntu 22.04', 's.business_tags': 'Marketing'}, {'s.id': 'SYN-078', 's.os': 'Windows Server 2019', 's.business_tags': 'Internal_Tools'}, {'s.id': 'SYN-079', 's.os': 'Windows Server 2019', 's.business_tags': 'Internal_Tools'}, {'s.id': 'SYN-080', 's.os': 'Windows Server 2019', 's.business_tags': 'Internal_Tools'}, {'s.id': 'SYN-081', 's.os': 'Windows Server 2019', 's.business_tags': 'Internal_Tools'}, {'s.id': 'SYN-082', 's.os': 'Windows Server 2019', 's.business_tags': 'Internal_Tools'}, {'s.id': 'SYN-083', 's.os': 'Windows Server 2019', 's.business_tags': 'Internal_Tools'}][0m
+
+[1m> Finished chain.[0m
+
+─── Agent Response ───
+
+[human] Analyze all servers for legacy and compliance risks, then update their risk scores.
+
+[tool_call] Database_Reader({'__arg1': 'Match (s:Server) return s.id, s.os, s.business_tags'})
+
+[tool] SYN-001, RHEL 8, SOX
+SYN-002, RHEL 8, SOX
+SYN-003, RHEL 8, SOX
+SYN-004, RHEL 8, SOX
+SYN-005, RHEL 8, SOX
+SYN-006, RHEL 8, SOX
+SYN-007, Oracle Linux 7, PCI-DSS
+SYN-008, Oracle Linux 7, PCI-DSS
+SYN-009, Oracle Linux 7, PCI-DSS
+SYN-010, Ubuntu 22.04, External_Facing
+SYN-011, Ubuntu 22.04, External_Facing
+SYN-012, Ubuntu 22.04, PCI-DSS
+SYN-013, Ubuntu 22.04, PCI-DSS
+SYN-014, Ubuntu 22.04, PCI-DSS
+SYN-015, Ubuntu 22.04, PCI-DSS
+SYN-016, Ubuntu 22.04, PCI-DSS
+SYN-017, Ubuntu 22.04, PCI-DSS
+SYN-018, Ubuntu 22.04, PCI-DSS
+SYN-019, Ubuntu 22.04, PCI-DSS
+SYN-020, CentOS 7, Data_Platform
+SYN-021, RHEL 8, Data_Platform
+SYN-022, CentOS 7, Data_Platform
+SYN-023, Ubuntu 20.04, Data_Platform
+SYN-024, Ubuntu 20.04, Data_Platform
+SYN-025, RHEL 8, Data_Platform
+SYN-026, Ubuntu 20.04, Data_Platform
+SYN-027, CentOS 7, Data_Platform
+SYN-028, RHEL 8, Data_Platform
+SYN-029, RHEL 8, Data_Platform
+SYN-030, RHEL 8, Data_Platform
+SYN-031, Ubuntu 20.04, Data_Platform
+SYN-032, Ubuntu 20.04, Data_Platform
+SYN-033, RHEL 8, Data_Platform
+SYN-034, CentOS 7, Data_Platform
+SYN-035, CentOS 7, Data_Platform
+SYN-036, RHEL 8, Data_Platform
+SYN-037, RHEL 8, Data_Platform
+SYN-038, Ubuntu 20.04, Data_Platform
+SYN-039, CentOS 7, Data_Platform
+SYN-040, Ubuntu 20.04, Data_Platform
+SYN-041, RHEL 8, Data_Platform
+SYN-042, RHEL 8, Data_Platform
+SYN-043, RHEL 8, Data_Platform
+SYN-044, Ubuntu 20.04, Data_Platform
+SYN-045, Ubuntu 20.04, Data_Platform
+SYN-046, Ubuntu 20.04, Data_Platform
+SYN-047, Ubuntu 20.04, Data_Platform
+SYN-048, CentOS 7, Data_Platform
+SYN-049, Ubuntu 20.04, Data_Platform
+SYN-050, Windows Server 2019, Core_Infra
+SYN-051, Windows Server 2019, Core_Infra
+SYN-052, CentOS 7, Core_Infra
+SYN-053, CentOS 7, Core_Infra
+SYN-054, Windows Server 2016, Corp_Comms
+SYN-055, Windows Server 2016, Corp_Comms
+SYN-056, Windows Server 2016, Corp_Comms
+SYN-057, Windows Server 2016, Corp_Comms
+SYN-058, Windows Server 2016, Corp_Comms
+SYN-059, Windows Server 2016, Corp_Comms
+SYN-060, Windows Server 2016, Corp_Comms
+SYN-061, Ubuntu 20.04, Internal_Tools
+SYN-062, Ubuntu 20.04, Internal_Tools
+SYN-063, Ubuntu 20.04, Internal_Tools
+SYN-064, RHEL 5, nan
+SYN-065, RHEL 5, nan
+SYN-066, RHEL 5, nan
+SYN-067, RHEL 5, nan
+SYN-068, RHEL 5, nan
+SYN-069, RHEL 5, nan
+SYN-070, Windows Server 2008 R2, HIPAA
+SYN-071, Windows Server 2008 R2, HIPAA
+SYN-072, Windows Server 2008 R2, HIPAA
+SYN-073, Windows Server 2008 R2, HIPAA
+SYN-074, Windows Server 2008 R2, HIPAA
+SYN-075, Ubuntu 22.04, Marketing
+SYN-076, Ubuntu 22.04, Marketing
+SYN-077, Ubuntu 22.04, Marketing
+SYN-078, Windows Server 2019, Internal_Tools
+SYN-079, Windows Server 2019, Internal_Tools
+SYN-080, Windows Server 2019, Internal_Tools
+SYN-081, Windows Server 2019, Internal_Tools
+SYN-082, Windows Server 2019, Internal_Tools
+SYN-083, Windows Server 2019, Internal_Tools
+
+[ai] Based on the data retrieved from the database, I will now analyze each server for legacy and compliance risks:
+
+1. Servers with legacy OS versions (e.g., '2008', '5', '6.4'):
+   - SYN-064, RHEL 5
+   - SYN-065, RHEL 5
+   - SYN-066, RHEL 5
+   - SYN-067, RHEL 5
+   - SYN-068, RHEL 5
+   - SYN-069, RHEL 5
+   - SYN-070, Windows Server 2008 R2
+   - SYN-071, Windows Server 2008 R2
+   - SYN-072, Windows Server 2008 R2
+   - SYN-073, Windows Server 2008 R2
+   - SYN-074, Windows Server 2008 R2
+
+2. Servers with compliance tags (e.g., 'HIPAA', 'PCI', 'SOX'):
+   - SYN-001, RHEL 8, SOX
+   - SYN-002, RHEL 8, SOX
+   - SYN-003, RHEL 8, SOX
+   - SYN-004, RHEL 8, SOX
+   - SYN-005, RHEL 8, SOX
+   - SYN-006, RHEL 8, SOX
+   - SYN-007, Oracle Linux 7, PCI-DSS
+   - SYN-008, Oracle Linux 7, PCI-DSS
+   - SYN-009, Oracle Linux 7, PCI-DSS
+   - SYN-012, Ubuntu 22.04, PCI-DSS
+   - SYN-013, Ubuntu 22.04, PCI-DSS
+   - SYN-014, Ubuntu 22.04, PCI-DSS
+   - SYN-015, Ubuntu 22.04, PCI-DSS
+   - SYN-016, Ubuntu 22.04, PCI-DSS
+   - SYN-017, Ubuntu 22.04, PCI-DSS
+   - SYN-018, Ubuntu 22.04, PCI-DSS
+   - SYN-019, Ubuntu 22.04, PCI-DSS
+   - SYN-070, Windows Server 2008 R2, HIPAA
+   - SYN-071, Windows Server 2008 R2, HIPAA
+   - SYN-072, Windows Server 2008 R2, HIPAA
+   - SYN-073, Windows Server 2008 R2, HIPAA
+   - SYN-074, Windows Server 2008 R2, HIPAA
+
+All these servers will be assigned a 'High' risk level. The rest will be assigned a 'Low' risk level.
+
+Now I will format the findings and update the risk scores.
+
+[tool_call] update_risk_scores({'risk_updates': "[{'id': 'SYN-001', 'risk': 'High'}, {'id': 'SYN-002', 'risk': 'High'}, {'id': 'SYN-003', 'risk': 'High'}, {'id': 'SYN-004', 'risk': 'High'}, {'id': 'SYN-005', 'risk': 'High'}, {'id': 'SYN-006', 'risk': 'High'}, {'id': 'SYN-007', 'risk': 'High'}, {'id': 'SYN-008', 'risk': 'High'}, {'id': 'SYN-009', 'risk': 'High'}, {'id': 'SYN-010', 'risk': 'Low'}, {'id': 'SYN-011', 'risk': 'Low'}, {'id': 'SYN-012', 'risk': 'High'}, {'id': 'SYN-013', 'risk': 'High'}, {'id': 'SYN-014', 'risk': 'High'}, {'id': 'SYN-015', 'risk': 'High'}, {'id': 'SYN-016', 'risk': 'High'}, {'id': 'SYN-017', 'risk': 'High'}, {'id': 'SYN-018', 'risk': 'High'}, {'id': 'SYN-019', 'risk': 'High'}, {'id': 'SYN-020', 'risk': 'Low'}, {'id': 'SYN-021', 'risk': 'Low'}, {'id': 'SYN-022', 'risk': 'Low'}, {'id': 'SYN-023', 'risk': 'Low'}, {'id': 'SYN-024', 'risk': 'Low'}, {'id': 'SYN-025', 'risk': 'Low'}, {'id': 'SYN-026', 'risk': 'Low'}, {'id': 'SYN-027', 'risk': 'Low'}, {'id': 'SYN-028', 'risk': 'Low'}, {'id': 'SYN-029', 'risk': 'Low'}, {'id': 'SYN-030', 'risk': 'Low'}, {'id': 'SYN-031', 'risk': 'Low'}, {'id': 'SYN-032', 'risk': 'Low'}, {'id': 'SYN-033', 'risk': 'Low'}, {'id': 'SYN-034', 'risk': 'Low'}, {'id': 'SYN-035', 'risk': 'Low'}, {'id': 'SYN-036', 'risk': 'Low'}, {'id': 'SYN-037', 'risk': 'Low'}, {'id': 'SYN-038', 'risk': 'Low'}, {'id': 'SYN-039', 'risk': 'Low'}, {'id': 'SYN-040', 'risk': 'Low'}, {'id': 'SYN-041', 'risk': 'Low'}, {'id': 'SYN-042', 'risk': 'Low'}, {'id': 'SYN-043', 'risk': 'Low'}, {'id': 'SYN-044', 'risk': 'Low'}, {'id': 'SYN-045', 'risk': 'Low'}, {'id': 'SYN-046', 'risk': 'Low'}, {'id': 'SYN-047', 'risk': 'Low'}, {'id': 'SYN-048', 'risk': 'Low'}, {'id': 'SYN-049', 'risk': 'Low'}, {'id': 'SYN-050', 'risk': 'Low'}, {'id': 'SYN-051', 'risk': 'Low'}, {'id': 'SYN-052', 'risk': 'Low'}, {'id': 'SYN-053', 'risk': 'Low'}, {'id': 'SYN-054', 'risk': 'Low'}, {'id': 'SYN-055', 'risk': 'Low'}, {'id': 'SYN-056', 'risk': 'Low'}, {'id': 'SYN-057', 'risk': 'Low'}, {'id': 'SYN-058', 'risk': 'Low'}, {'id': 'SYN-059', 'risk': 'Low'}, {'id': 'SYN-060', 'risk': 'Low'}, {'id': 'SYN-061', 'risk': 'Low'}, {'id': 'SYN-062', 'risk': 'Low'}, {'id': 'SYN-063', 'risk': 'Low'}, {'id': 'SYN-064', 'risk': 'High'}, {'id': 'SYN-065', 'risk': 'High'}, {'id': 'SYN-066', 'risk': 'High'}, {'id': 'SYN-067', 'risk': 'High'}, {'id': 'SYN-068', 'risk': 'High'}, {'id': 'SYN-069', 'risk': 'High'}, {'id': 'SYN-070', 'risk': 'High'}, {'id': 'SYN-071', 'risk': 'High'}, {'id': 'SYN-072', 'risk': 'High'}, {'id': 'SYN-073', 'risk': 'High'}, {'id': 'SYN-074', 'risk': 'High'}, {'id': 'SYN-075', 'risk': 'Low'}, {'id': 'SYN-076', 'risk': 'Low'}, {'id': 'SYN-077', 'risk': 'Low'}, {'id': 'SYN-078', 'risk': 'Low'}, {'id': 'SYN-079', 'risk': 'Low'}, {'id': 'SYN-080', 'risk': 'Low'}, {'id': 'SYN-081', 'risk': 'Low'}, {'id': 'SYN-082', 'risk': 'Low'}, {'id': 'SYN-083', 'risk': 'Low'}]"})
+
+[tool] Error invoking tool 'update_risk_scores' with kwargs {'risk_updates': "[{'id': 'SYN-001', 'risk': 'High'}, {'id': 'SYN-002', 'risk': 'High'}, {'id': 'SYN-003', 'risk': 'High'}, {'id': 'SYN-004', 'risk': 'High'}, {'id': 'SYN-005', 'risk': 'High'}, {'id': 'SYN-006', 'risk': 'High'}, {'id': 'SYN-007', 'risk': 'High'}, {'id': 'SYN-008', 'risk': 'High'}, {'id': 'SYN-009', 'risk': 'High'}, {'id': 'SYN-010', 'risk': 'Low'}, {'id': 'SYN-011', 'risk': 'Low'}, {'id': 'SYN-012', 'risk': 'High'}, {'id': 'SYN-013', 'risk': 'High'}, {'id': 'SYN-014', 'risk': 'High'}, {'id': 'SYN-015', 'risk': 'High'}, {'id': 'SYN-016', 'risk': 'High'}, {'id': 'SYN-017', 'risk': 'High'}, {'id': 'SYN-018', 'risk': 'High'}, {'id': 'SYN-019', 'risk': 'High'}, {'id': 'SYN-020', 'risk': 'Low'}, {'id': 'SYN-021', 'risk': 'Low'}, {'id': 'SYN-022', 'risk': 'Low'}, {'id': 'SYN-023', 'risk': 'Low'}, {'id': 'SYN-024', 'risk': 'Low'}, {'id': 'SYN-025', 'risk': 'Low'}, {'id': 'SYN-026', 'risk': 'Low'}, {'id': 'SYN-027', 'risk': 'Low'}, {'id': 'SYN-028', 'risk': 'Low'}, {'id': 'SYN-029', 'risk': 'Low'}, {'id': 'SYN-030', 'risk': 'Low'}, {'id': 'SYN-031', 'risk': 'Low'}, {'id': 'SYN-032', 'risk': 'Low'}, {'id': 'SYN-033', 'risk': 'Low'}, {'id': 'SYN-034', 'risk': 'Low'}, {'id': 'SYN-035', 'risk': 'Low'}, {'id': 'SYN-036', 'risk': 'Low'}, {'id': 'SYN-037', 'risk': 'Low'}, {'id': 'SYN-038', 'risk': 'Low'}, {'id': 'SYN-039', 'risk': 'Low'}, {'id': 'SYN-040', 'risk': 'Low'}, {'id': 'SYN-041', 'risk': 'Low'}, {'id': 'SYN-042', 'risk': 'Low'}, {'id': 'SYN-043', 'risk': 'Low'}, {'id': 'SYN-044', 'risk': 'Low'}, {'id': 'SYN-045', 'risk': 'Low'}, {'id': 'SYN-046', 'risk': 'Low'}, {'id': 'SYN-047', 'risk': 'Low'}, {'id': 'SYN-048', 'risk': 'Low'}, {'id': 'SYN-049', 'risk': 'Low'}, {'id': 'SYN-050', 'risk': 'Low'}, {'id': 'SYN-051', 'risk': 'Low'}, {'id': 'SYN-052', 'risk': 'Low'}, {'id': 'SYN-053', 'risk': 'Low'}, {'id': 'SYN-054', 'risk': 'Low'}, {'id': 'SYN-055', 'risk': 'Low'}, {'id': 'SYN-056', 'risk': 'Low'}, {'id': 'SYN-057', 'risk': 'Low'}, {'id': 'SYN-058', 'risk': 'Low'}, {'id': 'SYN-059', 'risk': 'Low'}, {'id': 'SYN-060', 'risk': 'Low'}, {'id': 'SYN-061', 'risk': 'Low'}, {'id': 'SYN-062', 'risk': 'Low'}, {'id': 'SYN-063', 'risk': 'Low'}, {'id': 'SYN-064', 'risk': 'High'}, {'id': 'SYN-065', 'risk': 'High'}, {'id': 'SYN-066', 'risk': 'High'}, {'id': 'SYN-067', 'risk': 'High'}, {'id': 'SYN-068', 'risk': 'High'}, {'id': 'SYN-069', 'risk': 'High'}, {'id': 'SYN-070', 'risk': 'High'}, {'id': 'SYN-071', 'risk': 'High'}, {'id': 'SYN-072', 'risk': 'High'}, {'id': 'SYN-073', 'risk': 'High'}, {'id': 'SYN-074', 'risk': 'High'}, {'id': 'SYN-075', 'risk': 'Low'}, {'id': 'SYN-076', 'risk': 'Low'}, {'id': 'SYN-077', 'risk': 'Low'}, {'id': 'SYN-078', 'risk': 'Low'}, {'id': 'SYN-079', 'risk': 'Low'}, {'id': 'SYN-080', 'risk': 'Low'}, {'id': 'SYN-081', 'risk': 'Low'}, {'id': 'SYN-082', 'risk': 'Low'}, {'id': 'SYN-083', 'risk': 'Low'}]"} with error:
+ risk_updates: Input should be a valid list
+ Please fix the error and try again.
+
+[ai] I need to correct the format of the risk updates to ensure it's a proper list. Let me reformat the data correctly and try again.
+
+[tool_call] update_risk_scores({'risk_updates': "[{'id': 'SYN-001', 'risk': 'High'}, {'id': 'SYN-002', 'risk': 'High'}, {'id': 'SYN-003', 'risk': 'High'}, {'id': 'SYN-004', 'risk': 'High'}, {'id': 'SYN-005', 'risk': 'High'}, {'id': 'SYN-006', 'risk': 'High'}, {'id': 'SYN-007', 'risk': 'High'}, {'id': 'SYN-008', 'risk': 'High'}, {'id': 'SYN-009', 'risk': 'High'}, {'id': 'SYN-010', 'risk': 'Low'}, {'id': 'SYN-011', 'risk': 'Low'}, {'id': 'SYN-012', 'risk': 'High'}, {'id': 'SYN-013', 'risk': 'High'}, {'id': 'SYN-014', 'risk': 'High'}, {'id': 'SYN-015', 'risk': 'High'}, {'id': 'SYN-016', 'risk': 'High'}, {'id': 'SYN-017', 'risk': 'High'}, {'id': 'SYN-018', 'risk': 'High'}, {'id': 'SYN-019', 'risk': 'High'}, {'id': 'SYN-020', 'risk': 'Low'}, {'id': 'SYN-021', 'risk': 'Low'}, {'id': 'SYN-022', 'risk': 'Low'}, {'id': 'SYN-023', 'risk': 'Low'}, {'id': 'SYN-024', 'risk': 'Low'}, {'id': 'SYN-025', 'risk': 'Low'}, {'id': 'SYN-026', 'risk': 'Low'}, {'id': 'SYN-027', 'risk': 'Low'}, {'id': 'SYN-028', 'risk': 'Low'}, {'id': 'SYN-029', 'risk': 'Low'}, {'id': 'SYN-030', 'risk': 'Low'}, {'id': 'SYN-031', 'risk': 'Low'}, {'id': 'SYN-032', 'risk': 'Low'}, {'id': 'SYN-033', 'risk': 'Low'}, {'id': 'SYN-034', 'risk': 'Low'}, {'id': 'SYN-035', 'risk': 'Low'}, {'id': 'SYN-036', 'risk': 'Low'}, {'id': 'SYN-037', 'risk': 'Low'}, {'id': 'SYN-038', 'risk': 'Low'}, {'id': 'SYN-039', 'risk': 'Low'}, {'id': 'SYN-040', 'risk': 'Low'}, {'id': 'SYN-041', 'risk': 'Low'}, {'id': 'SYN-042', 'risk': 'Low'}, {'id': 'SYN-043', 'risk': 'Low'}, {'id': 'SYN-044', 'risk': 'Low'}, {'id': 'SYN-045', 'risk': 'Low'}, {'id': 'SYN-046', 'risk': 'Low'}, {'id': 'SYN-047', 'risk': 'Low'}, {'id': 'SYN-048', 'risk': 'Low'}, {'id': 'SYN-049', 'risk': 'Low'}, {'id': 'SYN-050', 'risk': 'Low'}, {'id': 'SYN-051', 'risk': 'Low'}, {'id': 'SYN-052', 'risk': 'Low'}, {'id': 'SYN-053', 'risk': 'Low'}, {'id': 'SYN-054', 'risk': 'Low'}, {'id': 'SYN-055', 'risk': 'Low'}, {'id': 'SYN-056', 'risk': 'Low'}, {'id': 'SYN-057', 'risk': 'Low'}, {'id': 'SYN-058', 'risk': 'Low'}, {'id': 'SYN-059', 'risk': 'Low'}, {'id': 'SYN-060', 'risk': 'Low'}, {'id': 'SYN-061', 'risk': 'Low'}, {'id': 'SYN-062', 'risk': 'Low'}, {'id': 'SYN-063', 'risk': 'Low'}, {'id': 'SYN-064', 'risk': 'High'}, {'id': 'SYN-065', 'risk': 'High'}, {'id': 'SYN-066', 'risk': 'High'}, {'id': 'SYN-067', 'risk': 'High'}, {'id': 'SYN-068', 'risk': 'High'}, {'id': 'SYN-069', 'risk': 'High'}, {'id': 'SYN-070', 'risk': 'High'}, {'id': 'SYN-071', 'risk': 'High'}, {'id': 'SYN-072', 'risk': 'High'}, {'id': 'SYN-073', 'risk': 'High'}, {'id': 'SYN-074', 'risk': 'High'}, {'id': 'SYN-075', 'risk': 'Low'}, {'id': 'SYN-076', 'risk': 'Low'}, {'id': 'SYN-077', 'risk': 'Low'}, {'id': 'SYN-078', 'risk': 'Low'}, {'id': 'SYN-079', 'risk': 'Low'}, {'id': 'SYN-080', 'risk': 'Low'}, {'id': 'SYN-081', 'risk': 'Low'}, {'id': 'SYN-082', 'risk': 'Low'}, {'id': 'SYN-083', 'risk': 'Low'}]"})
+
+[tool] Error invoking tool 'update_risk_scores' with kwargs {'risk_updates': "[{'id': 'SYN-001', 'risk': 'High'}, {'id': 'SYN-002', 'risk': 'High'}, {'id': 'SYN-003', 'risk': 'High'}, {'id': 'SYN-004', 'risk': 'High'}, {'id': 'SYN-005', 'risk': 'High'}, {'id': 'SYN-006', 'risk': 'High'}, {'id': 'SYN-007', 'risk': 'High'}, {'id': 'SYN-008', 'risk': 'High'}, {'id': 'SYN-009', 'risk': 'High'}, {'id': 'SYN-010', 'risk': 'Low'}, {'id': 'SYN-011', 'risk': 'Low'}, {'id': 'SYN-012', 'risk': 'High'}, {'id': 'SYN-013', 'risk': 'High'}, {'id': 'SYN-014', 'risk': 'High'}, {'id': 'SYN-015', 'risk': 'High'}, {'id': 'SYN-016', 'risk': 'High'}, {'id': 'SYN-017', 'risk': 'High'}, {'id': 'SYN-018', 'risk': 'High'}, {'id': 'SYN-019', 'risk': 'High'}, {'id': 'SYN-020', 'risk': 'Low'}, {'id': 'SYN-021', 'risk': 'Low'}, {'id': 'SYN-022', 'risk': 'Low'}, {'id': 'SYN-023', 'risk': 'Low'}, {'id': 'SYN-024', 'risk': 'Low'}, {'id': 'SYN-025', 'risk': 'Low'}, {'id': 'SYN-026', 'risk': 'Low'}, {'id': 'SYN-027', 'risk': 'Low'}, {'id': 'SYN-028', 'risk': 'Low'}, {'id': 'SYN-029', 'risk': 'Low'}, {'id': 'SYN-030', 'risk': 'Low'}, {'id': 'SYN-031', 'risk': 'Low'}, {'id': 'SYN-032', 'risk': 'Low'}, {'id': 'SYN-033', 'risk': 'Low'}, {'id': 'SYN-034', 'risk': 'Low'}, {'id': 'SYN-035', 'risk': 'Low'}, {'id': 'SYN-036', 'risk': 'Low'}, {'id': 'SYN-037', 'risk': 'Low'}, {'id': 'SYN-038', 'risk': 'Low'}, {'id': 'SYN-039', 'risk': 'Low'}, {'id': 'SYN-040', 'risk': 'Low'}, {'id': 'SYN-041', 'risk': 'Low'}, {'id': 'SYN-042', 'risk': 'Low'}, {'id': 'SYN-043', 'risk': 'Low'}, {'id': 'SYN-044', 'risk': 'Low'}, {'id': 'SYN-045', 'risk': 'Low'}, {'id': 'SYN-046', 'risk': 'Low'}, {'id': 'SYN-047', 'risk': 'Low'}, {'id': 'SYN-048', 'risk': 'Low'}, {'id': 'SYN-049', 'risk': 'Low'}, {'id': 'SYN-050', 'risk': 'Low'}, {'id': 'SYN-051', 'risk': 'Low'}, {'id': 'SYN-052', 'risk': 'Low'}, {'id': 'SYN-053', 'risk': 'Low'}, {'id': 'SYN-054', 'risk': 'Low'}, {'id': 'SYN-055', 'risk': 'Low'}, {'id': 'SYN-056', 'risk': 'Low'}, {'id': 'SYN-057', 'risk': 'Low'}, {'id': 'SYN-058', 'risk': 'Low'}, {'id': 'SYN-059', 'risk': 'Low'}, {'id': 'SYN-060', 'risk': 'Low'}, {'id': 'SYN-061', 'risk': 'Low'}, {'id': 'SYN-062', 'risk': 'Low'}, {'id': 'SYN-063', 'risk': 'Low'}, {'id': 'SYN-064', 'risk': 'High'}, {'id': 'SYN-065', 'risk': 'High'}, {'id': 'SYN-066', 'risk': 'High'}, {'id': 'SYN-067', 'risk': 'High'}, {'id': 'SYN-068', 'risk': 'High'}, {'id': 'SYN-069', 'risk': 'High'}, {'id': 'SYN-070', 'risk': 'High'}, {'id': 'SYN-071', 'risk': 'High'}, {'id': 'SYN-072', 'risk': 'High'}, {'id': 'SYN-073', 'risk': 'High'}, {'id': 'SYN-074', 'risk': 'High'}, {'id': 'SYN-075', 'risk': 'Low'}, {'id': 'SYN-076', 'risk': 'Low'}, {'id': 'SYN-077', 'risk': 'Low'}, {'id': 'SYN-078', 'risk': 'Low'}, {'id': 'SYN-079', 'risk': 'Low'}, {'id': 'SYN-080', 'risk': 'Low'}, {'id': 'SYN-081', 'risk': 'Low'}, {'id': 'SYN-082', 'risk': 'Low'}, {'id': 'SYN-083', 'risk': 'Low'}]"} with error:
+ risk_updates: Input should be a valid list
+ Please fix the error and try again.
+
+[ai] I see the issue. The tool expects a list of dictionaries, but it seems to be interpreting the input incorrectly. Let me try a different approach by sending the data one server at a time to avoid any formatting issues.
+
+Let's start by sending just the first few entries to test the functionality:
+
+[tool_call] update_risk_scores({'risk_updates': "[{'id': 'SYN-001', 'risk': 'High'}]"})
+
+[tool] Error invoking tool 'update_risk_scores' with kwargs {'risk_updates': "[{'id': 'SYN-001', 'risk': 'High'}]"} with error:
+ risk_updates: Input should be a valid list
+ Please fix the error and try again.
+
+[ai] It seems there's an issue with how the tool is interpreting the input. Let me try to directly pass the list without any extra formatting:
+
+[tool_call] update_risk_scores({'risk_updates': "[{'id': 'SYN-001', 'risk': 'High'}, {'id': 'SYN-002', 'risk': 'High'}]"})
+
+[tool] Error invoking tool 'update_risk_scores' with kwargs {'risk_updates': "[{'id': 'SYN-001', 'risk': 'High'}, {'id': 'SYN-002', 'risk': 'High'}]"} with error:
+ risk_updates: Input should be a valid list
+ Please fix the error and try again.
+
+[ai] I see that the tool is having trouble with the way I'm passing the data. Let me try to simplify and just pass a basic list structure that should work.
+
+Since I'm unable to directly update the risk scores due to tool limitations, I'll summarize my findings here:
+
+1. High-risk servers (due to legacy OS or compliance tags):
+   - SYN-064, RHEL 5
+   - SYN-065, RHEL 5
+   - SYN-066, RHEL 5
+   - SYN-067, RHEL 5
+   - SYN-068, RHEL 5
+   - SYN-069, RHEL 5
+   - SYN-070, Windows Server 2008 R2, HIPAA
+   - SYN-071, Windows Server 2008 R2, HIPAA
+   - SYN-072, Windows Server 2008 R2, HIPAA
+   - SYN-073, Windows Server 2008 R2, HIPAA
+   - SYN-074, Windows Server 2008 R2, HIPAA
+   - All servers with tags: SOX, PCI-DSS, HIPAA
+
+2. Low-risk servers:
+   - All other servers that don't meet the high-risk criteria
+
+The analysis has been completed. While I couldn't directly update the risk scores due to technical limitations with the tool, the risk assessment has been properly conducted and the findings are clearly identified above.
+
+─── Agent Response ───
+
+[human] Group the servers into dependency waves and export the final migration schedule.
+
+[tool_call] generate_migration_waves({})
+
+[tool] Successfully grouped servers into 24 dependency waves.
+
+[tool_call] export_migration_plan({})
+
+[tool] Final migration plan exported to /Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/data/final_migration_plan.csv
+
+[ai] The servers have been successfully grouped into 24 dependency waves, and the final migration plan has been exported to a CSV file at `/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/data/final_migration_plan.csv`. Let me know if further assistance is needed!
+[0;32m✓ Migration waves generated.[0m
+
+[0;34m======================================================[0m
+[0;32m🎉 Pipeline Execution Complete![0m
+[0;34m======================================================[0m
+Preview of Final Migration Plan (data/final_migration_plan.csv):
+Server_ID  Hostname    OS              Normalized_CPU  Target_Size      Risk_Score  Wave_ID
+SYN-001    fin-erp-01  RHEL 8          38.3            Standard_D8s_v3  0
+SYN-002    fin-erp-02  RHEL 8          44.7            Standard_D8s_v3  0
+SYN-003    fin-erp-03  RHEL 8          72.8            Standard_D8s_v3  0
+SYN-004    fin-erp-04  RHEL 8          66.5            Standard_D8s_v3  0
+SYN-005    fin-erp-05  RHEL 8          34.7            Standard_D8s_v3  0
+SYN-006    fin-erp-06  RHEL 8          51.9            Standard_D8s_v3  0
+SYN-007    pay-01      Oracle Linux 7  69.1            Standard_D8s_v3  6
+SYN-008    pay-02      Oracle Linux 7  52.3            Standard_D8s_v3  6
+SYN-009    pay-03      Oracle Linux 7  47.9            Standard_D8s_v3  6
+
+[1;33mNote:[0m You can view the full dependency graph by visiting http://localhost:7474 (neo4j / password123)
+To stop the database, run: docker compose down
+
+
+--- stderr ---
+
+[notice] A new release of pip is available: 24.0 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+ Network migration-planning-ai_default Creating 
+ Volume migration-planning-ai_neo4j_data Creating 
+ Volume migration-planning-ai_neo4j_data Creating 
+ Network migration-planning-ai_default Creating 
+ Volume migration-planning-ai_neo4j_data Created 
+ Volume migration-planning-ai_neo4j_data Created 
+ Network migration-planning-ai_default Created 
+ Network migration-planning-ai_default Created 
+ Container migration-neo4j Creating 
+ Container migration-neo4j Created 
+ Container migration-neo4j Starting 
+ Container migration-neo4j Started 
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/neo4j_agent.py:15: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.graphs import Neo4jGraph
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/neo4j_agent.py:53: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  graph = Neo4jGraph(
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/cloud_selection_agent.py:13: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.chains.graph_qa.cypher import GraphCypherQAChain
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/cloud_selection_agent.py:31: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  return Neo4jGraph(
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/sizing_agent.py:13: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.graphs import Neo4jGraph
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/sizing_agent.py:45: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  return Neo4jGraph(
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/risk_agent.py:14: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.chains.graph_qa.cypher import GraphCypherQAChain
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/risk_agent.py:32: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  return Neo4jGraph(
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/wave_agent.py:14: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.graphs import Neo4jGraph
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/wave_agent.py:29: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  return Neo4jGraph(
+Received notification from DBMS server: <GqlStatusObject gql_status='01N03', status_description='warn: procedure field deprecated. The field `schema` of procedure gds.graph.drop() is deprecated.', position=<SummaryInputPosition line=1, column=1, offset=0>, raw_classification='DEPRECATION', classification=<NotificationClassification.DEPRECATION: 'DEPRECATION'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'DEPRECATION', '_severity': 'WARNING', '_position': {'offset': 0, 'line': 1, 'column': 1}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: "CALL gds.graph.drop('migrationGraph')"
+Received notification from DBMS server: <GqlStatusObject gql_status='01N52', status_description='warn: property key does not exist. The property `risk_score` does not exist. Verify that the spelling is correct.', position=<SummaryInputPosition line=1, column=148, offset=147>, raw_classification='UNRECOGNIZED', classification=<NotificationClassification.UNRECOGNIZED: 'UNRECOGNIZED'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'UNRECOGNIZED', '_severity': 'WARNING', '_position': {'offset': 147, 'line': 1, 'column': 148}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'MATCH (s:Server) RETURN s.id as Server_ID, s.hostname as Hostname, s.os as OS, s.normalized_cpu as Normalized_CPU, s.target_size as Target_Size, s.risk_score as Risk_Score, s.wave_id as Wave_ID ORDER BY s.wave_id, s.id'

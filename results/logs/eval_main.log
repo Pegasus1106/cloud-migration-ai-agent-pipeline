@@ -1,0 +1,29 @@
+D1 B1 10
+D1 B0 True 129.4
+D1 P1 r1 ready_for_approval 152.5 
+D1 P1 r2 ready_for_approval 492.6 
+D1 P1 r3 ready_for_approval 278.0 
+D2 B1 13
+D2 B0 True 173.3
+D2 P1 r1 ready_for_approval 204.1 
+D2 P1 r2 ready_for_approval 321.4 
+D2 P1 r3 ready_for_approval 300.8 
+D3_30 B1 8
+D3_30 B0 True 151.0
+D3_30 P1 r1 ready_for_approval 78.1 
+D3_30 P1 r2 ready_for_approval 76.9 
+D3_30 P1 r3 ready_for_approval 82.2 
+D3_100 B1 21
+D3_100 B0 True 172.3
+D3_100 P1 r1 ready_for_approval 359.5 
+D3_100 P1 r2 ready_for_approval 215.0 
+D3_100 P1 r3 ready_for_approval 324.0 
+D1 P1-rules ready_for_approval 0.2
+D1 P1-norepair blocked 27.3
+D1 P1-strict ready_for_approval 104.2
+D1 B1-strict  0.01
+D1 P1-qwen3-235b-a22b ready_for_approval 1264.3
+D2 P1-rules ready_for_approval 0.8
+D2 P1-norepair ready_for_approval 155.6
+D2 P1-strict blocked 5.6
+D2 B1-strict  0.01

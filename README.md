@@ -1,200 +1,140 @@
-# Cloud Migration AI Agent Pipeline - P1 Prototype (Milestone 2)
+# Cloud Migration AI Agent Pipeline — P1 (Milestone 2)
 
-This is the Milestone 1 "P1 proposed system" implementation. It was
-originally designed as a refinement of a separate stakeholder baseline
-pipeline (referred to below as **B0**), but this repository is fully
-standalone: it has no runtime or path dependency on that other project.
-A static, unmodified copy of the original baseline input
-(`data/baseline_raw_sample.csv`) is bundled here for reproducibility.
+An agentic decision-support system that turns server-discovery data into a validated,
+explained cloud-migration wave plan. It refines the stakeholder's baseline
+([ananthsekar007/migration-planning-ai](https://github.com/ananthsekar007/migration-planning-ai), "B0")
+with the requirements agreed in Milestone 1: derived inbound dependencies, a 3,000 GB
+per-wave transfer limit, early-migration preferences, community-aware grouping, a static
+FinOps comparison, and a chat-style constraint interface with user confirmation.
 
-This project adds inbound-dependency derivation, WCC/SCC/community-aware
-wave planning under a configurable transfer-volume limit, a static FinOps
-cost/savings estimate, a chat-style constraint interface, and a
-deterministic **B1** greedy baseline for comparison.
+**Design rule:** the LLM interprets intent, chooses bounded actions, and explains; deterministic
+tools compute graph structure, sizes, prices, risk, waves, and validation. Every LLM output is
+validated by a tool or verified against tool output. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
-## Prerequisites
-
-- **Python 3.10+** (the repo was built and tested with 3.11; the system
-  default `python3` on macOS is often 3.9, which is too old - see step 1).
-- **Docker Desktop** (or another Docker Engine + Compose v2 runtime),
-  running before you start the pipeline. No custom image is built here;
-  `compose.yml` pulls the public `neo4j:5` image (pinned by digest) plus
-  the `apoc` and `graph-data-science` plugins automatically, so nothing
-  needs to be shared or built separately for reproducibility.
-- **ASU VPN or ASU Wi-Fi**, and an **ASU_RC_API_KEY** from
-  https://voyager.rc.asu.edu/ (LLM Access tab -> Create Key). The LLM
-  steps call `https://openai.rc.asu.edu/v1`, which requires this.
-- Ports **7475** and **7688** free on localhost (offset from the
-  baseline's 7474/7687 so both projects can run side by side).
-
-## Steps to reproduce
-
-```bash
-# 1. From the workspace root, enter this project.
-cd cloud-migration-ai-agent-pipeline
-
-# 2. Add your API key (never commit this file - it is already gitignored).
-cp .env.example .env
-#    then edit .env and set: ASU_RC_API_KEY=your_key_here
-
-# 3. Make the run script executable (first time only).
-chmod +x run_pipeline_p1.sh
-
-# 4. Run the full pipeline on either dataset. This creates the venv,
-#    installs requirements.txt, starts the pinned Neo4j container,
-#    runs the Constraint Agent, then all 7 agent stages, then validates
-#    the result.
-./run_pipeline_p1.sh --dataset stakeholder   # data/sample.csv, 50 servers
-./run_pipeline_p1.sh --dataset synthetic     # data/synthetic_83.csv, 83 servers
-
-# Optional: pass a free-text constraint request instead of the default.
-./run_pipeline_p1.sh --dataset stakeholder --request "Keep waves under 2500 GB"
+```
+chat ──► Constraint Agent ──► user confirms ──► Supervisor (LangGraph)
+          discover → graph (Neo4j GDS) → size & price → risk → waves → VALIDATE
+              VALIDATE ──repairable──► Repair Agent ──► re-price ──► VALIDATE
+              VALIDATE ──needs a person──► review drafting ──► human review ──► VALIDATE / re-plan / stop
+              VALIDATE ──passed──► explainers (verified) ──► export ──► user approves
+          + “Ask the plan” Q&A agent (read-only Text2Cypher)
 ```
 
-**Expected output** after a run: `data/<dataset>_p1_plan.csv` (the final
-migration plan), `data/<dataset>_p1_wave_summary.json` (wave totals and
-any infeasible groups), `data/validation_report_<dataset>_P1.json` (the
-validator's pass/fail checks), and `data/run_log_<dataset>.json`
-(per-stage exit codes and timing). The script prints the validation
-report and these file paths at the end; exit code 0 means every stage
-succeeded.
+## Quick start
 
-**To inspect the graph:** open http://localhost:7475 in a browser
-(login `neo4j` / `password123`).
+Prerequisites: Python 3.10+ (3.11 used), Docker with Compose v2 (Docker Desktop), and for the
+LLM agents an ASU Voyager key on ASU Wi-Fi or the ASU VPN. Without a key everything still runs
+in rule-only mode (`--no-llm`); without Docker the graph stage falls back to networkx.
 
-**To stop and clean up:**
 ```bash
-docker compose down        # stop the container, keep the data volume
-docker compose down -v     # stop and delete the data volume
+cp .env.example .env          # set ASU_RC_API_KEY=...  (never commit .env)
+python3.11 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+docker compose up -d          # Neo4j 5 + GDS + APOC on ports 7475 (browser) / 7688 (bolt)
+
+streamlit run app.py          # web UI at http://localhost:8501
 ```
 
-**To reproduce the B1 baseline and the comparison tables** (no Docker
-needed for B1 itself), run the commands under "Running the baseline and
-comparisons" further below, after the P1 run above has produced
-`data/cleaned_stakeholder.csv` / `data/cleaned_synthetic.csv`.
+Or from the terminal:
 
-## Directory contents
+```bash
+# Chat request -> confirmation -> plan (auto-confirm and batch review policy for scripting)
+python run_p1.py --dataset data/sample.csv \
+  --request "Keep each wave under 2.5 TB, move the CRM app early, and start with a pilot wave" --yes
 
-| File | Role |
+# Fully interactive: the Constraint Agent may ask questions; you confirm and decide review items
+python run_p1.py --dataset data/sample.csv --interactive
+
+# Ablations
+python run_p1.py --dataset data/sample.csv --yes --no-llm          # every agent uses its rule fallback
+python run_p1.py --dataset data/sample.csv --yes --no-repair       # no Repair Agent
+python run_p1.py --dataset data/sample.csv --yes --strict-waves    # prototype packing
+
+./run_pipeline_p1.sh --dataset stakeholder   # one command: venv, Neo4j, agents, plan (exit 0 = valid plan)
+./run_pipeline_p1.sh --ui                    # same setup, then the web UI
+```
+
+Each run writes `runs/<run_id>/`: `plan.csv`, `wave_summary.json` (with verified wave
+explanations), `validation_report.json`, `graph_summary.json` (inbound/outbound summary, cycles,
+oversized components), `finops_summary.json`, `quality_report.json`, `review_log.json`,
+`repair_log.json`, `explanations.md`, `run_log.json` (config, model, prompt versions, catalog and
+lifecycle versions, timings, metrics), and `trace.jsonl` (every node, LLM call, tool call,
+verification, and fallback). Neo4j Browser: http://localhost:7475 (`neo4j` / `password123`, local only).
+
+## Results at a glance (Milestone 2)
+
+Full tables, ablations, and failure analysis: [docs/MILESTONE2_RESULTS.md](docs/MILESTONE2_RESULTS.md).
+
+- **Hard criteria** (0 dependency violations, no unreported wave above 3,000 GB, no undersized or non-AWS
+  instance, every feasible early request on time): P1 met all of them on D1, D2, D3_30, and D3_100; B0 and B1
+  met them on none of the four.
+- **Early-migration requests on time:** P1 100% on every dataset; B1 0 to 25%; B0 has no early handling.
+- **Dependencies split across waves:** P1 lower than B1 on D2, D3_30, and D3_100, tied on D1.
+- **B0 (stakeholder baseline, run unmodified):** chose Azure instead of AWS on D2/D3 and wrote no risk labels there.
+- **Constraint Agent:** 96.8% of 31 labeled requests (Milestone 1 target 85%).
+- **Ask-the-plan:** 92.6% correct rows and 0% query errors, vs 77.8% and 7.4% for the B0-style GraphCypherQAChain.
+- **Reliability:** 12/12 P1 runs on 4 datasets completed with valid, identical plans per dataset.
+- **Cost:** a P1 run takes minutes (about 99% waiting for the LLM); B1 runs in milliseconds.
+
+## Reproducing the Milestone 2 evaluation
+
+```bash
+python -m pytest -q tests                                   # 42 unit/integration tests
+python data/benchmark/generate_benchmark.py                 # rebuild D3 from cached gpt-oss-120b output
+python eval/run_eval.py --datasets D1,D2,D3_30,D3_100 --p1-repeats 3 \
+       --ablation-datasets D1,D2 --b0-repo ../migration-planning-ai      # what Milestone 2 reports
+python eval/eval_constraints.py                             # constraint parsing (31 labeled requests)
+python eval/eval_qa.py                                      # Ask-the-plan vs B0-style GraphCypherQAChain
+python eval/make_figures.py                                 # results/figures/*.png
+python3 eval/progress.py --watch                            # live progress bar for a running evaluation
+
+# Planned for the final submission (not yet run): D3_500, 10+ repeats, larger-model ablation beyond D1
+python eval/run_eval.py --datasets D3_500 --p1-repeats 3 --ablations ""
+python eval/run_eval.py --datasets D1,D2 --ablation-model qwen3-235b-a22b
+```
+
+B0 is run unmodified from a local clone of the stakeholder repository by
+`baselines/run_b0.py` (it swaps the input file, runs `./run_pipeline.sh --clean --run`, and
+restores the original file). Results, tables, plans, and figures are in [`results/`](results/);
+the write-up is [docs/MILESTONE2_RESULTS.md](docs/MILESTONE2_RESULTS.md).
+
+### Datasets
+
+| ID | File | Servers | What it tests |
+|---|---|---|---|
+| D1 | `data/sample.csv` | 50 | Stakeholder sample (B0 input + synthesized `Transfer_GB`, `Current_Monthly_Cost`, early flags; see `data/make_stakeholder_sample.py`); cycles, 45 TB indivisible warehouse, legacy OS, missing data |
+| D2 | `data/synthetic_83.csv` | 83 | Long dependency chains + one oversized 30-server data platform (`data/generate_synthetic_data.py`) |
+| D3 | `data/benchmark/D3_{30,100,500}.csv` | 30 / 100 / 500 | Portfolio written by `gpt-oss-120b`, structure and labels by seeded code: shared AD/DNS, shared BU databases (fan-in), replication and queue cycles, data platforms larger than the sizing matrix, regional/DR instances, 3% incomplete records, ground truth in `D3_*_truth.json` |
+
+Agent benchmarks: `data/benchmark/constraint_prompts.jsonl` (31 requests, 7 deliberately ambiguous;
+text by `gpt-oss-120b`, labels by code) and `data/benchmark/qa_questions.jsonl` (27 questions across
+12 templates; gold answers computed from the plan at evaluation time).
+
+## Repository layout
+
+| Path | Contents |
 |---|---|
-| `data_agent.py` | Normalizes discovery CSV, validates Transfer_GB / Current_Monthly_Cost / Early_Migration_Requested, writes a data-quality report. |
-| `neo4j_agent.py` | Loads servers + outbound edges into Neo4j (this project's own container). |
-| `graph_agent.py` | **New.** Derives inbound degree; computes WCC, SCC, and (for oversized WCCs) Louvain communities. |
-| `cloud_selection_agent.py`, `sizing_agent.py` | Reused from B0 unchanged (repointed at this project's Neo4j). |
-| `finops_agent.py` | **New.** Static AWS pricing catalog -> estimated monthly cost & savings vs. `Current_Monthly_Cost`. |
-| `risk_agent.py` | B0's agent with the tool-input bug fixed (defensive parsing) plus a post-hoc verification step that triggers a deterministic fallback if any server is left without a risk score. |
-| `constraint_agent.py` | **New.** Chat-style interface: free text -> confirmed `data/run_config.json` (max_transfer_gb, target_cloud, early-migration handling). |
-| `wave_agent_p1.py` | **New.** The core contribution: SCC-safe, community-prioritized, capacity-constrained wave packing (see `graph_utils.py`). |
-| `graph_utils.py` | Shared packing/condensation helpers used by both P1 and B1. |
-| `validator.py` | **New.** Deterministic checks (dependency order, transfer-volume limit, sizing safety, risk completeness) runnable against any plan CSV (B0, B1, or P1). |
-| `supervisor.py` | **New.** Runs all P1 stages in order, writes a run log, refuses to plan with an unconfirmed configuration. |
-| `baselines/b1_greedy_wave_agent.py` | **New.** Deterministic, LLM-free, community-blind baseline (SCC-granularity first-fit-decreasing packing). |
-| `compare_results.py` | Computes comparison metrics (wave count, cross-wave edges, utilization, early-migration placement) across B0/B1/P1. |
-| `data/baseline_raw_sample.csv` | A static, unmodified copy of the original baseline's 50-server discovery CSV, bundled here so this repo is self-contained. |
-| `data/make_stakeholder_sample.py` | Extends `data/baseline_raw_sample.csv` with Transfer_GB / Current_Monthly_Cost / Early_Migration_Requested (documented assumptions) to produce `data/sample.csv`. |
-| `data/generate_synthetic_data.py` | Generates an 83-server benchmark with one deliberately oversized WCC (~20.7k GB) to exercise community splitting. |
+| `p1/core/` | Deterministic tools: data contract (`data.py`), Neo4j/GDS store (`graphdb.py`), networkx fallback, catalog & sizing, FinOps, risk scoring, scheduler, planning policies (P1 and B1), validator, verifiers, Cypher guard |
+| `p1/agents/` | Constraint, Repair, Review-drafting, Risk-explainer, Wave-explainer, Q&A agents |
+| `p1/supervisor.py` | LangGraph state machine, routing, human-review interrupt, auto-review policy |
+| `p1/export.py`, `p1/tracing.py`, `p1/state.py` | Outputs, audit trail, typed config/state |
+| `app.py`, `run_p1.py`, `run_pipeline_p1.sh` | Web UI, CLI, one-command runner |
+| `baselines/` | `b1_greedy_wave_agent.py` (B1), `run_b0.py` (runs the stakeholder repo unmodified) |
+| `eval/` | Evaluation harness, agent benchmarks, figures |
+| `data/` | Datasets, AWS catalog (`aws_pricing_catalog.json`), OS lifecycle table (`os_lifecycle.json`), D3 generator |
+| `tests/` | pytest suite (data contract, inbound derivation, scheduling, FinOps arithmetic, risk, validator, agent guardrails, end-to-end interrupt/resume) |
+| `results/` | Evaluation outputs, plans, figures, prototype failure evidence |
 
-## Running the baseline (B1) and comparisons
+The pre-Milestone-2 prototype scripts (`*_agent.py`, `supervisor.py`, `graph_utils.py`) were
+replaced by `p1/`; they remain in git history at commit `d8ef245`.
 
-`./run_pipeline_p1.sh` always writes its cleaned CSV to the generic
-`data/cleaned_samples.csv` (whichever dataset you last ran). B1 and the
-comparison script instead expect a dataset-labeled cleaned CSV, so
-generate those explicitly first (requires the venv from step 4 above to
-be active: `source venv/bin/activate`):
+## Assumptions and limits
 
-```bash
-# Produce dataset-labeled cleaned CSVs (reused by both B1 and the
-# validator/comparison script so every system sees identical input).
-python data_agent.py data/sample.csv data/cleaned_stakeholder.csv
-python data_agent.py data/synthetic_83.csv data/cleaned_synthetic.csv
+- `Transfer_GB` defaults to `Storage_GB`; `Current_Monthly_Cost` in D1–D3 is synthesized with a
+  documented formula, so savings percentages are illustrative, not real bills.
+- AWS prices are a static us-east-1 Linux On-Demand snapshot, compute only; Windows Server and
+  SQL Server license costs are not included and are flagged per server.
+- Dependency direction: an edge A → B ("A calls B") requires wave(A) ≤ wave(B); same wave is allowed.
+- Neo4j holds one plan at a time; runs are serialized with a file lock.
 
-# Run the B1 baseline (deterministic, no LLM, no Neo4j needed).
-python baselines/b1_greedy_wave_agent.py --cleaned data/cleaned_stakeholder.csv \
-    --max-transfer-gb 3000 --out-plan baselines/stakeholder_b1_plan.csv \
-    --out-summary baselines/stakeholder_b1_summary.json
-
-python baselines/b1_greedy_wave_agent.py --cleaned data/cleaned_synthetic.csv \
-    --max-transfer-gb 3000 --out-plan baselines/synthetic_b1_plan.csv \
-    --out-summary baselines/synthetic_b1_summary.json
-
-# Validate any plan (B0, B1, or P1) against the same rules.
-python validator.py --plan <plan.csv> --cleaned <cleaned.csv> --label <name> \
-    --max-transfer-gb 3000 --infeasible <wave_summary.json>
-
-# Compare systems side by side (wave count, cross-wave edges, utilization,
-# early-migration placement, FinOps/risk-score availability).
-python compare_results.py --dataset stakeholder --cleaned data/cleaned_stakeholder.csv \
-    --b0-plan baselines/stakeholder_b0_plan.csv \
-    --b1-plan baselines/stakeholder_b1_plan.csv \
-    --p1-plan data/stakeholder_p1_plan.csv \
-    --early-ids SRV-008,SRV-009,SRV-048,SRV-049
-```
-
-The `--b0-plan` argument above is optional and only needed if you want the
-B0 row in the comparison table. This repository does not depend on B0 or
-bundle its code; if you have access to the separate baseline repository
-and have run its pipeline, copy its resulting `final_migration_plan.csv`
-in under `baselines/stakeholder_b0_plan.csv` manually. Without it,
-`compare_results.py` simply omits the B0 row and compares B1 vs. P1.
-
-## What was actually found running this (real, not hypothetical)
-
-- **B0's bug, reproduced and fixed.** B0's `risk_agent.py` failed to write
-  `Risk_Score` because the model sometimes passed a Python-repr string
-  instead of a JSON list, and the tool rejected it silently. P1's
-  `risk_agent.py` parses defensively and adds a post-hoc verification +
-  deterministic fallback. During real runs here it caught two *different*
-  failures live: a partial-coverage case (40/50 servers returned) and a
-  full failure case (0/83 servers returned) - both were detected and
-  corrected automatically.
-- **A packing-granularity bug found and fixed during this build.** An
-  earlier version of `wave_agent_p1.py` treated an entire oversized
-  WCC-community as one indivisible packing unit, which made P1 report
-  *more* infeasible groups than the community-blind B1 baseline on the
-  synthetic dataset (4 oversized ~5,000 GB communities vs. B1's 0, since
-  B1 packs at fine SCC granularity). The fix: only true SCCs (cycles) are
-  indivisible; `community_id` is used purely as a scheduling-priority
-  signal, not a forced grouping. See `wave_agent_p1.py` docstring and
-  `_assign_group_ids`.
-- **Measured outcome after the fix**, both datasets, 0 dependency and 0
-  transfer-volume violations for both B1 and P1 (`comparison_stakeholder.json`,
-  `comparison_synthetic.json`, `validation_report_*.json`):
-  - Early-migration requests: P1 moves flagged servers into wave 0-1 on
-    both datasets; B1 (which ignores the flag) scatters them into waves
-    4-6 (stakeholder) / 1-5 (synthetic).
-  - FinOps: only P1 produces a cost estimate (stakeholder: $37,533 ->
-    $9,984/mo, 73.4% estimated savings; synthetic: $60,114 -> $23,533/mo,
-    60.9%). B0 and B1 have no FinOps step.
-  - Risk-score completeness: B0 = 0/50 (the bug above); B1 and P1 = 100%.
-  - **Negative/neutral result, reported honestly**: the hypothesized
-    benefit of community detection - fewer cross-wave edges than B1's
-    community-blind packing - was **not** observed on either test
-    dataset (cross-wave-edge counts were equal: 30/30 on the stakeholder
-    set, 117/117 on the synthetic set). Both datasets' dependency
-    structure is dominated by long linear chains, which leaves little
-    scheduling freedom for the community-priority tie-break to exploit.
-    This is a planned follow-up before the final submission (see
-    Milestone 2 report, Sections 5-6): either strengthen the priority
-    weighting or redesign the synthetic benchmark with more parallel
-    (fan-out) structure within a single business unit.
-  - AWS sizing matrix gap (inherited from B0, not yet fixed): 5 servers
-    (16+ vCPU / 128+ GB RAM) exceed every catalog instance including the
-    default `m5.4xlarge`, flagged by the validator's `sizing_safety`
-    check on all three systems. Needs a larger instance tier added to
-    `data/aws_pricing_catalog.json`.
-
-See `Limitations.md` for the full list of known limitations, their root
-causes, and planned fixes before the final submission.
-
-## Known assumptions
-
-- `Transfer_GB` is approximated as `Storage_GB` (no live discovery feed).
-- `Current_Monthly_Cost` is not present in the original baseline CSV and
-  is synthesized with a documented formula (see
-  `data/make_stakeholder_sample.py`); it is held constant across B0/B1/P1
-  so FinOps comparisons are apples-to-apples, but it is not a real bill.
-- AWS pricing is a static snapshot (`data/aws_pricing_catalog.json`,
-  captured 2026-10-04 from instances.vantage.sh, us-east-1 On-Demand
-  Linux), not a live quote.
-- Same-wave placement of a server and its direct predecessor is treated
-  as satisfying dependency order (not requiring strictly-earlier).
+See [Limitations.md](Limitations.md) for the full list.

@@ -1,0 +1,338 @@
+[0;34m======================================================[0m
+[0;34m    Cloud Migration AI Agent Pipeline                 [0m
+[0;34m======================================================[0m
+
+[1;33m🧹 Cleaning up previous state...[0m
+[0;32m✓ Cleanup complete.[0m
+
+[1;33m[1/7] Setting up Python virtual environment...[0m
+[0;32m✓ Dependencies installed.[0m
+
+[1;33m[2/7] Starting Neo4j Database (with APOC & GDS)...[0m
+Waiting for Neo4j to be ready (this can take 30-40 seconds for plugins to load)...
+......[0;32m✓ Neo4j is ready![0m
+
+[1;33m[3/7] Running Module 1: Data Normalization Agent...[0m
+
+─── Agent Response ───
+The server discovery data in `data/sample.csv` has been successfully cleaned and normalized. Here's a summary of the actions taken:
+
+- **Rows Processed**: 50
+- **Rows Flagged**: 3 (due to missing critical compute metrics)
+- **Imputed Values**:
+  - `Allocated_vCPU`: 1 missing value filled with `2`
+  - `Allocated_RAM_GB`: 1 missing value filled with `4`
+  - `Storage_GB`: 1 missing value filled with `50`
+
+The normalized data, including the computed `Normalized_CPU_Pct`, has been saved to `data/cleaned_samples.csv`. Let me know if further processing or analysis is required!
+[0;32m✓ Cleaned CSV generated.[0m
+
+[1;33m[4/7] Running Module 2: Graph Ingestion Agent...[0m
+
+─── Agent Response ───
+The cleaned server discovery data has been successfully loaded into the Neo4j database. Here's a summary of the ingestion:
+
+- **Server nodes created**: 50
+- **COMMUNICATES_WITH edges created**: 38
+- **Neo4j URL**: bolt://localhost:7687
+- **Browser UI**: http://localhost:7474
+
+You can now query the graph to analyze server dependencies and communication patterns.
+[0;32m✓ Graph populated.[0m
+
+[1;33m[5/7] Running Module 3 & 4: Cloud Selection & Server Sizing...[0m
+
+
+[1m> Entering new GraphCypherQAChain chain...[0m
+Generated Cypher:
+[32;1m[1;3mMATCH (s:Server)
+RETURN s.os AS operating_system, count(s) AS server_count
+ORDER BY server_count DESC[0m
+Full Context:
+[32;1m[1;3m[{'operating_system': 'Ubuntu 22.04', 'server_count': 8}, {'operating_system': 'RHEL 8', 'server_count': 7}, {'operating_system': 'Windows Server 2019', 'server_count': 6}, {'operating_system': 'Ubuntu 20.04', 'server_count': 4}, {'operating_system': 'Windows Server 2016', 'server_count': 4}, {'operating_system': 'Windows Server 2008 R2', 'server_count': 4}, {'operating_system': 'Oracle Linux 6.4', 'server_count': 2}, {'operating_system': 'RHEL 5', 'server_count': 2}, {'operating_system': 'Windows Server 2012', 'server_count': 2}, {'operating_system': 'CentOS 7', 'server_count': 2}][0m
+
+[1m> Finished chain.[0m
+
+─── Agent Response ───
+
+[human] Evaluate our server ecosystem and select the best target cloud platform.
+
+[tool_call] query_neo4j({'question': 'What is the distribution of operating systems across all servers?'})
+
+[tool] Generated Cypher: MATCH (s:Server)
+RETURN s.os AS operating_system, count(s) AS server_count
+ORDER BY server_count DESC
+Answer: The distribution of operating systems across all servers is as follows:
+
+- Ubuntu 22.04: 8 servers
+- RHEL 8: 7 servers
+- Windows Server 2019: 6 servers
+- Ubuntu 20.04: 4 servers
+- Windows Server 2016: 4 servers
+- Windows Server 2008 R2: 4 servers
+- Oracle Linux 6.4: 2 servers
+- RHEL 5: 2 servers
+- Windows Server 2012: 2 servers
+- CentOS 7: 2 servers
+
+[ai] Based on the OS distribution, the environment has a significant presence of both Linux/Open Source (Ubuntu, RHEL, CentOS) and Microsoft technologies (Windows Server). However, the Linux distributions are more prevalent with 8 Ubuntu 22.04, 7 RHEL 8, and 2 CentOS 7 servers, totaling 17 Linux servers compared to 16 Windows servers. Therefore, I will choose AWS for its strong support for Linux workloads and open-source technologies.
+
+[tool_call] set_target_cloud({'cloud_name': 'AWS', 'rationale': 'The server ecosystem is dominated by Linux distributions (Ubuntu, RHEL, CentOS) which are better supported on AWS, making it the optimal choice for this environment.'})
+
+[tool] ✅ Target cloud saved to Neo4j.
+   Platform  : AWS
+   Rationale : The server ecosystem is dominated by Linux distributions (Ubuntu, RHEL, CentOS) which are better supported on AWS, making it the optimal choice for this environment.
+
+[ai] Based on my analysis of the server ecosystem, I have selected AWS as the target cloud platform. The environment is dominated by Linux distributions (Ubuntu, RHEL, CentOS) with 17 Linux servers compared to 16 Windows servers. AWS provides excellent support for Linux workloads and open-source technologies, making it the optimal choice for this environment. This selection will leverage AWS's strengths in hosting Linux-based applications while maintaining the flexibility to scale and manage the diverse server infrastructure effectively.
+
+─── Agent Response ───
+
+[human] Check our target cloud and right-size all servers in the database.
+
+[tool_call] get_target_cloud({})
+
+[tool] Target cloud platform: AWS
+
+[tool_call] right_size_servers({'cloud_provider': 'AWS'})
+
+[tool] ✅ Right-sizing complete for AWS.
+   Total servers sized: 50
+   Breakdown:
+  • t3.large: 19 servers
+  • t3.xlarge: 15 servers
+  • m5.4xlarge: 9 servers
+  • m5.2xlarge: 7 servers
+
+[ai] The server right-sizing process is complete for AWS.
+
+- **Total servers sized:** 50
+- **Breakdown:**
+  - `t3.large`: 19 servers
+  - `t3.xlarge`: 15 servers
+  - `m5.4xlarge`: 9 servers
+  - `m5.2xlarge`: 7 servers
+
+All servers in the database have been successfully resized according to the AWS sizing matrix. Let me know if further adjustments are needed!
+[0;32m✓ Architecture decisions saved.[0m
+
+[1;33m[6/7] Running Module 5 & 6: Risk Analysis & Wave Planning...[0m
+
+
+[1m> Entering new GraphCypherQAChain chain...[0m
+Generated Cypher:
+[32;1m[1;3mMATCH (s:Server)
+RETURN s.id, s.os, s.business_tags[0m
+Full Context:
+[32;1m[1;3m[{'s.id': 'SRV-001', 's.os': 'Windows Server 2019', 's.business_tags': 'Internal'}, {'s.id': 'SRV-002', 's.os': 'Windows Server 2019', 's.business_tags': 'Internal'}, {'s.id': 'SRV-003', 's.os': 'SQL Server 2019', 's.business_tags': 'Internal'}, {'s.id': 'SRV-004', 's.os': 'Windows Server 2008', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SRV-005', 's.os': 'Oracle Linux 6.4', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SRV-006', 's.os': 'RHEL 5', 's.business_tags': 'nan'}, {'s.id': 'SRV-007', 's.os': 'Windows Server 2012', 's.business_tags': 'Corp_Comms'}, {'s.id': 'SRV-008', 's.os': 'Ubuntu 20.04', 's.business_tags': 'External_Facing'}, {'s.id': 'SRV-009', 's.os': 'Ubuntu 20.04', 's.business_tags': 'External_Facing'}, {'s.id': 'SRV-010', 's.os': 'Windows Server 2019', 's.business_tags': 'Core_Infra'}, {'s.id': 'SRV-011', 's.os': 'Windows Server 2019', 's.business_tags': 'Core_Infra'}, {'s.id': 'SRV-012', 's.os': 'CentOS 7', 's.business_tags': 'Core_Infra'}, {'s.id': 'SRV-013', 's.os': 'CentOS 7', 's.business_tags': 'Core_Infra'}, {'s.id': 'SRV-014', 's.os': 'Windows Server 2016', 's.business_tags': 'SOX'}, {'s.id': 'SRV-015', 's.os': 'Windows Server 2016', 's.business_tags': 'SOX'}, {'s.id': 'SRV-016', 's.os': 'RHEL 7', 's.business_tags': 'SOX'}, {'s.id': 'SRV-017', 's.os': 'RHEL 7', 's.business_tags': 'SOX'}, {'s.id': 'SRV-018', 's.os': 'Oracle Linux 7', 's.business_tags': 'SOX'}, {'s.id': 'SRV-019', 's.os': 'Oracle Linux 7', 's.business_tags': 'SOX'}, {'s.id': 'SRV-020', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SRV-021', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SRV-022', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SRV-023', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SRV-024', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SRV-025', 's.os': 'Ubuntu 22.04', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SRV-026', 's.os': 'RHEL 8', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SRV-027', 's.os': 'RHEL 8', 's.business_tags': 'PCI-DSS'}, {'s.id': 'SRV-028', 's.os': 'Windows Server 2012', 's.business_tags': 'Non-Prod'}, {'s.id': 'SRV-029', 's.os': 'Oracle Linux 6.4', 's.business_tags': 'Non-Prod'}, {'s.id': 'SRV-030', 's.os': 'RHEL 5', 's.business_tags': 'nan'}, {'s.id': 'SRV-031', 's.os': 'Ubuntu 18.04', 's.business_tags': 'Non-Prod'}, {'s.id': 'SRV-032', 's.os': 'Windows Server 2019', 's.business_tags': 'Non-Prod'}, {'s.id': 'SRV-033', 's.os': 'Windows Server 2008 R2', 's.business_tags': 'HIPAA'}, {'s.id': 'SRV-034', 's.os': 'Windows Server 2008 R2', 's.business_tags': 'HIPAA'}, {'s.id': 'SRV-035', 's.os': 'Windows Server 2008 R2', 's.business_tags': 'HIPAA'}, {'s.id': 'SRV-036', 's.os': 'Windows Server 2008 R2', 's.business_tags': 'HIPAA'}, {'s.id': 'SRV-037', 's.os': 'SQL Server 2008', 's.business_tags': 'HIPAA'}, {'s.id': 'SRV-038', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SRV-039', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SRV-040', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SRV-041', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SRV-042', 's.os': 'RHEL 8', 's.business_tags': 'Data_Platform'}, {'s.id': 'SRV-043', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Internal_Tools'}, {'s.id': 'SRV-044', 's.os': 'Ubuntu 20.04', 's.business_tags': 'Internal_Tools'}, {'s.id': 'SRV-045', 's.os': 'Windows Server 2016', 's.business_tags': 'Corp_Comms'}, {'s.id': 'SRV-046', 's.os': 'Windows Server 2016', 's.business_tags': 'Corp_Comms'}, {'s.id': 'SRV-047', 's.os': 'SQL Server 2016', 's.business_tags': 'Corp_Comms'}, {'s.id': 'SRV-048', 's.os': 'Ubuntu 22.04', 's.business_tags': 'Marketing'}, {'s.id': 'SRV-049', 's.os': 'Ubuntu 22.04', 's.business_tags': 'Marketing'}, {'s.id': 'SRV-050', 's.os': 'Windows Server 2019', 's.business_tags': 'Internal_Tools'}][0m
+
+[1m> Finished chain.[0m
+
+─── Agent Response ───
+
+[human] Analyze all servers for legacy and compliance risks, then update their risk scores.
+
+[tool_call] Database_Reader({'__arg1': 'Match (s:Server) return s.id, s.os, s.business_tags'})
+
+[tool] SRV-001, Windows Server 2019, Internal
+SRV-002, Windows Server 2019, Internal
+SRV-003, SQL Server 2019, Internal
+SRV-004, Windows Server 2008, PCI-DSS
+SRV-005, Oracle Linux 6.4, PCI-DSS
+SRV-006, RHEL 5, nan
+SRV-007, Windows Server 2012, Corp_Comms
+SRV-008, Ubuntu 20.04, External_Facing
+SRV-009, Ubuntu 20.04, External_Facing
+SRV-010, Windows Server 2019, Core_Infra
+SRV-011, Windows Server 2019, Core_Infra
+SRV-012, CentOS 7, Core_Infra
+SRV-013, CentOS 7, Core_Infra
+SRV-014, Windows Server 2016, SOX
+SRV-015, Windows Server 2016, SOX
+SRV-016, RHEL 7, SOX
+SRV-017, RHEL 7, SOX
+SRV-018, Oracle Linux 7, SOX
+SRV-019, Oracle Linux 7, SOX
+SRV-020, Ubuntu 22.04, PCI-DSS
+SRV-021, Ubuntu 22.04, PCI-DSS
+SRV-022, Ubuntu 22.04, PCI-DSS
+SRV-023, Ubuntu 22.04, PCI-DSS
+SRV-024, Ubuntu 22.04, PCI-DSS
+SRV-025, Ubuntu 22.04, PCI-DSS
+SRV-026, RHEL 8, PCI-DSS
+SRV-027, RHEL 8, PCI-DSS
+SRV-028, Windows Server 2012, Non-Prod
+SRV-029, Oracle Linux 6.4, Non-Prod
+SRV-030, RHEL 5, nan
+SRV-031, Ubuntu 18.04, Non-Prod
+SRV-032, Windows Server 2019, Non-Prod
+SRV-033, Windows Server 2008 R2, HIPAA
+SRV-034, Windows Server 2008 R2, HIPAA
+SRV-035, Windows Server 2008 R2, HIPAA
+SRV-036, Windows Server 2008 R2, HIPAA
+SRV-037, SQL Server 2008, HIPAA
+SRV-038, RHEL 8, Data_Platform
+SRV-039, RHEL 8, Data_Platform
+SRV-040, RHEL 8, Data_Platform
+SRV-041, RHEL 8, Data_Platform
+SRV-042, RHEL 8, Data_Platform
+SRV-043, Ubuntu 20.04, Internal_Tools
+SRV-044, Ubuntu 20.04, Internal_Tools
+SRV-045, Windows Server 2016, Corp_Comms
+SRV-046, Windows Server 2016, Corp_Comms
+SRV-047, SQL Server 2016, Corp_Comms
+SRV-048, Ubuntu 22.04, Marketing
+SRV-049, Ubuntu 22.04, Marketing
+SRV-050, Windows Server 2019, Internal_Tools
+
+[ai] Based on the server data retrieved from the database, I will now analyze each server for legacy and compliance risks as per the instructions:
+
+1. **Legacy OS Detection**:
+   - Servers with OS containing '2008', '5', or '6.4' are flagged as High risk.
+   - Examples include: SRV-004 (Windows Server 2008), SRV-005 (Oracle Linux 6.4), SRV-006 (RHEL 5), SRV-029 (Oracle Linux 6.4), SRV-030 (RHEL 5).
+
+2. **Compliance Tags Detection**:
+   - Servers tagged with 'HIPAA', 'PCI', or 'SOX' are flagged as High risk.
+   - Examples include: SRV-004 (PCI-DSS), SRV-005 (PCI-DSS), SRV-014 (SOX), SRV-015 (SOX), SRV-016 (SOX), etc.
+
+All other servers without these criteria will be marked as Low risk.
+
+Here are the risk assessments for all servers:
+- SRV-001: Low
+- SRV-002: Low
+- SRV-003: Low
+- SRV-004: High
+- SRV-005: High
+- SRV-006: High
+- SRV-007: Low
+- SRV-008: Low
+- SRV-009: Low
+- SRV-010: Low
+- SRV-011: Low
+- SRV-012: Low
+- SRV-013: Low
+- SRV-014: High
+- SRV-015: High
+- SRV-016: High
+- SRV-017: High
+- SRV-018: High
+- SRV-019: High
+- SRV-020: High
+- SRV-021: High
+- SRV-022: High
+- SRV-023: High
+- SRV-024: High
+- SRV-025: High
+- SRV-026: High
+- SRV-027: High
+- SRV-028: Low
+- SRV-029: High
+- SRV-030: High
+- SRV-031: Low
+- SRV-032: Low
+- SRV-033: High
+- SRV-034: High
+- SRV-035: High
+- SRV-036: High
+- SRV-037: High
+- SRV-038: Low
+- SRV-039: Low
+- SRV-040: Low
+- SRV-041: Low
+- SRV-042: Low
+- SRV-043: Low
+- SRV-044: Low
+- SRV-045: Low
+- SRV-046: Low
+- SRV-047: Low
+- SRV-048: Low
+- SRV-049: Low
+- SRV-050: Low
+
+Now I will proceed to update these risk scores in the database.
+
+[tool_call] update_risk_scores({'risk_updates': [{'id': 'SRV-001', 'risk': 'Low'}, {'id': 'SRV-002', 'risk': 'Low'}, {'id': 'SRV-003', 'risk': 'Low'}, {'id': 'SRV-004', 'risk': 'High'}, {'id': 'SRV-005', 'risk': 'High'}, {'id': 'SRV-006', 'risk': 'High'}, {'id': 'SRV-007', 'risk': 'Low'}, {'id': 'SRV-008', 'risk': 'Low'}, {'id': 'SRV-009', 'risk': 'Low'}, {'id': 'SRV-010', 'risk': 'Low'}, {'id': 'SRV-011', 'risk': 'Low'}, {'id': 'SRV-012', 'risk': 'Low'}, {'id': 'SRV-013', 'risk': 'Low'}, {'id': 'SRV-014', 'risk': 'High'}, {'id': 'SRV-015', 'risk': 'High'}, {'id': 'SRV-016', 'risk': 'High'}, {'id': 'SRV-017', 'risk': 'High'}, {'id': 'SRV-018', 'risk': 'High'}, {'id': 'SRV-019', 'risk': 'High'}, {'id': 'SRV-020', 'risk': 'High'}, {'id': 'SRV-021', 'risk': 'High'}, {'id': 'SRV-022', 'risk': 'High'}, {'id': 'SRV-023', 'risk': 'High'}, {'id': 'SRV-024', 'risk': 'High'}, {'id': 'SRV-025', 'risk': 'High'}, {'id': 'SRV-026', 'risk': 'High'}, {'id': 'SRV-027', 'risk': 'High'}, {'id': 'SRV-028', 'risk': 'Low'}, {'id': 'SRV-029', 'risk': 'High'}, {'id': 'SRV-030', 'risk': 'High'}, {'id': 'SRV-031', 'risk': 'Low'}, {'id': 'SRV-032', 'risk': 'Low'}, {'id': 'SRV-033', 'risk': 'High'}, {'id': 'SRV-034', 'risk': 'High'}, {'id': 'SRV-035', 'risk': 'High'}, {'id': 'SRV-036', 'risk': 'High'}, {'id': 'SRV-037', 'risk': 'High'}, {'id': 'SRV-038', 'risk': 'Low'}, {'id': 'SRV-039', 'risk': 'Low'}, {'id': 'SRV-040', 'risk': 'Low'}, {'id': 'SRV-041', 'risk': 'Low'}, {'id': 'SRV-042', 'risk': 'Low'}, {'id': 'SRV-043', 'risk': 'Low'}, {'id': 'SRV-044', 'risk': 'Low'}, {'id': 'SRV-045', 'risk': 'Low'}, {'id': 'SRV-046', 'risk': 'Low'}, {'id': 'SRV-047', 'risk': 'Low'}, {'id': 'SRV-048', 'risk': 'Low'}, {'id': 'SRV-049', 'risk': 'Low'}, {'id': 'SRV-050', 'risk': 'Low'}]})
+
+[tool] ✅ Risk scores updated in Neo4j.
+   Total updated : 50
+   High risk     : 24
+   Low risk      : 26
+
+[ai] The risk analysis and updates have been successfully completed. Here's a summary:
+
+- A total of 50 servers were analyzed.
+- 24 servers were identified as High risk due to either legacy operating systems or compliance tags.
+- 26 servers were classified as Low risk.
+
+The risk scores have been updated in the Neo4j database accordingly. Let me know if further analysis or actions are required.
+
+─── Agent Response ───
+
+[human] Group the servers into dependency waves and export the final migration schedule.
+
+[tool_call] generate_migration_waves({})
+
+[tool] Successfully grouped servers into 19 dependency waves.
+
+[tool_call] export_migration_plan({})
+
+[tool] Final migration plan exported to /Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/data/final_migration_plan.csv
+
+[ai] The servers have been successfully grouped into 19 dependency waves based on their connections. The final migration plan has been exported to a CSV file at: `/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/data/final_migration_plan.csv`.
+[0;32m✓ Migration waves generated.[0m
+
+[0;34m======================================================[0m
+[0;32m🎉 Pipeline Execution Complete![0m
+[0;34m======================================================[0m
+Preview of Final Migration Plan (data/final_migration_plan.csv):
+Server_ID  Hostname      OS                   Normalized_CPU  Target_Size  Risk_Score  Wave_ID
+SRV-001    hr-web-01     Windows Server 2019  53.0            t3.large     Low         0
+SRV-002    hr-app-01     Windows Server 2019  69.5            t3.xlarge    Low         0
+SRV-003    hr-db-01      SQL Server 2019      81.0            m5.2xlarge   Low         0
+SRV-004    pay-app-01    Windows Server 2008  47.5            t3.xlarge    High        3
+SRV-005    pay-db-01     Oracle Linux 6.4     67.5            m5.4xlarge   High        3
+SRV-006    old-test-01   RHEL 5               3.8             t3.large     High        5
+SRV-007    mail-exch-01  Windows Server 2012  77.5            m5.2xlarge   Low         6
+SRV-008    crm-web-01    Ubuntu 20.04         32.5            t3.large     Low         7
+SRV-009    crm-db-01     Ubuntu 20.04         52.5            t3.xlarge    Low         7
+
+[1;33mNote:[0m You can view the full dependency graph by visiting http://localhost:7474 (neo4j / password123)
+To stop the database, run: docker compose down
+
+
+--- stderr ---
+
+[notice] A new release of pip is available: 24.0 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+ Network migration-planning-ai_default Creating 
+ Volume migration-planning-ai_neo4j_data Creating 
+ Volume migration-planning-ai_neo4j_data Creating 
+ Network migration-planning-ai_default Creating 
+ Volume migration-planning-ai_neo4j_data Created 
+ Volume migration-planning-ai_neo4j_data Created 
+ Network migration-planning-ai_default Created 
+ Network migration-planning-ai_default Created 
+ Container migration-neo4j Creating 
+ Container migration-neo4j Created 
+ Container migration-neo4j Starting 
+ Container migration-neo4j Started 
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/neo4j_agent.py:15: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.graphs import Neo4jGraph
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/neo4j_agent.py:53: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  graph = Neo4jGraph(
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/cloud_selection_agent.py:13: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.chains.graph_qa.cypher import GraphCypherQAChain
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/cloud_selection_agent.py:31: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  return Neo4jGraph(
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/sizing_agent.py:13: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.graphs import Neo4jGraph
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/sizing_agent.py:45: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  return Neo4jGraph(
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/risk_agent.py:14: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.chains.graph_qa.cypher import GraphCypherQAChain
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/risk_agent.py:32: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  return Neo4jGraph(
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/wave_agent.py:14: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.graphs import Neo4jGraph
+/Users/vrajchaudhari/Desktop/Cloud/migration-planning-ai/wave_agent.py:29: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  return Neo4jGraph(
+Received notification from DBMS server: <GqlStatusObject gql_status='01N03', status_description='warn: procedure field deprecated. The field `schema` of procedure gds.graph.drop() is deprecated.', position=<SummaryInputPosition line=1, column=1, offset=0>, raw_classification='DEPRECATION', classification=<NotificationClassification.DEPRECATION: 'DEPRECATION'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'DEPRECATION', '_severity': 'WARNING', '_position': {'offset': 0, 'line': 1, 'column': 1}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: "CALL gds.graph.drop('migrationGraph')"

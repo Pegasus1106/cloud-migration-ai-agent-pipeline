@@ -1,14 +1,31 @@
 {
-  "catalog_version": "2026-10-04-v1",
+  "catalog_version": "2026-11-08-v2",
   "region": "us-east-1",
   "os_assumption": "Linux On-Demand",
   "hours_per_month": 730,
-  "source": "https://instances.vantage.sh (On-Demand hourly list price, captured 2026-10-04)",
-  "disclaimer": "Static snapshot for reproducible estimation only. Not a live AWS billing quote. Excludes storage, data-transfer-out, and support charges.",
+  "source": "https://instances.vantage.sh/aws/ec2/<instance_type> (On-Demand hourly list price; v1 entries captured 2026-10-04, all entries re-read 2026-11-08)",
+  "disclaimer": "Static snapshot for reproducible estimation only. Not a live AWS billing quote. Compute only: excludes EBS storage, data-transfer-out, backups, support, and OS/database license charges (Windows Server and SQL Server workloads are flagged per server because their license cost is NOT included).",
+  "license_not_included_markers": {
+    "windows": "Windows Server license not included (priced at Linux rate)",
+    "sql server": "SQL Server license not included (BYOL assumed)"
+  },
   "instances": {
-    "t3.large":    { "vcpu": 2,  "ram_gb": 8,   "hourly_usd": 0.0832 },
-    "t3.xlarge":   { "vcpu": 4,  "ram_gb": 16,  "hourly_usd": 0.1664 },
-    "m5.2xlarge":  { "vcpu": 8,  "ram_gb": 32,  "hourly_usd": 0.3840 },
-    "m5.4xlarge":  { "vcpu": 16, "ram_gb": 64,  "hourly_usd": 0.7680 }
+    "t3.large":    { "vcpu": 2,  "ram_gb": 8,   "hourly_usd": 0.0832, "family": "burstable" },
+    "t3.xlarge":   { "vcpu": 4,  "ram_gb": 16,  "hourly_usd": 0.1664, "family": "burstable" },
+    "t3.2xlarge":  { "vcpu": 8,  "ram_gb": 32,  "hourly_usd": 0.3328, "family": "burstable" },
+    "m5.large":    { "vcpu": 2,  "ram_gb": 8,   "hourly_usd": 0.0960, "family": "general" },
+    "m5.xlarge":   { "vcpu": 4,  "ram_gb": 16,  "hourly_usd": 0.1920, "family": "general" },
+    "m5.2xlarge":  { "vcpu": 8,  "ram_gb": 32,  "hourly_usd": 0.3840, "family": "general" },
+    "m5.4xlarge":  { "vcpu": 16, "ram_gb": 64,  "hourly_usd": 0.7680, "family": "general" },
+    "m5.8xlarge":  { "vcpu": 32, "ram_gb": 128, "hourly_usd": 1.5360, "family": "general" },
+    "m5.12xlarge": { "vcpu": 48, "ram_gb": 192, "hourly_usd": 2.3040, "family": "general" },
+    "m5.16xlarge": { "vcpu": 64, "ram_gb": 256, "hourly_usd": 3.0720, "family": "general" },
+    "r5.large":    { "vcpu": 2,  "ram_gb": 16,  "hourly_usd": 0.1260, "family": "memory" },
+    "r5.xlarge":   { "vcpu": 4,  "ram_gb": 32,  "hourly_usd": 0.2520, "family": "memory" },
+    "r5.2xlarge":  { "vcpu": 8,  "ram_gb": 64,  "hourly_usd": 0.5040, "family": "memory" },
+    "r5.4xlarge":  { "vcpu": 16, "ram_gb": 128, "hourly_usd": 1.0080, "family": "memory" },
+    "r5.8xlarge":  { "vcpu": 32, "ram_gb": 256, "hourly_usd": 2.0160, "family": "memory" },
+    "r5.12xlarge": { "vcpu": 48, "ram_gb": 384, "hourly_usd": 3.0240, "family": "memory" },
+    "r5.16xlarge": { "vcpu": 64, "ram_gb": 512, "hourly_usd": 4.0320, "family": "memory" }
   }
 }

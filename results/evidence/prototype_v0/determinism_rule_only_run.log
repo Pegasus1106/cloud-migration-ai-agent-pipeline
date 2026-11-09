@@ -1,0 +1,155 @@
+/Users/vrajchaudhari/Desktop/Cloud/cloud-migration-ai-agent-pipeline/common.py:32: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  return Neo4jGraph(url=NEO4J_URL, username=NEO4J_USER, password=NEO4J_PASSWORD)
+Cleared Neo4j graph for a clean run.
+
+=== Stage: data_agent ===
+Agent invocation failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Running tool directly...
+Data Normalization Complete
+   Rows processed : 83
+   Rows flagged   : 0
+   Contract fields missing from source: none
+   Imputed fields :
+
+   Output saved to: data/cleaned_samples.csv
+   Quality report : data/data_quality_report.json
+
+
+=== Stage: neo4j_agent ===
+Agent invocation failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Running tool directly...
+Graph Ingestion Complete
+   Rows processed        : 83
+   Server nodes created  : 83
+   Edges created         : 117
+   Missing edge endpoints: none
+   Neo4j Browser         : http://localhost:7475
+
+
+=== Stage: graph_agent ===
+Agent invocation failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Running tools directly...
+
+-- Step 1: Inbound view --
+Inbound view derived from existing outbound edges (no duplicate reverse edges created).
+   Missing/placeholder endpoints: none
+   Top servers by inbound dependency impact:
+  - SYN-049 (dp-030): inbound_degree=6
+  - SYN-031 (dp-012): inbound_degree=5
+  - SYN-039 (dp-020): inbound_degree=5
+  - SYN-041 (dp-022): inbound_degree=5
+  - SYN-026 (dp-007): inbound_degree=4
+
+-- Step 2: Component analysis --
+Graph component analysis complete.
+   WCC (disconnected portfolios): 24
+   SCC (cyclic/indivisible groups): 83
+   Cycles detected (SCC size > 1):
+  none
+   Oversized WCCs needing community split (> 3000 GB):
+  - WCC 19: 20716 GB across 30 servers (limit 3000 GB -> needs community split)
+   Louvain communities written: 27
+
+
+=== Stage: cloud_selection_agent ===
+OS distribution (plain Cypher, no LLM):
+  - RHEL 8: 17
+  - Ubuntu 20.04: 15
+  - Ubuntu 22.04: 13
+  - CentOS 7: 9
+  - Windows Server 2019: 8
+  - Windows Server 2016: 7
+  - RHEL 5: 6
+  - Windows Server 2008 R2: 5
+  - Oracle Linux 7: 3
+Windows/SQL Server servers: 20 | Linux servers: 63
+✅ Target cloud saved to Neo4j.
+   Platform  : AWS
+   Rationale : Linux/open-source OSes dominate the environment.
+
+
+=== Stage: sizing_agent ===
+⚠️  Agent invocation failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Running tools directly…
+
+── Step 1: Get target cloud ──
+Target cloud platform: AWS
+
+── Step 2: Right-size for AWS ──
+✅ Right-sizing complete for AWS.
+   Total servers sized: 83
+   Breakdown:
+  • m5.4xlarge: 30 servers
+  • t3.xlarge: 25 servers
+  • t3.large: 19 servers
+  • m5.2xlarge: 9 servers
+
+
+=== Stage: finops_agent ===
+Agent invocation failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Running tool directly...
+FinOps estimate complete (catalog 2026-10-04-v1, us-east-1, Linux On-Demand, 730 hrs/month). This is a static estimate, not a live AWS billing quote.
+   Servers priced          : 83
+   Total current monthly cost : $60,113.75
+   Total estimated AWS cost   : $23,532.89
+   Estimated monthly savings  : $36,580.86 (+60.9%)
+
+
+=== Stage: risk_agent ===
+Agent invocation failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Running deterministic fallback...
+
+-- Step 1: Fetching servers --
+   Found 83 servers.
+
+-- Step 2: Analysing risk --
+   High risk: 28 servers
+   Low risk : 55 servers
+
+-- Step 3: Saving to Neo4j --
+Risk scores updated in Neo4j.
+   Total updated : 83
+   High risk     : 28
+   Low risk      : 55
+
+
+=== Stage: wave_agent_p1 ===
+Agent invocation failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Running tools directly...
+
+-- Step 1: Construct & pack waves --
+Wave construction complete.
+   Groups scheduled : 83
+   Waves created    : 30
+  - Wave 0: 2980 GB
+  - Wave 1: 2998 GB
+  - Wave 2: 2979 GB
+  - Wave 3: 2994 GB
+  - Wave 4: 2719 GB
+  - Wave 5: 2953 GB
+  - Wave 6: 1307 GB
+  - Wave 7: 1509 GB
+  - Wave 8: 1403 GB
+  - Wave 9: 1472 GB
+  - Wave 10: 412 GB
+  - Wave 11: 732 GB
+  - Wave 12: 690 GB
+  - Wave 13: 866 GB
+  - Wave 14: 849 GB
+  - Wave 15: 414 GB
+  - Wave 16: 764 GB
+  - Wave 17: 812 GB
+  - Wave 18: 605 GB
+  - Wave 19: 456 GB
+  - Wave 20: 852 GB
+  - Wave 21: 800 GB
+  - Wave 22: 614 GB
+  - Wave 23: 880 GB
+  - Wave 24: 370 GB
+  - Wave 25: 786 GB
+  - Wave 26: 840 GB
+  - Wave 27: 852 GB
+  - Wave 28: 619 GB
+  - Wave 29: 748 GB
+   Infeasible (over-limit, indivisible) groups:
+  none
+   Summary written to data/wave_summary.json
+
+-- Step 2: Export plan --
+Final migration plan exported to /Users/vrajchaudhari/Desktop/Cloud/cloud-migration-ai-agent-pipeline/data/final_migration_plan.csv (83 rows).
+
+
+Status: completed

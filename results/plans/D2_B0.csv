@@ -1,0 +1,84 @@
+Server_ID,Hostname,OS,Normalized_CPU,Target_Size,Risk_Score,Wave_ID
+SYN-001,fin-erp-01,RHEL 8,38.3,Standard_D8s_v3,,0
+SYN-002,fin-erp-02,RHEL 8,44.7,Standard_D8s_v3,,0
+SYN-003,fin-erp-03,RHEL 8,72.8,Standard_D8s_v3,,0
+SYN-004,fin-erp-04,RHEL 8,66.5,Standard_D8s_v3,,0
+SYN-005,fin-erp-05,RHEL 8,34.7,Standard_D8s_v3,,0
+SYN-006,fin-erp-06,RHEL 8,51.9,Standard_D8s_v3,,0
+SYN-007,pay-01,Oracle Linux 7,69.1,Standard_D8s_v3,,6
+SYN-008,pay-02,Oracle Linux 7,52.3,Standard_D8s_v3,,6
+SYN-009,pay-03,Oracle Linux 7,47.9,Standard_D8s_v3,,6
+SYN-010,crm2-01,Ubuntu 22.04,59.3,Standard_D4s_v3,,9
+SYN-011,crm2-02,Ubuntu 22.04,42.6,Standard_D4s_v3,,9
+SYN-012,ecom-01,Ubuntu 22.04,62.4,Standard_D4s_v3,,11
+SYN-013,ecom-02,Ubuntu 22.04,72.2,Standard_D4s_v3,,11
+SYN-014,ecom-03,Ubuntu 22.04,59.4,Standard_D4s_v3,,11
+SYN-015,ecom-04,Ubuntu 22.04,65.2,Standard_D4s_v3,,11
+SYN-016,ecom-05,Ubuntu 22.04,66.1,Standard_D4s_v3,,11
+SYN-017,ecom-06,Ubuntu 22.04,46.6,Standard_D4s_v3,,11
+SYN-018,ecom-07,Ubuntu 22.04,44.1,Standard_D4s_v3,,11
+SYN-019,ecom-08,Ubuntu 22.04,53.1,Standard_D4s_v3,,11
+SYN-020,dp-001,CentOS 7,61.3,Standard_D16s_v3,,19
+SYN-021,dp-002,RHEL 8,52.0,Standard_D16s_v3,,19
+SYN-022,dp-003,CentOS 7,55.3,Standard_D16s_v3,,19
+SYN-023,dp-004,Ubuntu 20.04,84.5,Standard_D16s_v3,,19
+SYN-024,dp-005,Ubuntu 20.04,77.7,Standard_D16s_v3,,19
+SYN-025,dp-006,RHEL 8,57.3,Standard_D16s_v3,,19
+SYN-026,dp-007,Ubuntu 20.04,75.4,Standard_D16s_v3,,19
+SYN-027,dp-008,CentOS 7,82.2,Standard_D16s_v3,,19
+SYN-028,dp-009,RHEL 8,66.1,Standard_D16s_v3,,19
+SYN-029,dp-010,RHEL 8,76.4,Standard_D16s_v3,,19
+SYN-030,dp-011,RHEL 8,75.0,Standard_D16s_v3,,19
+SYN-031,dp-012,Ubuntu 20.04,58.5,Standard_D16s_v3,,19
+SYN-032,dp-013,Ubuntu 20.04,70.9,Standard_D16s_v3,,19
+SYN-033,dp-014,RHEL 8,75.3,Standard_D16s_v3,,19
+SYN-034,dp-015,CentOS 7,82.6,Standard_D16s_v3,,19
+SYN-035,dp-016,CentOS 7,65.9,Standard_D16s_v3,,19
+SYN-036,dp-017,RHEL 8,83.1,Standard_D16s_v3,,19
+SYN-037,dp-018,RHEL 8,67.3,Standard_D16s_v3,,19
+SYN-038,dp-019,Ubuntu 20.04,70.9,Standard_D16s_v3,,19
+SYN-039,dp-020,CentOS 7,80.6,Standard_D16s_v3,,19
+SYN-040,dp-021,Ubuntu 20.04,53.3,Standard_D16s_v3,,19
+SYN-041,dp-022,RHEL 8,59.7,Standard_D16s_v3,,19
+SYN-042,dp-023,RHEL 8,52.1,Standard_D16s_v3,,19
+SYN-043,dp-024,RHEL 8,63.1,Standard_D16s_v3,,19
+SYN-044,dp-025,Ubuntu 20.04,51.4,Standard_D16s_v3,,19
+SYN-045,dp-026,Ubuntu 20.04,57.9,Standard_D16s_v3,,19
+SYN-046,dp-027,Ubuntu 20.04,68.0,Standard_D16s_v3,,19
+SYN-047,dp-028,Ubuntu 20.04,79.3,Standard_D16s_v3,,19
+SYN-048,dp-029,CentOS 7,84.5,Standard_D16s_v3,,19
+SYN-049,dp-030,Ubuntu 20.04,65.1,Standard_D16s_v3,,19
+SYN-050,ad-01,Windows Server 2019,46.9,Standard_D2s_v3,,49
+SYN-051,ad-02,Windows Server 2019,39.6,Standard_D2s_v3,,49
+SYN-052,dns-01,CentOS 7,51.8,Standard_D2s_v3,,51
+SYN-053,dns-02,CentOS 7,63.7,Standard_D2s_v3,,51
+SYN-054,mail-01,Windows Server 2016,62.4,Standard_D4s_v3,,53
+SYN-055,mail-02,Windows Server 2016,43.3,Standard_D4s_v3,,53
+SYN-056,mail-03,Windows Server 2016,42.8,Standard_D4s_v3,,53
+SYN-057,mail-04,Windows Server 2016,51.0,Standard_D4s_v3,,53
+SYN-058,sp-01,Windows Server 2016,47.4,Standard_D4s_v3,,57
+SYN-059,sp-02,Windows Server 2016,49.9,Standard_D4s_v3,,57
+SYN-060,sp-03,Windows Server 2016,45.9,Standard_D4s_v3,,57
+SYN-061,jira-01,Ubuntu 20.04,42.6,Standard_D4s_v3,,60
+SYN-062,jira-02,Ubuntu 20.04,56.3,Standard_D4s_v3,,60
+SYN-063,jira-03,Ubuntu 20.04,40.4,Standard_D4s_v3,,60
+SYN-064,legacy-01,RHEL 5,7.7,Standard_D2s_v3,,63
+SYN-065,legacy-02,RHEL 5,6.9,Standard_D2s_v3,,64
+SYN-066,legacy-03,RHEL 5,6.3,Standard_D2s_v3,,65
+SYN-067,legacy-04,RHEL 5,15.8,Standard_D2s_v3,,66
+SYN-068,legacy-05,RHEL 5,9.5,Standard_D2s_v3,,67
+SYN-069,legacy-06,RHEL 5,12.2,Standard_D2s_v3,,68
+SYN-070,med-01,Windows Server 2008 R2,61.3,Standard_D4s_v3,,69
+SYN-071,med-02,Windows Server 2008 R2,47.4,Standard_D4s_v3,,69
+SYN-072,med-03,Windows Server 2008 R2,42.4,Standard_D4s_v3,,69
+SYN-073,med-04,Windows Server 2008 R2,69.2,Standard_D4s_v3,,69
+SYN-074,med-05,Windows Server 2008 R2,78.0,Standard_D4s_v3,,69
+SYN-075,blog2-01,Ubuntu 22.04,43.1,Standard_D2s_v3,,74
+SYN-076,blog2-02,Ubuntu 22.04,58.4,Standard_D2s_v3,,74
+SYN-077,blog2-03,Ubuntu 22.04,54.0,Standard_D2s_v3,,74
+SYN-078,util-01,Windows Server 2019,9.7,Standard_D2s_v3,,77
+SYN-079,util-02,Windows Server 2019,14.5,Standard_D2s_v3,,78
+SYN-080,util-03,Windows Server 2019,12.6,Standard_D2s_v3,,79
+SYN-081,util-04,Windows Server 2019,7.9,Standard_D2s_v3,,80
+SYN-082,util-05,Windows Server 2019,14.8,Standard_D2s_v3,,81
+SYN-083,util-06,Windows Server 2019,12.6,Standard_D2s_v3,,82

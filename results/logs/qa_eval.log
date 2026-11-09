@@ -1,0 +1,109 @@
+/Users/vrajchaudhari/Desktop/Cloud/cloud-migration-ai-agent-pipeline/eval/eval_qa.py:115: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.chains.graph_qa.cypher import GraphCypherQAChain
+/Users/vrajchaudhari/Desktop/Cloud/cloud-migration-ai-agent-pipeline/eval/eval_qa.py:117: LangChainDeprecationWarning: The class `Neo4jGraph` was deprecated in LangChain 0.3.8 and will be removed in 1.0. An updated version of the class exists in the `langchain-neo4j package and should be used instead. To use it run `pip install -U `langchain-neo4j` and import as `from `langchain_neo4j import Neo4jGraph``.
+  graph = Neo4jGraph(url=config.NEO4J_URL, username=config.NEO4J_USER, password=config.NEO4J_PASSWORD)
+q01 B0-style  rows=OK  answer=OK  attempts=1 2.8s
+q01 P1        rows=OK  answer=OK  attempts=1 2.5s
+q02 B0-style  rows=OK  answer=OK  attempts=1 1.4s
+q02 P1        rows=OK  answer=OK  attempts=1 3.7s
+q03 B0-style  rows=OK  answer=OK  attempts=1 1.0s
+q03 P1        rows=OK  answer=OK  attempts=1 2.4s
+q04 B0-style  rows=OK  answer=OK  attempts=1 2.8s
+q04 P1        rows=OK  answer=OK  attempts=1 2.6s
+q05 B0-style  rows=OK  answer=OK  attempts=1 1.5s
+q05 P1        rows=OK  answer=OK  attempts=1 2.9s
+q06 B0-style  rows=OK  answer=OK  attempts=1 0.8s
+q06 P1        rows=OK  answer=OK  attempts=1 2.9s
+q07 B0-style  rows=OK  answer=OK  attempts=1 2.5s
+q07 P1        rows=OK  answer=OK  attempts=1 2.3s
+q08 B0-style  rows=OK  answer=OK  attempts=1 1.3s
+q08 P1        rows=OK  answer=OK  attempts=1 2.2s
+q09 B0-style  rows=OK  answer=OK  attempts=1 1.8s
+q09 P1        rows=OK  answer=OK  attempts=1 2.4s
+q10 B0-style  rows=BAD answer=BAD attempts=1 59.5s
+q10 P1        rows=OK  answer=OK  attempts=1 3.6s
+Received notification from DBMS server: <GqlStatusObject gql_status='01N52', status_description='warn: property key does not exist. The property `instance_type` does not exist. Verify that the spelling is correct.', position=<SummaryInputPosition line=2, column=10, offset=49>, raw_classification='UNRECOGNIZED', classification=<NotificationClassification.UNRECOGNIZED: 'UNRECOGNIZED'>, raw_severity='WARNING', severity=<NotificationSeverity.WARNING: 'WARNING'>, diagnostic_record={'_classification': 'UNRECOGNIZED', '_severity': 'WARNING', '_position': {'offset': 49, 'line': 2, 'column': 10}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: "MATCH (s:Server {hostname: 'sp-db-01'})\nRETURN s.instance_type AS recommended_instance_type"
+q11 B0-style  rows=BAD answer=BAD attempts=1 2.0s
+q11 P1        rows=OK  answer=OK  attempts=1 1.5s
+q12 B0-style  rows=BAD answer=BAD attempts=1 3.1s
+q12 P1        rows=OK  answer=OK  attempts=1 2.3s
+q13 B0-style  rows=OK  answer=BAD attempts=1 2.1s
+q13 P1        rows=OK  answer=BAD attempts=1 2.7s
+q14 B0-style  rows=OK  answer=BAD attempts=1 2.8s
+q14 P1        rows=OK  answer=BAD attempts=1 2.7s
+q15 B0-style  rows=OK  answer=BAD attempts=1 2.5s
+q15 P1        rows=OK  answer=BAD attempts=1 2.9s
+q16 B0-style  rows=OK  answer=BAD attempts=1 2.1s
+q16 P1        rows=OK  answer=BAD attempts=1 2.8s
+q17 B0-style  rows=OK  answer=OK  attempts=1 2.5s
+q17 P1        rows=OK  answer=OK  attempts=1 2.8s
+q18 B0-style  rows=BAD answer=BAD attempts=1 0.8s
+q18 P1        rows=OK  answer=OK  attempts=1 1.6s
+q19 B0-style  rows=OK  answer=OK  attempts=1 2.3s
+q19 P1        rows=BAD answer=BAD attempts=2 3.4s
+q20 B0-style  rows=OK  answer=OK  attempts=1 2.9s
+q20 P1        rows=OK  answer=OK  attempts=1 2.7s
+q21 B0-style  rows=OK  answer=OK  attempts=1 2.3s
+q21 P1        rows=OK  answer=OK  attempts=1 3.4s
+q22 B0-style  rows=OK  answer=OK  attempts=1 0.8s
+q22 P1        rows=OK  answer=OK  attempts=1 2.9s
+q23 B0-style  rows=BAD answer=BAD attempts=1 0.7s
+q23 P1        rows=OK  answer=OK  attempts=1 3.8s
+q24 B0-style  rows=OK  answer=BAD attempts=1 3.5s
+q24 P1        rows=OK  answer=OK  attempts=1 4.3s
+q25 B0-style  rows=OK  answer=OK  attempts=1 0.8s
+q25 P1        rows=BAD answer=BAD attempts=1 3.5s
+q26 B0-style  rows=OK  answer=OK  attempts=1 3.8s
+q26 P1        rows=OK  answer=OK  attempts=1 5.3s
+q27 B0-style  rows=BAD answer=BAD attempts=1 0.5s
+q27 P1        rows=OK  answer=OK  attempts=1 3.0s
+{
+  "B0-style": {
+    "questions": 27,
+    "executed_pct": 92.6,
+    "rows_correct_pct": 77.8,
+    "answer_correct_pct": 59.3,
+    "query_error_rate_pct": 7.4,
+    "mean_attempts": 1.0,
+    "latency_sec_mean": 4.1,
+    "latency_sec_p95": 3.5,
+    "by_template_rows_correct": {
+      "app_cost": "3/3",
+      "callers_of": "4/4",
+      "count_wave": "3/3",
+      "cycle_members": "1/1",
+      "early_list": "1/1",
+      "eol_count": "0/1",
+      "high_risk_app": "2/3",
+      "instance_of": "0/3",
+      "top_inbound": "0/1",
+      "wave_count": "1/1",
+      "wave_gb": "2/2",
+      "wave_of_host": "4/4"
+    }
+  },
+  "P1": {
+    "questions": 27,
+    "executed_pct": 100.0,
+    "rows_correct_pct": 92.6,
+    "answer_correct_pct": 77.8,
+    "query_error_rate_pct": 0.0,
+    "mean_attempts": 1.04,
+    "latency_sec_mean": 2.9,
+    "latency_sec_p95": 3.8,
+    "by_template_rows_correct": {
+      "app_cost": "3/3",
+      "callers_of": "4/4",
+      "count_wave": "3/3",
+      "cycle_members": "1/1",
+      "early_list": "1/1",
+      "eol_count": "1/1",
+      "high_risk_app": "2/3",
+      "instance_of": "3/3",
+      "top_inbound": "1/1",
+      "wave_count": "0/1",
+      "wave_gb": "2/2",
+      "wave_of_host": "4/4"
+    }
+  }
+}

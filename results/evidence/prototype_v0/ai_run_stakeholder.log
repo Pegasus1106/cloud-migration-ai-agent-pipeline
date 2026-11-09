@@ -1,0 +1,336 @@
+======================================================
+  Cloud Migration AI Agent Pipeline - P1 prototype    
+  Dataset: stakeholder (data/sample.csv)                      
+======================================================
+
+[1/5] Setting up Python virtual environment...
+
+[notice] A new release of pip is available: 24.0 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+Dependencies installed.
+
+[2/5] Starting this project's Neo4j (ports 7475/7688)...
+ Container p1-migration-neo4j Running 
+Neo4j is ready!
+
+[3/5] Running Constraint Agent...
+User request: 'Keep each migration wave under 3000 GB of transfer volume, target AWS, and move any server flagged Early_Migration_Requested as early as dependency order allows.'
+
+Extracted configuration (requires confirmation before planning runs):
+{
+  "max_transfer_gb": 3000.0,
+  "target_cloud": "AWS",
+  "honor_early_migration_flags": true,
+  "notes": "Target AWS",
+  "source_request": "Keep each migration wave under 3000 GB of transfer volume, target AWS, and move any server flagged Early_Migration_Requested as early as dependency order allows.",
+  "auto_confirmed": true
+}
+
+--yes passed: auto-confirmed for non-interactive/reproducible runs.
+
+Confirmed. Configuration saved to /Users/vrajchaudhari/Desktop/Cloud/cloud-migration-ai-agent-pipeline/data/run_config.json
+Configuration confirmed.
+
+[4/5] Running Supervisor (data -> graph -> cloud -> sizing -> finops -> risk -> wave)...
+Cleared Neo4j graph for a clean run.
+
+=== Stage: data_agent (data_agent.py data/sample.csv data/cleaned_samples.csv) ===
+
+--- Agent Response ---
+The server discovery data has been successfully cleaned and normalized. Here's a summary of the process and results:
+
+- **Rows Processed**: 50
+- **Rows Flagged**: 3 (due to missing critical compute metrics)
+- **Contract Fields**: No missing fields detected.
+- **Imputed Fields**:
+  - `Allocated_vCPU`: 1 missing value filled with '2'.
+  - `Allocated_RAM_GB`: 1 missing value filled with '4'.
+  - `Storage_GB`: 1 missing value filled with '50'.
+
+The normalized data, including the computed `Normalized_CPU_Pct`, has been saved to `data/cleaned_samples.csv`. A data quality report has also been generated and saved as `data/data_quality_report.json`.
+
+Let me know if further actions or analysis are required!
+
+
+=== Stage: neo4j_agent (neo4j_agent.py data/cleaned_samples.csv) ===
+
+--- Agent Response ---
+The cleaned server discovery data has been successfully loaded into the Neo4j database. Here's a summary of the ingestion:
+
+- **Server nodes created**: 50
+- **COMMUNICATES_WITH edges created**: 38
+- **Missing edge endpoints**: None
+
+You can explore the graph using the Neo4j Browser at [http://localhost:7475](http://localhost:7475).
+
+--- stderr (tail) ---
+
+
+=== Stage: graph_agent (graph_agent.py 3000.0) ===
+] The analysis reveals several key insights about the graph structure:
+
+1. **Inbound Dependency Impact**:
+   - No missing or placeholder endpoints were found.
+   - The server with the highest inbound dependency is `SRV-040 (dw-master-01)` with 4 inbound connections.
+   - Other servers with high inbound dependencies include `SRV-003 (hr-db-01)`, `SRV-016 (erp-app-01)`, `SRV-017 (erp-app-02)`, and `SRV-018 (erp-db-primary)` each with 2 inbound connections.
+
+2. **Graph Components**:
+   - There are **19 Weakly Connected Components (WCCs)**, indicating 19 disconnected portfolios in the network.
+   - There are **46 Strongly Connected Components (SCCs)**, suggesting numerous indivisible cycles or tightly coupled groups.
+   - **Cycles Detected**:
+     - SCC 39: A 3-server cycle involving `SRV-040`, `SRV-041`, and `SRV-042`.
+     - SCC 9: A 2-server cycle involving `SRV-010` and `SRV-011`.
+     - SCC 11: A 2-server cycle involving `SRV-012` and `SRV-013`.
+
+3. **Oversized Components**:
+   - Several WCCs exceed the 3000 GB transfer limit and require subdivision into smaller communities:
+     - **WCC 37**: 46000 GB across 5 servers.
+     - **WCC 13**: 10800 GB across 6 servers.
+     - **WCC 32**: 4740 GB across 5 servers.
+     - **WCC 19**: 4620 GB across 8 servers.
+
+These findings suggest a complex network structure with significant interdependencies and large disconnected portfolios that may require careful handling during wave-based operations due to their high data transfer volumes.
+
+--- stderr (tail) ---
+: 1}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: "CALL gds.graph.drop('p1SccGraph')"
+
+
+=== Stage: cloud_selection_agent (cloud_selection_agent.py) ===
+ppears on 8 servers, RHEL 8 on 7 servers, Windows Server 2019 on 6 servers, Ubuntu 20.04 on 4 servers, Windows Server 2016 on 4 servers, Windows Server 2008 R2 on 4 servers, Oracle Linux 6.4 on 2 servers, RHEL 5 on 2 servers, Windows Server 2012 on 2 servers, and CentOS 7 on 2 servers.
+
+[ai] Based on the OS distribution, the environment has a significant presence of both Linux/Open Source (Ubuntu, RHEL, CentOS) and Microsoft technologies (Windows Server). However, since there are more Linux-based servers than Windows-based ones, AWS would be the optimal choice for better compatibility and cost efficiency with the existing infrastructure.
+
+[tool_call] set_target_cloud({'cloud_name': 'AWS', 'rationale': 'The server ecosystem has a higher concentration of Linux-based operating systems (Ubuntu, RHEL, CentOS) compared to Windows Server, making AWS the optimal choice for better compatibility and cost efficiency.'})
+
+[tool] ✅ Target cloud saved to Neo4j.
+   Platform  : AWS
+   Rationale : The server ecosystem has a higher concentration of Linux-based operating systems (Ubuntu, RHEL, CentOS) compared to Windows Server, making AWS the optimal choice for better compatibility and cost efficiency.
+
+[ai] The target cloud platform has been set to AWS with the rationale that the server ecosystem has a higher concentration of Linux-based operating systems (Ubuntu, RHEL, CentOS) compared to Windows Server, making AWS the optimal choice for better compatibility and cost efficiency.
+<tool_call>
+
+--- stderr (tail) ---
+0: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.chains.graph_qa.cypher import GraphCypherQAChain
+
+
+=== Stage: sizing_agent (sizing_agent.py) ===
+
+─── Agent Response ───
+
+[human] Check our target cloud and right-size all servers in the database.
+
+[tool_call] get_target_cloud({})
+
+[tool] Target cloud platform: AWS
+
+[tool_call] right_size_servers({'cloud_provider': 'AWS'})
+
+[tool] ✅ Right-sizing complete for AWS.
+   Total servers sized: 50
+   Breakdown:
+  • t3.large: 19 servers
+  • t3.xlarge: 15 servers
+  • m5.4xlarge: 9 servers
+  • m5.2xlarge: 7 servers
+
+[ai] The server sizing process has been completed successfully for the AWS cloud platform. Here's a summary of the recommendations:
+
+- **Total servers sized:** 50
+- **Breakdown:**
+  - t3.large: 19 servers
+  - t3.xlarge: 15 servers
+  - m5.4xlarge: 9 servers
+  - m5.2xlarge: 7 servers
+
+These instance types have been recommended based on the workload and resource requirements of each server in the database.
+
+--- stderr (tail) ---
+
+
+=== Stage: finops_agent (finops_agent.py) ===
+
+--- Agent Response ---
+
+[human] Estimate AWS cost and savings for the environment.
+
+[tool_call] estimate_aws_cost({})
+
+[tool] FinOps estimate complete (catalog 2026-10-04-v1, us-east-1, Linux On-Demand, 730 hrs/month). This is a static estimate, not a live AWS billing quote.
+   Servers priced          : 50
+   Total current monthly cost : $37,533.00
+   Total estimated AWS cost   : $9,984.11
+   Estimated monthly savings  : $27,548.89 (+73.4%)
+
+[ai] The FinOps estimate for the environment has been completed using the static pricing catalog (version 2026-10-04-v1) for us-east-1, with Linux On-Demand instances and 730 hours per month. Please note that this is a static estimate and not a live AWS billing quote.
+
+Here are the key findings:
+- **Servers Priced**: 50
+- **Total Current Monthly Cost**: $37,533.00
+- **Total Estimated AWS Cost**: $9,984.11
+- **Estimated Monthly Savings**: $27,548.89 (73.4% savings)
+
+This estimate assumes the existing instance sizes assigned by the Sizing Agent remain unchanged and does not account for potential changes in usage, reserved instances, or other cost optimization strategies.
+
+--- stderr (tail) ---
+
+
+=== Stage: risk_agent (risk_agent.py) ===
+": "Low"}, {"id": "SRV-018", "risk": "Low"}, {"id": "SRV-019", "risk": "Low"}, {"id": "SRV-020", "risk": "High"}, {"id": "SRV-021", "risk": "High"}, {"id": "SRV-022", "risk": "High"}, {"id": "SRV-023", "risk": "High"}, {"id": "SRV-024", "risk": "High"}, {"id": "SRV-025", "risk": "High"}, {"id": "SRV-026", "risk": "Low"}, {"id": "SRV-027", "risk": "Low"}, {"id": "SRV-028", "risk": "Low"}, {"id": "SRV-029", "risk": "Low"}, {"id": "SRV-030", "risk": "Low"}, {"id": "SRV-031", "risk": "Low"}, {"id": "SRV-032", "risk": "High"}, {"id": "SRV-033", "risk": "High"}, {"id": "SRV-034", "risk": "High"}, {"id": "SRV-035", "risk": "Low"}, {"id": "SRV-036", "risk": "Low"}, {"id": "SRV-037", "risk": "Low"}, {"id": "SRV-038", "risk": "Low"}, {"id": "SRV-039", "risk": "Low"}, {"id": "SRV-040", "risk": "Low"}]'})
+
+[tool] Risk scores updated in Neo4j.
+   Total updated : 40
+   High risk     : 18
+   Low risk      : 22
+
+[ai] The risk analysis has been completed successfully. A total of 40 servers were analyzed, with 18 assigned a "High" risk score and 22 assigned a "Low" risk score. The updates have been written back to the Neo4j database.
+
+Verification: 10 servers still missing risk_score after the agent run. Running deterministic fallback...
+
+-- Step 1: Fetching servers --
+   Found 50 servers.
+
+-- Step 2: Analysing risk --
+   High risk: 24 servers
+   Low risk : 26 servers
+
+-- Step 3: Saving to Neo4j --
+Risk scores updated in Neo4j.
+   Total updated : 50
+   High risk     : 24
+   Low risk      : 26
+
+--- stderr (tail) ---
+8: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.chains.graph_qa.cypher import GraphCypherQAChain
+
+
+=== Stage: wave_agent_p1 (wave_agent_p1.py) ===
+lete.
+   Groups scheduled : 46
+   Waves created    : 10
+  - Wave 0: 2980 GB
+  - Wave 1: 2990 GB
+  - Wave 2: 3000 GB
+  - Wave 3: 45000 GB
+  - Wave 4: 3000 GB
+  - Wave 5: 5000 GB
+  - Wave 6: 5000 GB
+  - Wave 7: 2640 GB
+  - Wave 8: 2250 GB
+  - Wave 9: 4000 GB
+   Infeasible (over-limit, indivisible) groups:
+  - 39: 45000 GB (exceeds 3000 GB limit, indivisible dependency group, placed alone)
+  - 17: 5000 GB (exceeds 3000 GB limit, indivisible dependency group, placed alone)
+  - 18: 5000 GB (exceeds 3000 GB limit, indivisible dependency group, placed alone)
+  - 36: 4000 GB (exceeds 3000 GB limit, indivisible dependency group, placed alone)
+   Summary written to data/wave_summary.json
+
+[tool_call] export_migration_plan({})
+
+[tool] Final migration plan exported to /Users/vrajchaudhari/Desktop/Cloud/cloud-migration-ai-agent-pipeline/data/final_migration_plan.csv (50 rows).
+
+[ai] The migration plan has been successfully constructed and exported. Here's a summary:
+
+- **Number of Waves Created**: 10
+- **Groups Scheduled**: 46
+- **Infeasible Groups**: 4 groups were identified as infeasible due to exceeding the 3000 GB limit:
+  - Group 39: 45000 GB
+  - Group 17: 5000 GB
+  - Group 18: 5000 GB
+  - Group 36: 4000 GB
+
+These infeasible groups were placed alone in their own waves due to their indivisible dependency constraints.
+
+The final migration plan has been exported to `/Users/vrajchaudhari/Desktop/Cloud/cloud-migration-ai-agent-pipeline/data/final_migration_plan.csv` and contains 50 rows.
+
+--- stderr (tail) ---
+
+
+Run log written to data/run_log_stakeholder.json (status=completed)
+Pipeline stages complete.
+
+[5/5] Saving labeled outputs and validating...
+{
+  "label": "stakeholder_P1",
+  "plan_path": "data/stakeholder_p1_plan.csv",
+  "checks": {
+    "schema_completeness": {
+      "required_columns_present": true,
+      "missing_columns": [],
+      "total_rows": 50,
+      "rows_with_wave_id": 50
+    },
+    "dependency_validity": {
+      "edges_checked": 38,
+      "violations": 0,
+      "examples": []
+    },
+    "transfer_volume_validity": {
+      "max_transfer_gb": 3000.0,
+      "waves_checked": 10,
+      "violations": 0,
+      "examples": [],
+      "known_infeasible_waves_excused": [
+        3,
+        5,
+        6,
+        9
+      ],
+      "wave_totals_gb": {
+        "0": 2980.0,
+        "1": 2990.0,
+        "2": 3000.0,
+        "3": 45000.0,
+        "4": 3000.0,
+        "5": 5000.0,
+        "6": 5000.0,
+        "7": 2640.0,
+        "8": 2250.0,
+        "9": 4000.0
+      }
+    },
+    "sizing_safety": {
+      "rows_checked": 50,
+      "undersized_violations": 5,
+      "examples": [
+        {
+          "server_id": "SRV-040",
+          "target_size": "m5.4xlarge"
+        },
+        {
+          "server_id": "SRV-041",
+          "target_size": "m5.4xlarge"
+        },
+        {
+          "server_id": "SRV-042",
+          "target_size": "m5.4xlarge"
+        },
+        {
+          "server_id": "SRV-018",
+          "target_size": "m5.4xlarge"
+        },
+        {
+          "server_id": "SRV-019",
+          "target_size": "m5.4xlarge"
+        }
+      ]
+    },
+    "risk_score_completeness": {
+      "rows_with_risk_score": 50,
+      "total_rows": 50
+    }
+  }
+}
+
+Written to data/validation_report_stakeholder_P1.json
+
+======================================================
+P1 pipeline execution complete for dataset: stakeholder
+======================================================
+Final plan   : data/stakeholder_p1_plan.csv
+Wave summary : data/stakeholder_p1_wave_summary.json
+Validation   : data/validation_report_stakeholder_P1.json
+Neo4j Browser: http://localhost:7475 (neo4j / password123)
+
+To stop Neo4j: docker compose down

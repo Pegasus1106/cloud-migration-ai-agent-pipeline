@@ -1,0 +1,405 @@
+======================================================
+  Cloud Migration AI Agent Pipeline - P1 prototype    
+  Dataset: stakeholder (data/sample.csv)                      
+======================================================
+
+[1/5] Setting up Python virtual environment...
+
+[notice] A new release of pip is available: 24.0 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+Dependencies installed.
+
+[2/5] Starting this project's Neo4j (ports 7475/7688)...
+ Image neo4j:5@sha256:d9cfe82983d27f5a75b3aaae8f316d04f9a698a3b7f6103a508f7caf8362f255 Pulling 
+ bd36565c0fde Pulling fs layer 0B
+ 4f4fb700ef54 Pulling fs layer 0B
+ 6d57550c3227 Pulling fs layer 0B
+ dacaa6e19784 Pulling fs layer 0B
+ 77040b885ba0 Pulling fs layer 0B
+ 4f4fb700ef54 Download complete 0B
+ 6d57550c3227 Download complete 0B
+ 77040b885ba0 Downloading 1.049MB
+ 77040b885ba0 Downloading 5.243MB
+ 77040b885ba0 Downloading 8.389MB
+ 77040b885ba0 Downloading 10.49MB
+ bd36565c0fde Downloading 1.049MB
+ dacaa6e19784 Downloading 1.049MB
+ 77040b885ba0 Downloading 14.68MB
+ 77040b885ba0 Downloading 15.73MB
+ bd36565c0fde Downloading 2.097MB
+ dacaa6e19784 Downloading 2.097MB
+ bd36565c0fde Downloading 3.146MB
+ dacaa6e19784 Downloading 2.097MB
+ 77040b885ba0 Downloading 16.78MB
+ dacaa6e19784 Downloading 3.146MB
+ 77040b885ba0 Downloading 18.87MB
+ bd36565c0fde Downloading 4.194MB
+ dacaa6e19784 Downloading 4.194MB
+ 77040b885ba0 Downloading 22.02MB
+ bd36565c0fde Downloading 5.243MB
+ 77040b885ba0 Downloading 23.07MB
+ bd36565c0fde Downloading 7.34MB
+ dacaa6e19784 Downloading 5.243MB
+ 77040b885ba0 Downloading 24.12MB
+ bd36565c0fde Downloading 7.34MB
+ dacaa6e19784 Downloading 5.243MB
+ bd36565c0fde Downloading 9.437MB
+ dacaa6e19784 Downloading 6.291MB
+ 77040b885ba0 Downloading 26.21MB
+ bd36565c0fde Downloading 10.49MB
+ dacaa6e19784 Downloading 7.34MB
+ 77040b885ba0 Downloading 27.26MB
+ dacaa6e19784 Downloading 7.34MB
+ 77040b885ba0 Downloading 28.31MB
+ bd36565c0fde Downloading 11.53MB
+ bd36565c0fde Downloading 12.58MB
+ dacaa6e19784 Downloading 8.389MB
+ 77040b885ba0 Downloading 29.36MB
+ dacaa6e19784 Downloading 9.437MB
+ 77040b885ba0 Downloading 31.46MB
+ bd36565c0fde Downloading 14.68MB
+ dacaa6e19784 Downloading 10.49MB
+ 77040b885ba0 Downloading 32.51MB
+ bd36565c0fde Downloading 15.73MB
+ dacaa6e19784 Downloading 11.53MB
+ 77040b885ba0 Downloading 33.55MB
+ bd36565c0fde Downloading 16.78MB
+ dacaa6e19784 Downloading 12.58MB
+ 77040b885ba0 Downloading 34.6MB
+ bd36565c0fde Downloading 17.83MB
+ bd36565c0fde Downloading 18.87MB
+ dacaa6e19784 Downloading 12.58MB
+ 77040b885ba0 Downloading 36.7MB
+ bd36565c0fde Downloading 19.92MB
+ dacaa6e19784 Downloading 13.63MB
+ 77040b885ba0 Downloading 37.75MB
+ bd36565c0fde Downloading 20.97MB
+ dacaa6e19784 Downloading 13.63MB
+ 77040b885ba0 Downloading 38.8MB
+ dacaa6e19784 Downloading 14.68MB
+ 77040b885ba0 Downloading 40.89MB
+ bd36565c0fde Downloading 22.02MB
+ dacaa6e19784 Downloading 14.68MB
+ 77040b885ba0 Downloading 40.89MB
+ bd36565c0fde Downloading 23.07MB
+ bd36565c0fde Downloading 24.12MB
+ dacaa6e19784 Downloading 15.73MB
+ 77040b885ba0 Downloading 42.99MB
+ bd36565c0fde Downloading 25.17MB
+ dacaa6e19784 Downloading 16.78MB
+ 77040b885ba0 Downloading 44.04MB
+ dacaa6e19784 Downloading 17.83MB
+ 77040b885ba0 Downloading 45.09MB
+ bd36565c0fde Downloading 26.21MB
+ dacaa6e19784 Downloading 17.83MB
+ 77040b885ba0 Downloading 46.14MB
+ bd36565c0fde Downloading 28.31MB
+ dacaa6e19784 Downloading 18.87MB
+ 77040b885ba0 Downloading 47.19MB
+ bd36565c0fde Downloading 29.36MB
+ dacaa6e19784 Downloading 19.92MB
+ 77040b885ba0 Downloading 49.28MB
+ dacaa6e19784 Downloading 20.97MB
+ 77040b885ba0 Downloading 50.33MB
+ bd36565c0fde Download complete 0B
+ bd36565c0fde Extracting 1B
+ dacaa6e19784 Downloading 22.02MB
+ 77040b885ba0 Downloading 52.43MB
+ bd36565c0fde Extracting 1B
+ 77040b885ba0 Downloading 53.48MB
+ 894c1ef41fbe Download complete 0B
+ dacaa6e19784 Downloading 22.02MB
+ bd36565c0fde Extracting 1B
+ dacaa6e19784 Downloading 23.07MB
+ 77040b885ba0 Downloading 55.57MB
+ bd36565c0fde Extracting 1B
+ dacaa6e19784 Downloading 24.12MB
+ 77040b885ba0 Downloading 56.62MB
+ bd36565c0fde Extracting 1B
+ 0bbfc4f6b59b Downloading 2.097MB
+ dacaa6e19784 Downloading 25.17MB
+ 77040b885ba0 Downloading 58.72MB
+ bd36565c0fde Pull complete 0B
+ dacaa6e19784 Downloading 25.17MB
+ 77040b885ba0 Downloading 60.82MB
+ 0bbfc4f6b59b Downloading 2.097MB
+ 0bbfc4f6b59b Downloading 3.146MB
+ dacaa6e19784 Downloading 26.21MB
+ 77040b885ba0 Downloading 61.87MB
+ dacaa6e19784 Downloading 27.26MB
+ 77040b885ba0 Downloading 63.96MB
+ 0bbfc4f6b59b Download complete 0B
+ 77040b885ba0 Downloading 66.06MB
+ dacaa6e19784 Downloading 28.31MB
+ dacaa6e19784 Downloading 30.41MB
+ 77040b885ba0 Downloading 68.16MB
+ dacaa6e19784 Downloading 31.46MB
+ 77040b885ba0 Downloading 70.25MB
+ dacaa6e19784 Downloading 32.51MB
+ 77040b885ba0 Downloading 72.35MB
+ dacaa6e19784 Downloading 34.6MB
+ 77040b885ba0 Downloading 76.55MB
+ dacaa6e19784 Downloading 36.7MB
+ 77040b885ba0 Downloading 78.64MB
+ dacaa6e19784 Downloading 38.8MB
+ 77040b885ba0 Downloading 79.69MB
+ 77040b885ba0 Downloading 82.84MB
+ dacaa6e19784 Downloading 40.89MB
+ dacaa6e19784 Downloading 42.99MB
+ 77040b885ba0 Downloading 84.93MB
+ 77040b885ba0 Downloading 87.03MB
+ dacaa6e19784 Downloading 45.09MB
+ dacaa6e19784 Downloading 46.14MB
+ 77040b885ba0 Downloading 88.08MB
+ dacaa6e19784 Downloading 49.28MB
+ 77040b885ba0 Downloading 90.18MB
+ dacaa6e19784 Downloading 50.33MB
+ 77040b885ba0 Downloading 92.27MB
+ dacaa6e19784 Downloading 53.48MB
+ 77040b885ba0 Downloading 94.37MB
+ dacaa6e19784 Downloading 55.57MB
+ 77040b885ba0 Downloading 96.47MB
+ dacaa6e19784 Downloading 57.67MB
+ 77040b885ba0 Downloading 98.57MB
+ dacaa6e19784 Downloading 59.77MB
+ 77040b885ba0 Downloading 100.7MB
+ dacaa6e19784 Downloading 61.87MB
+ 77040b885ba0 Downloading 102.8MB
+ dacaa6e19784 Downloading 63.96MB
+ 77040b885ba0 Downloading 104.9MB
+ dacaa6e19784 Downloading 67.11MB
+ 77040b885ba0 Downloading 107MB
+ dacaa6e19784 Downloading 69.21MB
+ 77040b885ba0 Downloading 109.1MB
+ dacaa6e19784 Downloading 71.3MB
+ 77040b885ba0 Downloading 110.1MB
+ dacaa6e19784 Downloading 73.4MB
+ 77040b885ba0 Downloading 113.2MB
+ dacaa6e19784 Downloading 75.5MB
+ 77040b885ba0 Downloading 114.3MB
+ dacaa6e19784 Downloading 77.59MB
+ 77040b885ba0 Downloading 116.4MB
+ dacaa6e19784 Downloading 79.69MB
+ 77040b885ba0 Downloading 119.5MB
+ dacaa6e19784 Downloading 80.74MB
+ 77040b885ba0 Downloading 120.6MB
+ dacaa6e19784 Downloading 82.84MB
+ 77040b885ba0 Downloading 122.7MB
+ dacaa6e19784 Downloading 84.93MB
+ 77040b885ba0 Downloading 124.8MB
+ 77040b885ba0 Downloading 127.9MB
+ dacaa6e19784 Downloading 87.03MB
+ 77040b885ba0 Downloading 129MB
+ dacaa6e19784 Downloading 88.08MB
+ 77040b885ba0 Downloading 131.1MB
+ dacaa6e19784 Downloading 91.23MB
+ dacaa6e19784 Downloading 93.32MB
+ 77040b885ba0 Downloading 133.2MB
+ dacaa6e19784 Downloading 95.42MB
+ 77040b885ba0 Downloading 134.2MB
+ dacaa6e19784 Downloading 97.52MB
+ 77040b885ba0 Downloading 136.3MB
+ dacaa6e19784 Downloading 99.61MB
+ 77040b885ba0 Downloading 137.4MB
+ 77040b885ba0 Downloading 139.5MB
+ dacaa6e19784 Downloading 101.7MB
+ dacaa6e19784 Downloading 103.8MB
+ 77040b885ba0 Downloading 140.5MB
+ dacaa6e19784 Downloading 107MB
+ 77040b885ba0 Downloading 141.6MB
+ dacaa6e19784 Downloading 108MB
+ 77040b885ba0 Downloading 143.7MB
+ dacaa6e19784 Downloading 111.1MB
+ 77040b885ba0 Downloading 144.7MB
+ dacaa6e19784 Downloading 112.2MB
+ 77040b885ba0 Downloading 145.8MB
+ dacaa6e19784 Downloading 113.2MB
+ 77040b885ba0 Downloading 146.8MB
+ dacaa6e19784 Downloading 116.4MB
+ 77040b885ba0 Downloading 148.9MB
+ dacaa6e19784 Downloading 119.5MB
+ 77040b885ba0 Downloading 151MB
+ 77040b885ba0 Downloading 151MB
+ dacaa6e19784 Downloading 121.6MB
+ dacaa6e19784 Downloading 124.8MB
+ 77040b885ba0 Downloading 153.1MB
+ 77040b885ba0 Downloading 154.1MB
+ dacaa6e19784 Downloading 126.9MB
+ 77040b885ba0 Downloading 155.2MB
+ dacaa6e19784 Downloading 129MB
+ dacaa6e19784 Downloading 132.1MB
+ 77040b885ba0 Downloading 156.2MB
+ 77040b885ba0 Downloading 158.3MB
+ dacaa6e19784 Downloading 134.2MB
+ dacaa6e19784 Downloading 136.3MB
+ 77040b885ba0 Downloading 158.3MB
+ dacaa6e19784 Downloading 138.4MB
+ 77040b885ba0 Downloading 160.4MB
+ 77040b885ba0 Downloading 161.5MB
+ dacaa6e19784 Downloading 141.6MB
+ 77040b885ba0 Downloading 163.6MB
+ dacaa6e19784 Downloading 143.7MB
+ dacaa6e19784 Downloading 145.8MB
+ 77040b885ba0 Downloading 163.6MB
+ dacaa6e19784 Downloading 148.9MB
+ 77040b885ba0 Downloading 164.6MB
+ dacaa6e19784 Downloading 151MB
+ 77040b885ba0 Downloading 166.7MB
+ dacaa6e19784 Downloading 154.1MB
+ 77040b885ba0 Downloading 167.8MB
+ dacaa6e19784 Downloading 156.4MB
+ 77040b885ba0 Downloading 168.8MB
+ dacaa6e19784 Download complete 0B
+ 77040b885ba0 Downloading 170.9MB
+ dacaa6e19784 Extracting 1B
+ 77040b885ba0 Downloading 170.9MB
+ dacaa6e19784 Extracting 1B
+ 77040b885ba0 Downloading 170.9MB
+ dacaa6e19784 Extracting 1B
+ 77040b885ba0 Downloading 172MB
+ dacaa6e19784 Extracting 1B
+ 77040b885ba0 Downloading 174.1MB
+ dacaa6e19784 Extracting 1B
+ 77040b885ba0 Downloading 176.2MB
+ dacaa6e19784 Extracting 1B
+ 77040b885ba0 Downloading 178.3MB
+ dacaa6e19784 Extracting 1B
+ 77040b885ba0 Downloading 178.7MB
+ dacaa6e19784 Extracting 1B
+ 77040b885ba0 Download complete 0B
+ dacaa6e19784 Extracting 1B
+ dacaa6e19784 Extracting 1B
+ 6d57550c3227 Pull complete 0B
+ dacaa6e19784 Pull complete 0B
+ 77040b885ba0 Extracting 1B
+ 77040b885ba0 Extracting 1B
+ 77040b885ba0 Extracting 1B
+ 77040b885ba0 Extracting 1B
+ 77040b885ba0 Extracting 1B
+ 77040b885ba0 Extracting 1B
+ 77040b885ba0 Extracting 1B
+ 77040b885ba0 Extracting 1B
+ 77040b885ba0 Extracting 1B
+ 4f4fb700ef54 Pull complete 0B
+ 77040b885ba0 Pull complete 0B
+ Image neo4j:5@sha256:d9cfe82983d27f5a75b3aaae8f316d04f9a698a3b7f6103a508f7caf8362f255 Pulled 
+ Network cloud-migration-ai-agent-pipeline_default Creating 
+ Volume cloud-migration-ai-agent-pipeline_p1_neo4j_data Creating 
+ Volume cloud-migration-ai-agent-pipeline_p1_neo4j_data Creating 
+ Network cloud-migration-ai-agent-pipeline_default Creating 
+ Volume cloud-migration-ai-agent-pipeline_p1_neo4j_data Created 
+ Volume cloud-migration-ai-agent-pipeline_p1_neo4j_data Created 
+ Network cloud-migration-ai-agent-pipeline_default Created 
+ Network cloud-migration-ai-agent-pipeline_default Created 
+ Container p1-migration-neo4j Creating 
+ Container p1-migration-neo4j Created 
+ Container p1-migration-neo4j Starting 
+ Container p1-migration-neo4j Started 
+Neo4j is ready!
+
+[3/5] Running Constraint Agent...
+User request: 'Keep each migration wave under 3000 GB of transfer volume, target AWS, and move any server flagged Early_Migration_Requested as early as dependency order allows.'
+LLM extraction failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Falling back to schema defaults.
+
+Extracted configuration (requires confirmation before planning runs):
+{
+  "max_transfer_gb": 3000.0,
+  "target_cloud": "AWS",
+  "honor_early_migration_flags": true,
+  "notes": "",
+  "source_request": "Keep each migration wave under 3000 GB of transfer volume, target AWS, and move any server flagged Early_Migration_Requested as early as dependency order allows.",
+  "auto_confirmed": true
+}
+
+--yes passed: auto-confirmed for non-interactive/reproducible runs.
+
+Confirmed. Configuration saved to /Users/vrajchaudhari/Desktop/Cloud/cloud-migration-ai-agent-pipeline/data/run_config.json
+Configuration confirmed.
+
+[4/5] Running Supervisor (data -> graph -> cloud -> sizing -> finops -> risk -> wave)...
+Cleared Neo4j graph for a clean run.
+
+=== Stage: data_agent (data_agent.py data/sample.csv data/cleaned_samples.csv) ===
+Agent invocation failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Running tool directly...
+Data Normalization Complete
+   Rows processed : 50
+   Rows flagged   : 3
+   Contract fields missing from source: none
+   Imputed fields :
+  - Allocated_vCPU: 1 missing -> filled with '2'
+  - Allocated_RAM_GB: 1 missing -> filled with '4'
+  - Storage_GB: 1 missing -> filled with '50'
+   Output saved to: data/cleaned_samples.csv
+   Quality report : data/data_quality_report.json
+
+
+=== Stage: neo4j_agent (neo4j_agent.py data/cleaned_samples.csv) ===
+Agent invocation failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Running tool directly...
+Graph Ingestion Complete
+   Rows processed        : 50
+   Server nodes created  : 50
+   Edges created         : 38
+   Missing edge endpoints: none
+   Neo4j Browser         : http://localhost:7475
+
+--- stderr (tail) ---
+
+
+=== Stage: graph_agent (graph_agent.py 3000.0) ===
+Agent invocation failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Running tools directly...
+
+-- Step 1: Inbound view --
+Inbound view derived from existing outbound edges (no duplicate reverse edges created).
+   Missing/placeholder endpoints: none
+   Top servers by inbound dependency impact:
+  - SRV-040 (dw-master-01): inbound_degree=4
+  - SRV-003 (hr-db-01): inbound_degree=2
+  - SRV-016 (erp-app-01): inbound_degree=2
+  - SRV-017 (erp-app-02): inbound_degree=2
+  - SRV-018 (erp-db-primary): inbound_degree=2
+
+-- Step 2: Component analysis --
+Graph component analysis complete.
+   WCC (disconnected portfolios): 19
+   SCC (cyclic/indivisible groups): 46
+   Cycles detected (SCC size > 1):
+  - SCC 39: 3 servers in a cycle ['SRV-040', 'SRV-041', 'SRV-042']
+  - SCC 9: 2 servers in a cycle ['SRV-010', 'SRV-011']
+  - SCC 11: 2 servers in a cycle ['SRV-012', 'SRV-013']
+   Oversized WCCs needing community split (> 3000 GB):
+  - WCC 37: 46000 GB across 5 servers (limit 3000 GB -> needs community split)
+  - WCC 13: 10800 GB across 6 servers (limit 3000 GB -> needs community split)
+  - WCC 32: 4740 GB across 5 servers (limit 3000 GB -> needs community split)
+  - WCC 19: 4620 GB across 8 servers (limit 3000 GB -> needs community split)
+   Louvain communities written: 19
+
+--- stderr (tail) ---
+: 1}, 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: "CALL gds.graph.drop('p1SccGraph')"
+
+
+=== Stage: cloud_selection_agent (cloud_selection_agent.py) ===
+⚠️  Agent invocation failed (Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.). Running tools directly…
+
+── Step 1: Query OS Distribution (LLM-generated Cypher) ──
+
+
+> Entering new GraphCypherQAChain chain...
+
+--- stderr (tail) ---
+ai-agent-pipeline/venv/lib/python3.11/site-packages/langchain_core/language_models/chat_models.py", line 2065, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "/Users/vrajchaudhari/Desktop/Cloud/cloud-migration-ai-agent-pipeline/venv/lib/python3.11/site-packages/langchain_openai/chat_models/base.py", line 2001, in _generate
+    _handle_openai_api_error(e)
+  File "/Users/vrajchaudhari/Desktop/Cloud/cloud-migration-ai-agent-pipeline/venv/lib/python3.11/site-packages/langchain_openai/chat_models/base.py", line 728, in _handle_openai_api_error
+    raise OpenAIAuthenticationError(
+langchain_openai.chat_models.base.OpenAIAuthenticationError: Error code: 401 - Authentication Error, LiteLLM Virtual Key expected. Received=****, expected to start with 'sk-'.
+
+
+Supervisor: stage 'cloud_selection_agent' failed (exit 1). Stopping run.
+
+Run log written to data/run_log_stakeholder.json (status=failed)
+Pipeline stages complete.
+
+[5/5] Saving labeled outputs and validating...
+cp: data/final_migration_plan.csv: No such file or directory

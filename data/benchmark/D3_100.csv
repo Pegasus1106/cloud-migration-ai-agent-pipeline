@@ -1,0 +1,101 @@
+Server_ID,Hostname,OS_Version,Allocated_vCPU,Allocated_RAM_GB,Peak_CPU_Pct,Avg_CPU_Pct,Storage_GB,App_Name,Business_Tags,Outbound_Connections,Transfer_GB,Current_Monthly_Cost,Early_Migration_Requested
+BEN-0001,ad-dc-01,Windows Server 2019,4.0,16.0,79,65,153.0,Active_Directory,Internal,BEN-0002:1433:743,153,377.65,False
+BEN-0002,ad-dc-02,Windows Server 2022,4.0,16.0,82,47,63.0,Active_Directory,Internal,BEN-0001:389:816,63,373.15,False
+BEN-0003,dns-01,CentOS 7,4.0,16.0,54,44,234.0,Core_DNS,Internal,BEN-0004:389:76,234,381.7,False
+BEN-0004,dns-02,Ubuntu 22.04,4.0,16.0,46,29,117.0,Core_DNS,Internal,,117,375.85,False
+BEN-0005,patc-auto-web-01,Windows Server 2016,4.0,8.0,41,25,198.0,Patch_Automation_Engine,SOX,BEN-0007:389:39|BEN-0001:389:328|BEN-0003:3306:881,198,299.9,False
+BEN-0006,patc-auto-web-02,Windows Server 2019,2.0,8.0,27,14,114.0,Patch_Automation_Engine,SOX,BEN-0008:53:78|BEN-0001:443:854|BEN-0003:443:209,114,215.7,False
+BEN-0007,patc-auto-app-01,Windows Server 2019,4.0,16.0,51,38,73.0,Patch_Automation_Engine,SOX,BEN-0009:389:385,73,373.65,False
+BEN-0008,patc-auto-app-02,Windows Server 2016,8.0,16.0,75,39,236.0,Patch_Automation_Engine,SOX,BEN-0009:8080:101,236,541.8,False
+BEN-0009,corporat-sqlclu-01,SQL Server 2022,8.0,64.0,75,39,1123.0,Shared_DB_Corporat,SOX,BEN-0010:389:323,1123,1066.15,False
+BEN-0010,corporat-sqlclu-02,SQL Server 2022,16.0,128.0,45,14,960.0,Shared_DB_Corporat,SOX,BEN-0009:53:536,960,2018.0,False
+BEN-0011,netw-heal-srv-01,Ubuntu 24.04,8.0,16.0,24,10,108.0,Network_Health_Dashboard,Internal,,108,535.4,True
+BEN-0012,frau-dete-srv-01,RHEL 9,8.0,32.0,63,29,139.0,Fraud_Detection_Risk_Scoring_Service,PCI-DSS,BEN-0013:53:175|BEN-0001:389:408|BEN-0003:3306:360,139,696.95,False
+BEN-0013,retailec-sqlclu-01,SQL Server 2016,8.0,64.0,59,39,816.0,Shared_DB_Retailec,SOX,BEN-0014:5432:98,816,1050.8,False
+BEN-0014,retailec-sqlclu-02,SQL Server 2019,8.0,64.0,31,12,2158.0,Shared_DB_Retailec,SOX,BEN-0013:3306:655,2158,1117.9,False
+BEN-0015,paym-gate-web-01,Ubuntu 22.04,4.0,8.0,47,26,94.0,Payment_Gateway_Proxy,PCI-DSS,BEN-0017:443:677,94,294.7,False
+BEN-0016,paym-gate-web-02,Ubuntu 22.04,2.0,4.0,45,5,167.0,Payment_Gateway_Proxy,PCI-DSS,BEN-0017:53:77,167,178.35,False
+BEN-0017,paym-gate-app-01,Ubuntu 22.04,8.0,16.0,49,19,180.0,Payment_Gateway_Proxy,PCI-DSS,BEN-0018:1433:252,180,539.0,False
+BEN-0018,paym-gate-db-01,Oracle Linux 8,16.0,64.0,85,54,1065.0,Payment_Gateway_Proxy,PCI-DSS,,1065,1383.25,False
+BEN-0019,clin-guid-web-01,Ubuntu 20.04,2.0,8.0,41,16,130.0,Clinical_Guidelines_Repository,HIPAA,BEN-0020:1433:750|BEN-0001:3306:815|BEN-0003:443:660,130,216.5,False
+BEN-0020,clin-guid-app-01,Ubuntu 20.04,8.0,16.0,36,15,202.0,Clinical_Guidelines_Repository,HIPAA,BEN-0022:5432:36|BEN-0001:443:809|BEN-0003:5432:432,202,540.1,False
+BEN-0021,clin-guid-app-02,Ubuntu 20.04,8.0,16.0,59,23,229.0,Clinical_Guidelines_Repository,HIPAA,BEN-0022:389:351,229,541.45,False
+BEN-0022,healthca-sqlclu-01,SQL Server 2019,16.0,64.0,72,45,1050.0,Shared_DB_Healthca,SOX,BEN-0023:443:658,1050,1382.5,False
+BEN-0023,healthca-sqlclu-02,SQL Server 2019,8.0,64.0,74,64,731.0,Shared_DB_Healthca,SOX,BEN-0022:1433:524,731,1046.55,False
+BEN-0024,recu-bill-web-01,RHEL 9,2.0,8.0,60,48,92.0,Recurring_Billing_Service,PCI-DSS,BEN-0026:53:166|BEN-0001:5432:274|BEN-0003:3306:529,92,214.6,False
+BEN-0025,recu-bill-web-02,RHEL 8,2.0,4.0,57,33,43.0,Recurring_Billing_Service,PCI-DSS,BEN-0027:8080:118|BEN-0001:8080:824|BEN-0003:1433:698,43,172.15,False
+BEN-0026,recu-bill-app-01,RHEL 9,8.0,16.0,86,67,56.0,Recurring_Billing_Service,PCI-DSS,BEN-0028:8080:206,56,532.8,False
+BEN-0027,recu-bill-app-02,RHEL 9,8.0,16.0,83,60,240.0,Recurring_Billing_Service,PCI-DSS,BEN-0028:389:456,240,542.0,False
+BEN-0028,financep-sqlclu-01,SQL Server 2019,8.0,64.0,47,9,2011.0,Shared_DB_Financep,SOX,BEN-0029:8080:564,2011,1110.55,False
+BEN-0029,financep-sqlclu-02,SQL Server 2022,16.0,64.0,45,34,2063.0,Shared_DB_Financep,SOX,BEN-0028:3306:345,2063,1433.15,False
+BEN-0030,conf-mana-web-01,RHEL 9,4.0,8.0,65,49,140.0,Configuration_Management_Database,SOX,BEN-0032:3306:645|BEN-0001:1433:556|BEN-0003:1433:829,140,297.0,False
+BEN-0031,conf-mana-web-02,RHEL 8,4.0,16.0,70,50,,Configuration_Management_Database,SOX,BEN-0033:3306:360|BEN-0001:5432:896|BEN-0003:3306:790,50,372.5,False
+BEN-0032,conf-mana-app-01,Ubuntu 22.04,8.0,32.0,57,32,57.0,Configuration_Management_Database,SOX,BEN-0009:53:645,57,692.85,False
+BEN-0033,conf-mana-app-02,Ubuntu 20.04,4.0,16.0,70,58,37.0,Configuration_Management_Database,SOX,BEN-0009:8080:372,37,371.85,False
+BEN-0034,exec-scor-srv-01,Windows Server 2022,4.0,16.0,27,12,33.0,Executive_Scorecard_Reporting_Suite,Internal,BEN-0001:443:768|BEN-0003:5432:598,33,371.65,False
+BEN-0035,pays-gate-srv-01,Ubuntu 22.04,8.0,16.0,52,23,42.0,PayStream_Gateway,PCI-DSS,BEN-0028:3306:30,42,532.1,False
+BEN-0036,recr-work-web-01,Windows Server 2016,4.0,16.0,57,22,201.0,Recruitment_Workflow_Engine,SOX,BEN-0038:443:244|BEN-0001:8080:67|BEN-0003:8080:521,201,380.05,False
+BEN-0037,recr-work-web-02,Windows Server 2022,4.0,8.0,36,5,118.0,Recruitment_Workflow_Engine,SOX,BEN-0038:1433:286|BEN-0001:443:423|BEN-0003:443:697,118,295.9,False
+BEN-0038,recr-work-app-01,Windows Server 2019,4.0,,25,1,155.0,Recruitment_Workflow_Engine,SOX,BEN-0039:8080:147,155,377.75,False
+BEN-0039,hr-sqlclu-01,SQL Server 2019,8.0,32.0,64,40,1249.0,Shared_DB_Hr,SOX,BEN-0040:3306:202,1249,752.45,False
+BEN-0040,hr-sqlclu-02,SQL Server 2019,16.0,128.0,48,9,1167.0,Shared_DB_Hr,SOX,BEN-0039:3306:767,1167,2028.35,False
+BEN-0041,cust-serv-srv-01,Windows Server 2022,8.0,16.0,25,1,41.0,Customer_Service_Ticketing_CSM,PCI-DSS,BEN-0013:3306:889|BEN-0001:53:763|BEN-0003:389:628,41,532.05,False
+BEN-0042,exte-part-srv-01,RHEL 8,4.0,16.0,28,1,150.0,External_Partner_Portal,External_Facing,,150,377.5,False
+BEN-0043,risk-scor-srv-01,Windows Server 2019,,16.0,85,69,154.0,Risk_Scoring_Service,PCI-DSS,,154,537.7,False
+BEN-0044,medi-clin-node-01,RHEL 9,32.0,256.0,87,50,1979.0,MediStat_Clinical_Reporting_Suite,HIPAA,BEN-0045:3306:467|BEN-0047:8080:760|BEN-0001:389:616|BEN-0003:8080:176,1979,3988.95,False
+BEN-0045,medi-clin-node-02,RHEL 9,32.0,128.0,77,60,1633.0,MediStat_Clinical_Reporting_Suite,HIPAA,BEN-0046:53:371|BEN-0048:3306:174|BEN-0001:443:569|BEN-0003:389:44,1633,2691.65,False
+BEN-0046,medi-clin-node-03,Ubuntu 20.04,16.0,64.0,53,40,941.0,MediStat_Clinical_Reporting_Suite,HIPAA,BEN-0047:5432:199|BEN-0048:53:564,941,1377.05,False
+BEN-0047,medi-clin-node-04,RHEL 8,32.0,256.0,47,26,649.0,MediStat_Clinical_Reporting_Suite,HIPAA,BEN-0048:53:45|BEN-0049:389:27|BEN-0050:389:361,649,3922.45,False
+BEN-0048,medi-clin-node-05,RHEL 8,16.0,128.0,78,59,2070.0,MediStat_Clinical_Reporting_Suite,HIPAA,BEN-0049:8080:217|BEN-0050:3306:855,2070,2073.5,False
+BEN-0049,medi-clin-node-06,RHEL 8,16.0,64.0,44,20,1922.0,MediStat_Clinical_Reporting_Suite,HIPAA,BEN-0050:1433:569,1922,1426.1,False
+BEN-0050,medi-clin-node-07,Ubuntu 20.04,16.0,128.0,60,30,1014.0,MediStat_Clinical_Reporting_Suite,HIPAA,,1014,2020.7,False
+BEN-0051,cust-text-ingest-01,RHEL 8,4.0,16.0,48,8,110.0,CustomerSentiment_Text_Mining_Service,Internal,BEN-0052:389:57,110,375.5,False
+BEN-0052,cust-text-xform-01,Ubuntu 24.04,8.0,32.0,19,1,233.0,CustomerSentiment_Text_Mining_Service,Internal,BEN-0053:3306:597|BEN-0054:53:23,233,701.65,False
+BEN-0053,cust-text-load-01,Ubuntu 22.04,8.0,32.0,34,2,67.0,CustomerSentiment_Text_Mining_Service,Internal,,67,693.35,False
+BEN-0054,cust-text-queue-01,Ubuntu 24.04,8.0,32.0,8,1,106.0,CustomerSentiment_Text_Mining_Service,Internal,BEN-0052:53:354,106,695.3,False
+BEN-0055,prod-beha-node-01,Ubuntu 22.04,32.0,128.0,35,4,806.0,ProductUsage_Behavioural_Analytics,Internal,BEN-0056:443:392|BEN-0057:8080:882|BEN-0059:53:532|BEN-0001:389:582|BEN-0003:443:28,806,2650.3,False
+BEN-0056,prod-beha-node-02,Ubuntu 22.04,16.0,64.0,95,68,851.0,ProductUsage_Behavioural_Analytics,Internal,BEN-0057:443:699|BEN-0059:5432:344|BEN-0001:5432:663|BEN-0003:389:699,851,1372.55,False
+BEN-0057,prod-beha-node-03,Ubuntu 20.04,32.0,256.0,31,19,1468.0,ProductUsage_Behavioural_Analytics,Internal,BEN-0058:5432:654|BEN-0060:5432:288,1468,3963.4,False
+BEN-0058,prod-beha-node-04,Ubuntu 22.04,16.0,64.0,89,50,1011.0,ProductUsage_Behavioural_Analytics,Internal,BEN-0059:8080:129,1011,1380.55,False
+BEN-0059,prod-beha-node-05,Ubuntu 24.04,16.0,64.0,44,20,1590.0,ProductUsage_Behavioural_Analytics,Internal,BEN-0060:443:560|BEN-0061:53:886,1590,1409.5,False
+BEN-0060,prod-beha-node-06,RHEL 8,32.0,128.0,79,65,1076.0,ProductUsage_Behavioural_Analytics,Internal,BEN-0061:1433:660,1076,2663.8,False
+BEN-0061,prod-beha-node-07,Ubuntu 24.04,32.0,128.0,28,9,1349.0,ProductUsage_Behavioural_Analytics,Internal,,1349,2677.45,False
+BEN-0062,well-prog-srv-01,Ubuntu 20.04,8.0,16.0,14,1,129.0,Wellness_Program_Portal,HIPAA,,129,536.45,False
+BEN-0063,tax-fili-srv-01,Ubuntu 22.04,8.0,32.0,63,37,85.0,Tax_Filing_Service,PCI-DSS,BEN-0028:5432:832,85,694.25,False
+BEN-0064,empl-surv-srv-01,RHEL 8,8.0,16.0,26,1,230.0,Employee_Survey_Tool,Internal,,230,541.5,True
+BEN-0065,tele-visi-web-01,Ubuntu 22.04,2.0,8.0,43,13,120.0,Tele_Visit_Platform,HIPAA,BEN-0067:389:874|BEN-0001:8080:147|BEN-0003:5432:715,120,216.0,False
+BEN-0066,tele-visi-web-02,Ubuntu 22.04,4.0,16.0,69,57,184.0,Tele_Visit_Platform,HIPAA,BEN-0068:53:254|BEN-0001:389:486|BEN-0003:5432:399,184,379.2,False
+BEN-0067,tele-visi-app-01,Ubuntu 20.04,4.0,16.0,76,47,67.0,Tele_Visit_Platform,HIPAA,BEN-0022:1433:199,67,373.35,False
+BEN-0068,tele-visi-app-02,RHEL 8,4.0,16.0,74,47,85.0,Tele_Visit_Platform,HIPAA,BEN-0022:389:174,85,374.25,False
+BEN-0069,invo-web-01,Windows Server 2019,4.0,8.0,58,18,221.0,InvoiceHub,PCI-DSS,BEN-0072:3306:627|BEN-0001:3306:349|BEN-0003:1433:641,221,301.05,False
+BEN-0070,invo-web-02,Windows Server 2019,2.0,4.0,52,33,138.0,InvoiceHub,PCI-DSS,BEN-0072:1433:506|BEN-0001:389:68|BEN-0003:443:274,138,176.9,False
+BEN-0071,invo-web-03,Windows Server 2016,2.0,4.0,80,41,170.0,InvoiceHub,PCI-DSS,BEN-0072:8080:483,170,178.5,False
+BEN-0072,invo-app-01,Windows Server 2019,8.0,16.0,86,72,31.0,InvoiceHub,PCI-DSS,BEN-0028:389:597,31,531.55,False
+BEN-0073,glob-geo-node-01,RHEL 8,32.0,128.0,60,47,2609.0,GlobalInsights_Geo_Analytics_Engine,Internal,BEN-0074:443:485|BEN-0076:389:694|BEN-0075:53:808|BEN-0001:3306:591|BEN-0003:1433:785,2609,2740.45,False
+BEN-0074,glob-geo-node-02,Ubuntu 24.04,32.0,128.0,85,47,4566.0,GlobalInsights_Geo_Analytics_Engine,Internal,BEN-0075:8080:354|BEN-0078:3306:418|BEN-0076:443:550|BEN-0001:8080:818|BEN-0003:389:574,4566,2838.3,False
+BEN-0075,glob-geo-node-03,Ubuntu 24.04,32.0,256.0,67,52,4691.0,GlobalInsights_Geo_Analytics_Engine,Internal,BEN-0076:389:354|BEN-0077:1433:398,4691,4124.55,False
+BEN-0076,glob-geo-node-04,RHEL 9,16.0,64.0,53,30,8192.0,GlobalInsights_Geo_Analytics_Engine,Internal,BEN-0077:3306:427|BEN-0078:53:356,8192,1739.6,False
+BEN-0077,glob-geo-node-05,RHEL 8,32.0,128.0,64,37,8175.0,GlobalInsights_Geo_Analytics_Engine,Internal,BEN-0078:1433:387,8175,3018.75,False
+BEN-0078,glob-geo-node-06,RHEL 8,16.0,64.0,49,39,7938.0,GlobalInsights_Geo_Analytics_Engine,Internal,,7938,1726.9,False
+BEN-0079,pric-prom-srv-01,RHEL 9,4.0,16.0,69,53,179.0,Pricing_Promotion_Engine,PCI-DSS,BEN-0013:443:354|BEN-0001:389:576|BEN-0003:1433:321,179,378.95,False
+BEN-0080,remo-pati-web-01,Windows Server 2019,4.0,8.0,40,11,49.0,Remote_Patient_Monitoring_Gateway,HIPAA,BEN-0081:53:22|BEN-0001:5432:672|BEN-0003:1433:151,49,292.45,False
+BEN-0081,remo-pati-app-01,Windows Server 2019,8.0,16.0,38,4,190.0,Remote_Patient_Monitoring_Gateway,HIPAA,BEN-0022:443:180|BEN-0001:53:853|BEN-0003:389:733,190,539.5,False
+BEN-0082,remo-pati-app-02,Windows Server 2019,8.0,16.0,40,25,93.0,Remote_Patient_Monitoring_Gateway,HIPAA,BEN-0022:3306:151,93,534.65,False
+BEN-0083,reta-sale-node-01,Ubuntu 20.04,16.0,128.0,85,62,437.0,RetailPulse_Sales_Analytics,Internal,BEN-0084:8080:180|BEN-0085:1433:399|BEN-0087:1433:119,437,1991.85,False
+BEN-0084,reta-sale-node-02,RHEL 8,32.0,256.0,73,51,605.0,RetailPulse_Sales_Analytics,Internal,BEN-0085:3306:548|BEN-0088:1433:538|BEN-0086:443:604,605,3920.25,False
+BEN-0085,reta-sale-node-03,RHEL 8,16.0,128.0,31,1,339.0,RetailPulse_Sales_Analytics,Internal,BEN-0086:8080:709|BEN-0087:53:119,339,1986.95,False
+BEN-0086,reta-sale-node-04,Ubuntu 20.04,32.0,128.0,73,62,693.0,RetailPulse_Sales_Analytics,Internal,BEN-0087:53:227,693,2644.65,False
+BEN-0087,reta-sale-node-05,RHEL 9,32.0,128.0,38,25,273.0,RetailPulse_Sales_Analytics,Internal,BEN-0088:1433:428|BEN-0090:3306:33|BEN-0089:1433:542,273,2623.65,False
+BEN-0088,reta-sale-node-06,RHEL 9,32.0,256.0,54,39,639.0,RetailPulse_Sales_Analytics,Internal,BEN-0089:53:655,639,3921.95,False
+BEN-0089,reta-sale-node-07,RHEL 8,16.0,64.0,72,41,168.0,RetailPulse_Sales_Analytics,Internal,BEN-0090:3306:193,168,1338.4,False
+BEN-0090,reta-sale-node-08,Ubuntu 22.04,16.0,64.0,76,39,182.0,RetailPulse_Sales_Analytics,Internal,,182,1339.1,False
+BEN-0091,char-mana-srv-01,Windows Server 2019,8.0,16.0,51,15,166.0,Chargeback_Manager,PCI-DSS,BEN-0028:443:566,166,538.3,False
+BEN-0092,paym-reco-ingest-01,Windows Server 2019,4.0,16.0,31,19,152.0,Payment_Reconciliation_Engine,PCI-DSS,BEN-0093:8080:287,152,377.6,False
+BEN-0093,paym-reco-xform-01,Windows Server 2022,8.0,32.0,42,27,47.0,Payment_Reconciliation_Engine,PCI-DSS,BEN-0094:443:389|BEN-0095:5432:623,47,692.35,False
+BEN-0094,paym-reco-load-01,Windows Server 2022,4.0,16.0,47,24,209.0,Payment_Reconciliation_Engine,PCI-DSS,BEN-0028:389:844,209,380.45,False
+BEN-0095,paym-reco-queue-01,Windows Server 2016,4.0,16.0,42,19,70.0,Payment_Reconciliation_Engine,PCI-DSS,BEN-0093:8080:465,70,373.5,False
+BEN-0096,cred-card-srv-01,Windows Server 2019,4.0,16.0,47,31,193.0,Credit_Card_Token_Vault,PCI-DSS,,193,379.65,False
+BEN-0097,mark-attr-ingest-01,Ubuntu 20.04,8.0,32.0,16,3,77.0,Marketing_Attribution_Modeler,Internal,BEN-0098:5432:454,77,693.85,True
+BEN-0098,mark-attr-xform-01,RHEL 9,4.0,16.0,33,13,238.0,Marketing_Attribution_Modeler,Internal,BEN-0099:53:721|BEN-0100:5432:478,238,381.9,True
+BEN-0099,mark-attr-load-01,Ubuntu 20.04,4.0,16.0,5,1,176.0,Marketing_Attribution_Modeler,Internal,,176,378.8,True
+BEN-0100,mark-attr-queue-01,Ubuntu 24.04,4.0,16.0,9,1,72.0,Marketing_Attribution_Modeler,Internal,BEN-0098:1433:866,72,373.6,True

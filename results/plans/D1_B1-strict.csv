@@ -1,0 +1,51 @@
+Server_ID,Hostname,App_Name,OS_Version,Target_Size,Risk_Score,Transfer_GB,Current_Monthly_Cost,SCC_Id,Wave_ID,Early_Migration_Requested
+SRV-007,mail-exch-01,Exchange,Windows Server 2012,m5.2xlarge,Low,1000.0,740.0,SCC:SRV-007,0,False
+SRV-050,util-filesrv-01,File_Server,Windows Server 2019,t3.large,Low,2000.0,310.0,SCC:SRV-050,0,False
+SRV-001,hr-web-01,HR_Portal,Windows Server 2019,t3.large,Low,100.0,215.0,SCC:SRV-001,1,False
+SRV-004,pay-app-01,Payment_Gateway,Windows Server 2008,t3.xlarge,High,150.0,297.5,SCC:SRV-004,1,False
+SRV-010,ad-dc-01,Active_Directory,Windows Server 2019,t3.large,Low,100.0,215.0,SCC:SRV-010,1,False
+SRV-011,ad-dc-02,Active_Directory,Windows Server 2019,t3.large,Low,100.0,215.0,SCC:SRV-010,1,False
+SRV-015,erp-web-02,ERP_System,Windows Server 2016,t3.xlarge,High,150.0,377.5,SCC:SRV-015,1,False
+SRV-028,dev-erp-01,ERP_Dev,Windows Server 2012,t3.large,Low,100.0,175.0,SCC:SRV-028,1,False
+SRV-031,test-web-05,Web_Test,Ubuntu 18.04,t3.large,Low,60.0,173.0,SCC:SRV-031,1,False
+SRV-032,qa-sim-01,QA_Tools,Windows Server 2019,t3.xlarge,Low,200.0,260.0,SCC:SRV-032,1,False
+SRV-033,med-ui-01,Med_Records,Windows Server 2008 R2,t3.large,High,120.0,216.0,SCC:SRV-033,1,False
+SRV-034,med-ui-02,Med_Records,Windows Server 2008 R2,t3.large,High,120.0,216.0,SCC:SRV-034,1,False
+SRV-036,med-app-02,Med_Records,Windows Server 2008 R2,t3.xlarge,High,250.0,382.5,SCC:SRV-036,1,False
+SRV-038,bi-etl-01,BI_Analytics,RHEL 8,m5.2xlarge,Low,500.0,715.0,SCC:SRV-038,1,False
+SRV-039,bi-etl-02,BI_Analytics,RHEL 8,m5.2xlarge,Low,500.0,715.0,SCC:SRV-039,1,False
+SRV-043,jira-server-01,Jira,Ubuntu 20.04,t3.xlarge,Low,200.0,380.0,SCC:SRV-043,1,False
+SRV-045,sp-web-01,SharePoint,Windows Server 2016,t3.xlarge,Low,150.0,377.5,SCC:SRV-045,1,False
+SRV-046,sp-app-01,SharePoint,Windows Server 2016,t3.xlarge,Low,200.0,380.0,SCC:SRV-046,1,False
+SRV-040,dw-master-01,Data_Warehouse,RHEL 8,m5.4xlarge,Low,15000.0,4640.0,SCC:SRV-040,2,False
+SRV-041,dw-node-01,Data_Warehouse,RHEL 8,m5.4xlarge,Low,15000.0,4640.0,SCC:SRV-040,2,False
+SRV-042,dw-node-02,Data_Warehouse,RHEL 8,m5.4xlarge,Low,15000.0,4640.0,SCC:SRV-040,2,False
+SRV-005,pay-db-01,Payment_Gateway,Oracle Linux 6.4,m5.4xlarge,High,2000.0,1430.0,SCC:SRV-005,3,False
+SRV-047,sp-db-01,SharePoint,SQL Server 2016,m5.2xlarge,Low,1000.0,740.0,SCC:SRV-047,3,False
+SRV-002,hr-app-01,HR_Portal,Windows Server 2019,t3.xlarge,Low,200.0,380.0,SCC:SRV-002,4,False
+SRV-006,old-test-01,Unknown,RHEL 5,t3.large,High,40.0,112.0,SCC:SRV-006,4,False
+SRV-008,crm-web-01,CRM,Ubuntu 20.04,t3.large,Low,80.0,174.0,SCC:SRV-008,4,True
+SRV-012,dns-01,Core_DNS,CentOS 7,t3.large,Low,40.0,112.0,SCC:SRV-012,4,False
+SRV-013,dns-02,Core_DNS,CentOS 7,t3.large,Low,40.0,112.0,SCC:SRV-012,4,False
+SRV-014,erp-web-01,ERP_System,Windows Server 2016,t3.xlarge,High,50.0,372.5,SCC:SRV-014,4,False
+SRV-020,ecom-web-01,E-Commerce,Ubuntu 22.04,t3.large,High,80.0,214.0,SCC:SRV-020,4,False
+SRV-021,ecom-web-02,E-Commerce,Ubuntu 22.04,t3.large,High,80.0,214.0,SCC:SRV-021,4,False
+SRV-022,ecom-web-03,E-Commerce,Ubuntu 22.04,t3.large,High,80.0,214.0,SCC:SRV-022,4,False
+SRV-023,ecom-web-04,E-Commerce,Ubuntu 22.04,t3.large,High,80.0,214.0,SCC:SRV-023,4,False
+SRV-029,dev-erp-db,ERP_Dev,Oracle Linux 6.4,t3.xlarge,High,500.0,395.0,SCC:SRV-029,4,False
+SRV-030,old-poc-01,POC_Archived,RHEL 5,t3.large,High,50.0,112.5,SCC:SRV-030,4,False
+SRV-035,med-app-01,Med_Records,Windows Server 2008 R2,t3.xlarge,High,250.0,382.5,SCC:SRV-035,4,False
+SRV-044,jira-db-01,Jira,Ubuntu 20.04,t3.xlarge,Low,300.0,385.0,SCC:SRV-044,4,False
+SRV-048,blog-wp-01,Corp_Blog,Ubuntu 22.04,t3.large,Low,40.0,112.0,SCC:SRV-048,4,True
+SRV-037,med-db-01,Med_Records,SQL Server 2008,m5.4xlarge,High,4000.0,1530.0,SCC:SRV-037,5,False
+SRV-003,hr-db-01,HR_Portal,SQL Server 2019,m5.2xlarge,Low,500.0,715.0,SCC:SRV-003,6,False
+SRV-009,crm-db-01,CRM,Ubuntu 20.04,t3.xlarge,Low,500.0,395.0,SCC:SRV-009,6,True
+SRV-016,erp-app-01,ERP_System,RHEL 7,m5.2xlarge,High,300.0,705.0,SCC:SRV-016,6,False
+SRV-017,erp-app-02,ERP_System,RHEL 7,m5.2xlarge,High,300.0,705.0,SCC:SRV-017,6,False
+SRV-024,ecom-app-01,E-Commerce,Ubuntu 22.04,t3.xlarge,High,150.0,377.5,SCC:SRV-024,6,False
+SRV-025,ecom-app-02,E-Commerce,Ubuntu 22.04,t3.xlarge,High,150.0,377.5,SCC:SRV-025,6,False
+SRV-049,blog-db-01,Corp_Blog,Ubuntu 22.04,t3.large,Low,50.0,112.5,SCC:SRV-049,6,True
+SRV-018,erp-db-primary,ERP_System,Oracle Linux 7,m5.4xlarge,High,5000.0,2220.0,SCC:SRV-018,7,False
+SRV-019,erp-db-standby,ERP_System,Oracle Linux 7,m5.4xlarge,High,5000.0,2220.0,SCC:SRV-019,8,False
+SRV-026,ecom-db-primary,E-Commerce,RHEL 8,m5.4xlarge,High,2000.0,1110.0,SCC:SRV-026,9,False
+SRV-027,ecom-db-replica,E-Commerce,RHEL 8,m5.4xlarge,High,2000.0,1110.0,SCC:SRV-027,10,False

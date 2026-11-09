@@ -1,0 +1,52 @@
+D1-clear-00            OK   16.5s 
+D1-clear-01            OK   16.4s 
+D1-clear-02            OK   14.9s 
+D1-clear-03            OK    5.4s 
+D1-clear-04            OK   10.3s 
+D1-clear-05            OK   10.2s 
+D1-clear-06            OK    6.9s 
+D1-clear-07            OK   11.9s 
+D1-clear-08            OK    9.1s 
+D1-clear-09            OK    9.6s 
+D1-clear-10            OK   11.5s 
+D1-clear-11            OK   17.8s 
+D3_100-clear-00        OK   14.2s 
+D3_100-clear-01        OK   18.0s 
+D3_100-clear-02        OK   11.2s 
+D3_100-clear-03        OK   16.8s 
+D3_100-clear-04        OK   13.5s 
+D3_100-clear-05        OK   14.8s 
+D3_100-clear-06        OK    7.8s 
+D3_100-clear-07        OK    8.4s 
+D3_100-clear-08        OK   10.8s 
+D3_100-clear-09        OK   13.6s 
+D3_100-clear-10        OK    6.7s 
+D3_100-clear-11        OK   18.8s 
+D1-ambiguous-00        OK    3.9s 
+D1-ambiguous-01        BAD  17.1s {"asked_clarification": false}
+D1-ambiguous-02        OK    7.9s 
+D3_100-ambiguous-00    OK    7.7s 
+D3_100-ambiguous-01    OK    2.5s 
+D3_100-ambiguous-02    OK    8.0s 
+D3_100-ambiguous-03    OK    2.8s 
+{
+  "model": "qwen3-coder-30b-a3b-instruct",
+  "cases": 31,
+  "clear": 24,
+  "ambiguous": 7,
+  "overall_accuracy_pct": 96.8,
+  "clear_exact_match_pct": 100.0,
+  "field_accuracy_pct": {
+    "max_transfer_gb": 100.0,
+    "target_cloud": 100.0,
+    "early": 100.0,
+    "pilot_wave": 100.0
+  },
+  "ambiguous_clarified_pct": 85.7,
+  "false_clarification_pct": 0.0,
+  "latency_sec_mean": 11.1,
+  "llm_calls_mean": 4.2,
+  "self_corrections_total": 26,
+  "errors": 0,
+  "milestone1_target_pct": 85.0
+}
