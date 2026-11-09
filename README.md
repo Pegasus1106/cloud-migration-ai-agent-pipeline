@@ -1,4 +1,4 @@
-# Cloud Migration AI Agent Pipeline — P1 (Milestone 2)
+# Cloud Migration AI Agent Pipeline — P1 (Prototype)
 
 An agentic decision-support system that turns server-discovery data into a validated,
 explained cloud-migration wave plan. It refines the stakeholder's baseline
@@ -61,7 +61,7 @@ oversized components), `finops_summary.json`, `quality_report.json`, `review_log
 lifecycle versions, timings, metrics), and `trace.jsonl` (every node, LLM call, tool call,
 verification, and fallback). Neo4j Browser: http://localhost:7475 (`neo4j` / `password123`, local only).
 
-## Results at a glance (Milestone 2)
+## Results at a glance (Prototype)
 
 Full tables, ablations, and failure analysis: [docs/MILESTONE2_RESULTS.md](docs/MILESTONE2_RESULTS.md).
 
